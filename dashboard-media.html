@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Soniq — Dashboard: Media</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+        <style>:root { --bg: #08080d; --surface: #141419; --surface-2: #0e0e14; --ink: #0b0b10; --line: rgba(255,255,255,.08); --line-strong: rgba(255,255,255,.16); --text: #f2f2f6; --muted: #9a9aa8; --dim: #6b6b7a; --purple: #8b7cf8; --purple-dim: #6c5ce7; --purple-soft: rgba(139,124,248,.12); --yellow: #ffd426; --green: #3ddc97; --amber: #ffb84d; --red: #ff7a6b; --r: 16px; --r-sm: 10px; --sans: 'Plus Jakarta Sans',system-ui,-apple-system,sans-serif; --mono: 'JetBrains Mono',ui-monospace,SFMono-Regular,monospace; } * { box-sizing: border-box; margin: 0; padding: 0; } html { scroll-behavior: smooth; } body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; } body.glow { background: radial-gradient(900px 600px at -5% -5%, rgba(120,80,220,.22), transparent 60%),
+  radial-gradient(700px 500px at 105% -5%, rgba(200,170,40,.14), transparent 60%),
+  var(--bg); } a { color: var(--purple); text-decoration: none; } a:hover { text-decoration: underline; } img { max-width: 100%; } .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; } .narrow { max-width: 640px; margin: 0 auto; } /* mockup bar */.mockbar { position: sticky; top: 0; z-index: 50; background: #000; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: .08em; padding: 8px 16px; display: flex; gap: 14px; align-items: center; overflow-x: auto; white-space: nowrap; } .mockbar b { color: var(--yellow); font-weight: 600; } .mockbar a { color: var(--muted); } .mockbar a.on { color: var(--text); } /* type */.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--dim); } .eyebrow.purple { color: var(--purple); } h1 { font-size: clamp(34px,4.6vw,54px); line-height: 1.12; font-weight: 700; letter-spacing: -.02em; } h2 { font-size: clamp(26px,3vw,34px); line-height: 1.2; font-weight: 700; letter-spacing: -.015em; } h3 { font-size: 19px; font-weight: 600; } .sub { color: var(--muted); font-size: 18px; line-height: 1.6; } .small { font-size: 13.5px; color: var(--muted); } .mono { font-family: var(--mono); } .tiny-mono { font-family: var(--mono); font-size: 12.5px; color: var(--dim); } /* buttons */.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--sans); font-weight: 700; font-size: 16px; border-radius: 12px; padding: 14px 26px; border: 1px solid transparent; cursor: pointer; transition: .15s; } .btn-yellow { background: var(--yellow); color: #151203; } .btn-yellow:hover { filter: brightness(1.06); text-decoration: none; } .btn-outline { background: transparent; color: var(--purple); border-color: var(--purple); } .btn-outline:hover { background: var(--purple-soft); text-decoration: none; } .btn-quiet { background: var(--surface); color: var(--text); border-color: var(--line-strong); } .btn-quiet:hover { border-color: var(--purple); text-decoration: none; } .btn-sm { padding: 9px 16px; font-size: 14px; border-radius: 10px; } .btn[disabled], .btn.is-disabled { opacity: .35; cursor: not-allowed; filter: grayscale(.4); } /* cards + inputs */.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 28px; } .card.inset { background: var(--surface-2); } .input, .field input, .field textarea { width: 100%; background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 12px; color: var(--text); font-family: var(--sans); font-size: 17px; padding: 15px 18px; outline: none; } .input:focus, .field input:focus { border-color: var(--purple); } .input::placeholder { color: var(--dim); } .field { margin-bottom: 18px; } .field label { display: block; font-size: 15px; color: var(--text); margin-bottom: 8px; font-weight: 600; } .dropzone { border: 1.5px dashed var(--line-strong); border-radius: 12px; padding: 22px; text-align: center; color: var(--muted); font-size: 15px; cursor: pointer; } .dropzone:hover { border-color: var(--purple); color: var(--text); } .dropzone b { color: var(--purple); } /* pills + badges */.pill { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; border: 1px solid var(--line-strong); border-radius: 999px; padding: 4px 11px; color: var(--muted); } .pill.green { color: var(--green); border-color: rgba(61,220,151,.4); } .pill.amber { color: var(--amber); border-color: rgba(255,184,77,.4); } .pill.purple { color: var(--purple); border-color: rgba(139,124,248,.45); } .chip { display: inline-block; font-size: 12.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; } /* checks */.checks { display: flex; gap: 26px; flex-wrap: wrap; justify-content: center; color: var(--muted); font-size: 15px; } .checks span::before { content: "✓"; color: var(--green); margin-right: 8px; font-weight: 700; } /* score ring */.ring { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 22px; flex: none; border: 2.5px solid var(--purple); color: var(--text); } .ring.g { border-color: var(--green); } .ring.a { border-color: var(--amber); } .ring.r { border-color: var(--red); } .ring-label { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--dim); text-align: center; margin-top: 6px; } /* fit scale */.scale { margin-top: 14px; } .scale-bar { position: relative; height: 6px; border-radius: 3px; background: linear-gradient(90deg,var(--red) 0 40%,var(--amber) 40% 70%,var(--green) 70% 100%); opacity: .85; } .scale-bar i { position: absolute; top: -5px; width: 3px; height: 16px; background: #fff; border-radius: 2px; } .scale-legend { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; color: var(--dim); margin-top: 7px; text-transform: uppercase; } /* placeholder flag */.placeholder { border: 1.5px dashed rgba(255,184,77,.5); border-radius: 12px; padding: 14px 16px; color: var(--muted); font-size: 14.5px; position: relative; margin-top: 10px; } .placeholder::before { content: "VERIFY BEFORE PUBLISH"; font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; color: var(--amber); display: block; margin-bottom: 6px; } /* sections */section { padding: 88px 0; } .section-head { text-align: center; max-width: 680px; margin: 0 auto 52px; } .section-head .eyebrow { display: block; margin-bottom: 14px; } .section-head p { margin-top: 14px; } /* homepage top nav */.topnav { display: flex; align-items: center; justify-content: space-between; padding: 26px 0; } .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text); } .brand .dot { width: 30px; height: 30px; border-radius: 8px; background: conic-gradient(from 40deg,#4dd0e1,#8b7cf8,#ffd426,#4dd0e1); flex: none; } .topnav nav { display: flex; gap: 26px; align-items: center; font-size: 15px; } .topnav nav a { color: var(--muted); } .topnav nav a:hover { color: var(--text); text-decoration: none; } .topnav nav a.signin { color: var(--purple); } /* grids */.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; } .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; } @media (max-width:920px){ .grid-2, .grid-3 {  grid-template-columns: 1fr; } } /* how-it-works connector */.steps { position: relative; } .step-num { font-family: var(--mono); color: var(--purple); font-size: 13px; margin-bottom: 14px; } .step-card p { color: var(--muted); font-size: 15px; margin-top: 10px; } /* pricing */.tier { display: flex; flex-direction: column; gap: 0; position: relative; } .tier .price { font-size: 38px; font-weight: 800; margin: 10px 0 2px; } .tier .price span { font-size: 15px; color: var(--muted); font-weight: 500; } .tier ul { list-style: none; margin-top: 18px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; color: var(--muted); } .tier ul li::before { content: "✓"; color: var(--green); margin-right: 9px; font-weight: 700; } .tier .who { color: var(--dim); font-size: 14px; } .tier.hot { border-color: var(--purple); box-shadow: 0 0 0 1px var(--purple); } .tier .flag { position: absolute; top: -12px; left: 24px; background: var(--purple); color: #0b0b10; font-family: var(--mono); font-size: 10px; letter-spacing: .15em; padding: 4px 10px; border-radius: 999px; font-weight: 700; } .tier .btn { margin-top: 22px; } /* faq */.faq details { border-bottom: 1px solid var(--line); padding: 20px 4px; } .faq summary { cursor: pointer; font-weight: 600; font-size: 17px; list-style: none; display: flex; justify-content: space-between; align-items: center; } .faq summary::after { content: "+"; color: var(--purple); font-size: 22px; font-weight: 400; } .faq details[open] summary::after { content: "–"; } .faq details p { color: var(--muted); margin-top: 12px; font-size: 15.5px; max-width: 60ch; } /* footer */footer { border-top: 1px solid var(--line); padding: 34px 0; display: flex; justify-content: space-between; color: var(--dim); font-size: 14px; } footer nav { display: flex; gap: 22px; } /* flow card pages */.flow-wrap { max-width: 720px; margin: 0 auto; padding: 56px 24px; } .flow-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 40px; } .flow-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; } .captured { font-family: var(--mono); font-size: 12.5px; letter-spacing: .18em; color: var(--purple); margin-bottom: 14px; } .captured::before { content: "✓ "; } /* search results */.result-row { display: flex; align-items: center; gap: 14px; background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 12px; padding: 14px 16px; margin-top: 10px; cursor: pointer; } .result-row:hover { border-color: var(--purple); } .result-row.sel { border-color: var(--purple); box-shadow: 0 0 0 1px var(--purple); } .result-row .meta { font-size: 13px; color: var(--dim); } .result-row .name { font-weight: 700; } .result-row .chips { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; } /* dashboard shell */.shell { display: grid; grid-template-columns: 248px 1fr; min-height: 100vh; } .side { border-right: 1px solid var(--line); padding: 22px 18px; display: flex; flex-direction: column; background: #0a0a10; } .side .brand { margin-bottom: 34px; font-size: 16px; } .side nav a { display: block; padding: 10px 12px; border-radius: 10px; color: var(--muted); font-size: 15.5px; margin-bottom: 4px; } .side nav a.on { color: var(--text); background: var(--surface); font-weight: 600; } .side nav a:hover { color: var(--text); text-decoration: none; } .side .foot { margin-top: auto; display: flex; gap: 10px; align-items: center; font-size: 14px; } .side .foot .av { width: 34px; height: 34px; border-radius: 50%; background: var(--purple-soft); color: var(--purple); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; } .main { padding: 0 40px 80px; } .topbar { display: flex; align-items: center; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px; } .searchbox { flex: 1; max-width: 480px; display: flex; align-items: center; gap: 10px; background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 12px; padding: 11px 16px; color: var(--dim); font-size: 15px; } .crumb { font-family: var(--mono); font-size: 12.5px; letter-spacing: .1em; color: var(--dim); margin: 8px 0 22px; } .crumb b { color: var(--muted); font-weight: 500; } /* target rows */.target { display: flex; gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-bottom: 14px; align-items: flex-start; } .target.sel { border-color: var(--purple); box-shadow: 0 0 0 1px var(--purple); } .target input[type=checkbox] { margin-top: 22px; accent-color: var(--purple); width: 16px; height: 16px; } .target .body { flex: 1; } .target .headrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; } .target .why { margin-left: auto; font-size: 14px; } .target p.reason { color: var(--muted); font-size: 14.5px; margin-top: 8px; max-width: 75ch; } .target .metaline { font-size: 13px; color: var(--dim); margin-top: 2px; } .selectbar { position: sticky; bottom: 0; background: #000; border: 1px solid var(--line-strong); border-radius: 14px; padding: 14px 20px; display: flex; align-items: center; gap: 16px; margin-top: 8px; } /* pipeline board */.board { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; align-items: start; } @media (max-width:1000px){ .board {  grid-template-columns: 1fr 1fr; } } .col-head { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; color: var(--dim); text-transform: uppercase; margin-bottom: 12px; display: flex; justify-content: space-between; } .pcard { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 12px; } .pcard .nm { font-weight: 700; font-size: 15px; display: flex; gap: 8px; align-items: center; } .pcard .meta { font-size: 12.5px; color: var(--dim); margin-top: 5px; } .pcard .act { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; } .col-empty { border: 1.5px dashed var(--line-strong); border-radius: 12px; padding: 18px; color: var(--dim); font-size: 13.5px; } /* stats strip */.stats { display: flex; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin: 26px 0; } .stats div { flex: 1; padding: 22px 26px; border-right: 1px solid var(--line); } .stats div:last-child { border-right: 0; } .stats b { font-size: 28px; font-weight: 800; margin-right: 10px; } .stats span { color: var(--muted); font-size: 15px; } /* design notes */.notes { max-width: 1120px; margin: 40px auto 80px; padding: 0 32px; } .notes details { background: #000; border: 1px dashed var(--line-strong); border-radius: 12px; padding: 18px 22px; } .notes summary { font-family: var(--mono); font-size: 12px; letter-spacing: .2em; color: var(--amber); cursor: pointer; text-transform: uppercase; } .notes ul { margin: 14px 0 4px 18px; color: var(--muted); font-size: 14.5px; display: flex; flex-direction: column; gap: 8px; } @media (max-width:920px){ .shell {  grid-template-columns: 1fr; }  .side {  flex-direction: row;  align-items: center;  border-right: 0;  border-bottom: 1px solid var(--line); }  .side nav {  display: flex; }  .side .brand {  margin-bottom: 0; }  .side .foot {  display: none; }  .main {  padding: 0 20px 60px; }  .board {  grid-template-columns: 1fr; }  section {  padding: 56px 0; } }</style>
+    </head>
+    <body class="">
+        <div class="mockbar">
+            <b>SONIQ V2 MOCKUP</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="on" href="dashboard-media.html">Media</a>
+        </div>
+        <div class="shell">
+            <aside class="side">
+                <div class="brand">
+                    <span class="dot"></span>Sonic Spotlights
+                </div>
+                <nav>
+                    <a href="dashboard-workspace.html">Workspace</a>
+                    <a href="dashboard-campaign.html">Campaigns</a>
+                    <a class="on" href="dashboard-media.html">Media</a>
+                </nav>
+                <div class="foot">
+                    <span class="av">MT</span>
+                    <div>Grayline<br>
+                        <a class="tiny-mono" href="#" style="font-size:11px">CONTEXT ↗</a>
+                    </div>
+                </div>
+            </aside>
+            <div class="main">
+                <div class="topbar">
+                    <div class="searchbox">⌕ &nbsp;Search anything <span class="mono" style="margin-left:auto;font-size:12px">⌘K</span>
+                    </div>
+                    <span style="margin-left:auto" class="chip">⚙</span>
+                </div>
+                <p class="crumb">MEDIA <b>›</b> HOLDING PATTERN EP</p>
+                <div style="display:grid;grid-template-columns:250px 1fr;gap:32px" class="media-grid">
+                    <div>
+                        <p class="eyebrow" style="margin-bottom:14px">Collections</p>
+                        <div class="card" style="padding:14px 16px;border-color:var(--purple);margin-bottom:10px">
+                            <b style="font-size:15px">Holding Pattern EP</b>
+                            <p class="tiny-mono" style="font-size:10.5px;margin-top:3px">CURRENT RELEASE</p>
+                        </div>
+                        <div class="card inset" style="padding:14px 16px">
+                            <b style="font-size:15px">Unassigned</b>
+                            <p class="tiny-mono" style="font-size:10.5px;margin-top:3px">ARTIST-LEVEL FILES</p>
+                        </div>
+                        <p class="small" style="margin-top:16px">Bios and artist photos live at the artist level in Context. They travel with every release automatically.</p>
+                    </div>
+                    <div>
+                        <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+                            <div style="width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,#2a2450,#4a3a8a);display:flex;align-items:center;justify-content:center;font-weight:800">HP</div>
+                            <div style="flex:1">
+                                <p class="tiny-mono" style="color:var(--purple)">RELEASE MEDIA</p>
+                                <h2 style="font-size:26px">Holding Pattern EP</h2>
+                                <p class="tiny-mono">SINGLE · EMO</p>
+                            </div>
+                            <button class="btn btn-outline btn-sm">↥ Upload files</button>
+                        </div>
+                        <div class="card" style="margin-top:26px">
+                            <div style="display:flex;align-items:center;gap:14px">
+                                <h3>Media kit · 3 of 6 complete</h3>
+                                <div style="flex:1;height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden">
+                                    <div style="width:50%;height:100%;background:var(--purple)"></div>
+                                </div>
+                            </div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 28px;margin-top:18px" class="kit-grid">
+                                <p><span style="color:var(--green)">✓</span> Cover art <span class="small">3000×3000 png</span></p>
+                                <p><span style="color:var(--green)">✓</span> Streaming links</p>
+                                <p><span style="color:var(--green)">✓</span> Bio <span class="small">from Context</span></p>
+                                <p><span style="color:var(--dim)">○</span> Press photos <a class="small" href="#">Add</a></p>
+                                <p><span style="color:var(--dim)">○</span> WAV / MP3 <a class="small" href="#">Add</a></p>
+                                <p><span style="color:var(--dim)">○</span> One-sheet <a class="small" href="#">Add</a></p>
+                            </div>
+                        </div>
+                        <div class="card inset" style="margin-top:16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+                            <div style="flex:1;min-width:240px">
+                                <p style="font-weight:600">Shareable kit link</p>
+                                <p class="mono" style="color:var(--purple);font-size:14px;margin-top:4px">soniq.link/grayline/holding-pattern</p>
+                            </div>
+                            <button class="btn btn-quiet btn-sm">Copy link</button>
+                        </div>
+                        <p class="small" style="margin-top:12px"><span style="color:var(--green)">✓</span> Media travels to curators as this link, never an attachment. The link updates when the kit does.</p>
+                        <div style="margin-top:34px">
+                            <h3>Campaigns using this release <span class="small">1</span></h3>
+                            <a class="card" style="display:flex;align-items:center;gap:16px;margin-top:14px;text-decoration:none;color:var(--text)" href="dashboard-campaign.html"> <div style="flex:1">
+                                    <b>Holding Pattern EP campaign</b>
+                                    <p class="tiny-mono" style="margin-top:3px">ACTIVE</p>
+                                </div> <span class="tiny-mono">● 2 READY &nbsp; ○ 1 SENT &nbsp; ○ 1 REPLIED &nbsp; ○ 0 PLACED</span> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notes">
+            <details>
+                <summary>Design notes · Media</summary>
+                <ul>
+                    <li>
+                        <b>The kit completeness checklist gives this page a job.</b> The current iteration is a mostly empty file bin with one upload prompt. A kit meter (3 of 6) plus explicit missing items turns it into a to-do list with an obvious finish line, and each item maps to what a curator or writer actually asks for.
+                    </li>
+                    <li>
+                        <b>The shareable kit link is the payoff feature</b> and connects directly to the Replied column in Campaigns ("send the WAV" → Share media kit). One evergreen link that updates with the kit means the artist never re-sends attachments; that line already existed in your copy, and now it's attached to a visible, copyable link.
+                    </li>
+                    <li>Release naming carried through: "Holding Pattern EP" and an HP cover placeholder instead of "Your current release" and the auto-generated "YO" avatar.</li>
+                    <li>"Bios stay in Context because they belong to the artist" was explaining data architecture. Reworded to the user benefit: artist-level files travel with every release automatically.</li>
+                    <li>Upload dropdown ("IMAGE" type select) removed from the header; type is inferable from the file. One Upload button.</li>
+                </ul>
+            </details>
+        </div>
+    </body>
+</html>
