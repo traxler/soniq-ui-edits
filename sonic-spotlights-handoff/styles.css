@@ -1,0 +1,28 @@
+/* ============================================================
+   Sonic Spotlights — Design System
+   Global entry point. Consumers link THIS file only.
+   Keep this file as @import lines (+ a minimal base reset).
+   ============================================================ */
+
+@import "tokens/fonts.css";
+@import "tokens/colors.css";
+@import "tokens/typography.css";
+@import "tokens/spacing.css";
+@import "tokens/effects.css";
+
+/* ---- Minimal base so cards/screens read correctly on the void ---- */
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body {
+  margin: 0;
+  background: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+*, *::before, *::after { box-sizing: border-box; }
+
+::selection { background: var(--purple-glow); color: var(--ink); }
