@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soniq v3 — new pages</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  :root{
+    --void:#050505;--charcoal:#121212;--line:#2a2a2a;--line-soft:#222;
+    --purple:#7C3AED;--purple-bright:#a78bfa;--yellow:#FACC15;
+    --ink:#f4f4f5;--muted:#a2a2ac;--faint:#6b6b76;
+    --mono:'JetBrains Mono','DejaVu Sans Mono',monospace;
+    --disp:'Plus Jakarta Sans',-apple-system,sans-serif;
+    --sans:'Figtree',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:#3a3a3f;color:var(--ink);font-family:var(--sans);}
+  body{padding:26px;display:flex;flex-direction:column;align-items:center;gap:26px;}
+
+  .page{width:1056px;height:816px;background:#fff;color:#111;position:relative;overflow:hidden;
+    box-shadow:0 18px 50px rgba(0,0,0,.45);padding:54px 64px 48px;}
+  .page.dark{background:var(--void);color:var(--ink);}
+  .topband{position:absolute;top:0;left:0;right:0;height:7px;background:var(--yellow);}
+
+  .eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:.16em;color:#7c3aed;font-weight:700;text-transform:uppercase;display:flex;align-items:center;gap:12px;}
+  .page.dark .eyebrow{color:var(--purple-bright);letter-spacing:.2em;}
+  .pill{background:#7C3AED;color:#fff;font-family:var(--sans);font-size:10px;letter-spacing:.06em;padding:3px 10px;border-radius:999px;font-weight:700;}
+  .pill.y{background:var(--yellow);color:#111;}
+  h1.title{font-family:var(--disp);font-size:32px;font-weight:700;letter-spacing:-.02em;margin-top:10px;color:#0c0c0c;}
+  .pagefoot{position:absolute;left:64px;right:64px;bottom:30px;display:flex;justify-content:space-between;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#9a9aa2;border-top:1px solid #ececec;padding-top:14px;}
+  .page.dark .pagefoot{color:#6b6b73;border-top:1px solid #1c1c1c;}
+
+  /* phone */
+  .phone{width:268px;height:556px;background:var(--void);border-radius:34px;border:1px solid #000;
+    box-shadow:0 0 0 9px #1c1c1c,0 22px 40px rgba(0,0,0,.4);position:relative;overflow:hidden;flex:none;}
+  .phone.sm{height:466px;width:252px;}
+  .notch{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:84px;height:5px;background:#2a2a2a;border-radius:3px;z-index:6;}
+  .scr{position:absolute;inset:0;display:flex;flex-direction:column;}
+  .statusbar{display:flex;justify-content:space-between;align-items:center;padding:14px 18px 6px;
+    font-family:var(--mono);font-size:11px;color:#cfcfd4;position:relative;z-index:5;}
+  .dots{letter-spacing:2px;}
+  .content{position:relative;z-index:4;padding:6px 18px 14px;display:flex;flex-direction:column;height:100%;}
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
+  .logo{font-weight:700;font-size:15px;color:#fff;letter-spacing:-.01em;}
+  .signin{font-size:12px;color:var(--purple-bright);}
+  .kicker{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--faint);margin-bottom:9px;}
+  h2.head{font-size:20px;line-height:1.16;font-weight:600;color:#fff;letter-spacing:-.01em;}
+  .body{font-size:11.5px;line-height:1.5;color:var(--muted);margin-top:9px;}
+  .cta{margin-top:15px;background:var(--yellow);color:#111;font-weight:700;font-size:13px;text-align:center;padding:13px;border-radius:9px;box-shadow:0 0 22px rgba(250,204,21,.22);}
+  .eta{margin-top:9px;text-align:center;font-family:var(--mono);font-size:9.5px;letter-spacing:.03em;color:var(--faint);}
+  .eta b{color:var(--purple-bright);font-weight:500;}
+  .ticks{margin-top:14px;display:flex;flex-direction:column;gap:7px;}
+  .tick{font-size:10.5px;color:#c7c7cd;}
+  .tick b{color:var(--purple-bright);font-weight:500;}
+  .how{margin-top:auto;border-top:1px solid var(--line-soft);padding-top:11px;}
+  .how-k{font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--faint);margin-bottom:7px;}
+  .step{font-size:10.5px;color:#bcbcc2;margin-bottom:4px;}
+  .step span{font-family:var(--mono);color:var(--purple-bright);margin-right:6px;}
+
+  /* annotations */
+  .col-head{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#7c3aed;margin-bottom:3px;}
+  .col-sub{font-size:12.5px;color:#6a6a72;font-style:italic;margin-bottom:16px;}
+  .anno{display:flex;gap:10px;align-items:flex-start;margin-bottom:11px;}
+  .num{flex:none;width:18px;height:18px;border-radius:50%;border:1.4px solid #7C3AED;color:#7C3AED;font-family:var(--mono);font-size:9px;display:flex;align-items:center;justify-content:center;margin-top:1px;font-weight:700;}
+  .anno p{font-size:12px;line-height:1.42;color:#33333a;}
+  .anno p b{color:#0c0c0c;font-weight:600;}
+
+  /* Spotlights atmosphere */
+  .atmos{position:absolute;inset:0;z-index:1;pointer-events:none;}
+  .spot-beam{position:absolute;top:-60px;width:230px;height:430px;filter:blur(2px);transform-origin:top center;background:linear-gradient(180deg,rgba(124,58,237,.32),rgba(124,58,237,0) 72%);}
+  .spot-beam.b1{left:-30px;transform:rotate(17deg);}
+  .spot-beam.b2{right:-40px;transform:rotate(-15deg);background:linear-gradient(180deg,rgba(250,204,21,.20),rgba(250,204,21,0) 70%);}
+  .spot-pool{position:absolute;border-radius:50%;filter:blur(34px);}
+  .spot-pool.p1{width:200px;height:120px;left:8px;bottom:60px;background:rgba(124,58,237,.28);}
+  .spot-pool.p2{width:150px;height:90px;right:0;bottom:120px;background:rgba(250,204,21,.10);}
+  .spot-vig{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 0%,rgba(124,58,237,.10),rgba(5,5,5,0) 55%);}
+  .spot-grain{position:absolute;inset:0;opacity:.5;background-image:radial-gradient(rgba(255,255,255,.05) .5px,transparent .5px);background-size:3px 3px;}
+
+  /* auth */
+  .seg{display:flex;background:#101010;border:1px solid var(--line);border-radius:9px;padding:3px;margin-bottom:20px;position:relative;z-index:4;}
+  .seg div{flex:1;text-align:center;font-size:11.5px;padding:8px;border-radius:6px;color:var(--muted);font-weight:500;}
+  .seg .on{background:var(--purple);color:#fff;}
+  .field{background:#0d0d0d;border:1px solid var(--line);border-radius:9px;padding:13px;font-size:11.5px;color:var(--faint);margin-bottom:11px;}
+  .pbtn{background:var(--purple);color:#fff;font-weight:600;font-size:12.5px;text-align:center;padding:12px;border-radius:9px;box-shadow:0 0 20px rgba(124,58,237,.3);}
+  .divider{display:flex;align-items:center;gap:10px;margin:16px 0;color:var(--faint);font-size:10px;}
+  .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line-soft);}
+  .sso{border:1px solid var(--line);border-radius:9px;padding:11px;font-size:11.5px;color:#d4d4da;text-align:center;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .sso .dot{width:13px;height:13px;border-radius:3px;}
+  .note{margin-top:auto;border-top:1px solid var(--line-soft);padding-top:11px;font-size:10px;color:var(--faint);line-height:1.5;}
+  .note b{color:var(--purple-bright);font-weight:500;}
+
+  /* hand-off + workspace shared cards */
+  .savedcard{background:#141414;border:1px solid var(--line-soft);border-radius:12px;padding:13px 14px;margin-top:4px;}
+  .savedcard .lbl{font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--faint);margin-bottom:6px;}
+  .savedcard .ttl{font-size:13px;color:#fff;font-weight:600;margin-bottom:8px;}
+  .savedcard .li{font-size:10.5px;color:#c2c2c8;margin-bottom:4px;}
+  .savedcard .li b{color:var(--purple-bright);font-weight:500;}
+  .working{font-size:10px;color:var(--faint);margin-top:9px;display:flex;align-items:center;gap:7px;}
+  .working .pdot{width:6px;height:6px;border-radius:50%;background:var(--purple);box-shadow:0 0 8px var(--purple);}
+  .callout{margin-top:13px;background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.35);border-radius:11px;padding:12px 13px;display:flex;gap:11px;align-items:flex-start;}
+  .callout .lap{flex:none;width:26px;height:18px;border:1.6px solid var(--purple-bright);border-radius:3px 3px 0 0;position:relative;margin-top:2px;}
+  .callout .lap::after{content:"";position:absolute;left:-5px;right:-5px;bottom:-4px;height:3px;background:var(--purple-bright);border-radius:0 0 3px 3px;}
+  .callout .ct{font-size:10.5px;color:#cfcfd6;line-height:1.45;}
+  .callout .ct b{color:#fff;font-weight:600;}
+  .callout .ct .resend{color:var(--purple-bright);}
+  .yclr{margin-top:13px;background:var(--yellow);color:#111;font-weight:700;font-size:13px;text-align:center;padding:13px;border-radius:9px;box-shadow:0 0 22px rgba(250,204,21,.2);}
+  .subc{margin-top:8px;text-align:center;font-size:9.5px;color:var(--faint);}
+
+  /* workspace */
+  .ws-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;}
+  .ws-ctx{font-size:10px;color:var(--muted);font-family:var(--mono);border:1px solid var(--line-soft);border-radius:20px;padding:3px 10px;}
+  .ws-av{width:24px;height:24px;border-radius:50%;background:var(--purple);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--mono);}
+  .ws-prep{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:9px;}
+  .hero{background:#151515;border:1px solid var(--line-soft);border-left:3px solid var(--purple);border-radius:11px;padding:12px 13px;}
+  .hero .hk{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--purple-bright);margin-bottom:7px;}
+  .hero .ht{font-size:15px;color:#fff;font-weight:600;line-height:1.22;letter-spacing:-.01em;}
+  .hero .hw{font-size:10px;color:var(--muted);line-height:1.5;margin-top:7px;}
+  .hero .hcta{margin-top:10px;background:var(--yellow);color:#111;font-weight:700;font-size:12px;text-align:center;padding:9px;border-radius:8px;}
+  .hero .hlink{margin-top:8px;text-align:center;font-size:10px;color:var(--purple-bright);}
+  .snap{margin-top:10px;background:#121212;border:1px solid var(--line-soft);border-radius:11px;padding:10px 13px;}
+  .snap .sh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+  .snap .sk{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--faint);}
+  .snap .chev{font-size:11px;color:var(--purple-bright);}
+  .snap .row{display:flex;gap:12px;margin-bottom:7px;}
+  .snap .stat{flex:1;}
+  .snap .stat b{display:block;font-family:var(--mono);font-size:15px;color:#fff;font-weight:700;}
+  .snap .stat span{font-size:8.5px;color:var(--faint);}
+  .snap .empty{font-size:9px;color:var(--faint);font-style:italic;border-top:1px solid var(--line-soft);padding-top:7px;}
+  .chatdock{margin-top:auto;}
+  .chatbar{background:#161616;border:1px solid var(--line);border-radius:22px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-size:10.5px;color:var(--faint);}
+  .chatbar .send{width:20px;height:20px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;}
+  .ws-nav{display:flex;justify-content:space-around;align-items:center;border-top:1px solid var(--line-soft);margin-top:10px;padding-top:9px;}
+  .ws-nav .nv{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:7.5px;color:var(--faint);font-family:var(--mono);}
+  .ws-nav .nv .ic{width:15px;height:15px;border:1.4px solid currentColor;border-radius:3px;}
+  .ws-nav .nv.act{color:var(--purple-bright);}
+
+  /* v3 changelog cards */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px;}
+  .card{border:1px solid #ececec;border-left:3px solid var(--yellow);border-radius:8px;padding:15px 16px;}
+  .card.proc{border-left-color:var(--purple);}
+  .card .ck{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:#7c3aed;margin-bottom:8px;}
+  .card.proc .ck{color:#7c3aed;}
+  .card .ct{font-size:14px;font-weight:600;color:#0c0c0c;margin-bottom:7px;line-height:1.25;}
+  .card .cd{font-size:11.5px;color:#444;line-height:1.46;margin-bottom:9px;}
+  .card .cs{font-size:11px;color:#9a9aa2;font-style:italic;}
+
+  /* cover */
+  .cv-logo{height:40px;margin-top:4px}
+  .cv-eyebrow{font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.18em;color:var(--purple-bright);margin-top:20px;text-transform:uppercase;}
+  .cv-h1{font-family:var(--disp);font-size:60px;font-weight:700;letter-spacing:-.025em;line-height:1.03;margin-top:30px;color:#fff;}
+  .cv-body{font-size:16px;line-height:1.6;color:#b6b6bd;max-width:660px;margin-top:34px;}
+  .cv-foot{position:absolute;left:64px;right:64px;bottom:48px;display:flex;justify-content:space-between;font-size:13px;color:#8a8a92;border-top:1px solid #1c1c1c;padding-top:18px;}
+  .cv-foot b{color:#cfcfd4;font-weight:500;}
+
+  @media print{body{background:#fff;padding:0;gap:0;}.page{box-shadow:none;page-break-after:always;}@page{size:letter landscape;margin:0;}}
+</style>
+</head>
+<body>
+
+<!-- ===== PAGE 1 · COVER (v3) ===== -->
+<section class="page dark">
+  <div class="topband"></div>
+  <img src="assets/logo/2026_SonicSpotlights_LOGOhorizontalgradientdark.png" class="cv-logo" alt="Sonic Spotlights">
+  <div class="cv-eyebrow">UX Design &nbsp;·&nbsp; Combined Wireframe Package &nbsp;·&nbsp; V7.4 · BYOC + Copy-Paste + Legal-UX</div>
+  <h1 class="cv-h1">The first release.<br>End to end.</h1>
+  <div class="cv-body">A combined wireframe deck for Soniq’s Momentum Builder — from the first 90 seconds on a phone, to the first session in the workspace, to the campaign rolling out, to the reasoning layer that earns the artist’s trust. The deck is launch-true: at launch Soniq has no send integration — it scores the curators the artist brings or searches for fit, drafts each pitch in her voice, and she sends from her own inbox (copy-paste / open-in-email); the trial gates at three free drafts, not at sending. v7.1 added the four legal-UX surfaces (preview-terms notice, sign-in assent, auto-renewal consent, terms re-acceptance gate); v7.2 added the Soniq Improvement opt-out. v7.4 is a consistency-and-honesty pass: the last “Soniq supplies the curators” language is gone, the Try preview now scores a curator she brings, the Day-0 surfaces show an honest near-empty state, the Workspace/Campaigns split and Context parity are locked, and the Artifacts nav item is retired. A closing roadmap traces bring-your-own → partner integration → owned catalog.</div>
+  <div class="cv-foot">
+    <span><b>Primary persona</b> &nbsp; The Momentum Builder &nbsp;·&nbsp; releasing every 4–8 weeks</span>
+    <span><b>Prepared by</b> &nbsp; Claude · UX Design support &nbsp;·&nbsp; June 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== ROUND 01 · LAND + TRY ===== -->
+<section class="page">
+  <div class="eyebrow">CHAPTER 01 · SCREENS 01 &amp; 02 <span class="pill y">V7.4 · BYOC LAUNCH</span></div>
+  <h1 class="title">Land &amp; Try — the first 30 seconds.</h1>
+
+  <div style="display:flex;gap:48px;margin-top:22px;padding-left:8px;">
+    <!-- LAND -->
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="phone sm">
+        <div class="notch"></div>
+        <div class="atmos"><div class="spot-vig"></div><div class="spot-beam b1"></div><div class="spot-beam b2"></div><div class="spot-pool p1"></div><div class="spot-pool p2"></div><div class="spot-grain"></div></div>
+        <div class="scr">
+          <div class="statusbar"><span>9:41</span><span class="dots">●●●● 100%</span></div>
+          <div class="content">
+            <div class="topbar"><span class="logo">Soniq</span><span class="signin">Sign in</span></div>
+            <div class="kicker">FOR RELEASING ARTISTS</div>
+            <h2 class="head">Your next release, pitched to people who actually listen.</h2>
+            <div class="body">Search or bring the playlist curators and press you have in mind — Soniq scores each for fit with your sound and drafts the pitch in your voice. You send it from your own inbox.</div>
+            <div class="cta">Try with your release →</div>
+            <div class="eta"><b>~60s</b> to your first fit score · one link</div>
+            <div class="ticks">
+              <div class="tick"><b>✓</b> No card. You're always the sender.</div>
+              <div class="tick"><b>✓</b> Built for 4–8wk release cadence</div>
+            </div>
+            <div class="how">
+              <div class="how-k">HOW IT WORKS</div>
+              <div class="step"><span>01</span>Drop your music</div>
+              <div class="step"><span>02</span>Bring or search curators → Soniq scores fit</div>
+              <div class="step"><span>03</span>Copy &amp; send from your inbox</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="width:252px;margin-top:13px;">
+        <div class="col-head" style="text-align:center;justify-content:center;">01 · LAND</div>
+        <div class="col-sub" style="text-align:center;margin-bottom:8px;">"Is this for me — and how long?"</div>
+        <div class="anno"><span class="num">1</span><p>The mono line answers <i>scope</i> ("one link") and <i>reward timing</i> ("~60s to your first fit score") at the decision point. Yellow stays the button's alone; the time cue is purple.</p></div>
+      </div>
+    </div>
+
+    <!-- TRY -->
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="phone sm">
+        <div class="notch"></div>
+        <div class="atmos"><div class="spot-vig"></div><div class="spot-beam b1"></div><div class="spot-beam b2"></div><div class="spot-pool p1"></div><div class="spot-pool p2"></div><div class="spot-grain"></div></div>
+        <div class="scr">
+          <div class="statusbar"><span>9:41</span><span class="dots">●●●● 100%</span></div>
+          <div class="content">
+            <div class="topbar"><span class="logo">← Soniq · try</span><span class="signin" style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--faint);">STEP 2 OF 2</span></div>
+            <div style="display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;color:var(--purple-bright);margin-bottom:9px;">✓ YOUR SOUND · CAPTURED</div>
+            <h2 class="head" style="font-size:18px;">Now — a curator to score.</h2>
+            <div class="body" style="margin-top:7px;">Bring one you have in mind. Still no sign-up.</div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--faint);margin:15px 0 7px;">PASTE A PLAYLIST · OR SEARCH</div>
+            <div class="field" style="margin-bottom:9px;">Spotify / Apple Music playlist link</div>
+            <div style="border-top:1px solid var(--line-soft);margin:6px 0 11px;"></div>
+            <div style="font-size:10px;color:var(--purple-bright);margin-bottom:4px;">No curator yet? <b style="color:#fff;font-weight:600;">Try a sample →</b></div>
+            <div class="cta" style="margin-top:auto;">Score the fit →</div>
+            <div class="eta" style="margin-top:9px;">Fit only — verification comes later. We never auto-pitch.</div>
+          <div style="margin-top:7px;font-size:8px;color:#8a8a96;text-align:center;line-height:1.5">By continuing you agree to the <u style="color:#a78bfa">Terms</u> &amp; <u style="color:#a78bfa">Privacy Policy</u></div>
+          </div>
+        </div>
+      </div>
+      <div style="width:252px;margin-top:13px;">
+        <div class="col-head" style="text-align:center;justify-content:center;">02 · TRY</div>
+        <div class="col-sub" style="text-align:center;margin-bottom:8px;">"Show me, don't tell me."</div>
+        <div class="anno"><span class="num">2</span><p>Two steps: Step 1 takes her <i>sound</i>; Step 2 scores a <i>curator she brings</i> — or a one-tap sample. The reward is a real fit score before any account exists.</p></div>
+      </div>
+    </div>
+
+    <!-- v7 launch-true rationale -->
+    <div style="width:268px;padding-top:18px;">
+      <div class="col-head">V7.4 · BYOC, HONESTLY UNVERIFIED</div>
+      <div class="col-sub">Sell what ships on day one.</div>
+      <div class="anno"><span class="num">3</span><p><b>The "Soniq supplies the list" framing is gone.</b> Land no longer says Soniq <i>finds</i> curators — the artist <b>brings or searches</b>, and Soniq <b>scores fit + drafts</b>. True the moment she pastes a link.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>The preview proves the moat:</b> it scores a curator she brings in ~60s — <i>fit only, honestly unverified</i>. That is the answer to "why not just ask a general AI?": the targeting, demonstrated.</p></div>
+      <div class="anno"><span class="num">5</span><p><b>What stays:</b> no card, you're always the sender, ~60s — the trust spine of the page is unchanged.</p></div>
+      <div class="anno"><span class="num">6</span><p><b>v7.1 · preview-terms notice.</b> The gateless preview means she uses AI analysis before any account exists — so a conspicuous notice sits adjacent to the CTA (ToS “How you accept”). Notice here; binding clickwrap at account creation. Quiet by design: 8px, linked, never competing with the decision.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · LAND + TRY · SPOTLIGHTS</span><span>PAGE 02 / 26</span></div>
+</section>
+
+<!-- ===== ROUND 01 · SIGN-IN SIDE WIREFRAME ===== -->
+<section class="page">
+  <div class="eyebrow">CHAPTER 01 · SCREEN 03 · SIGN-IN <span class="pill">SIDE WIREFRAME</span></div>
+  <h1 class="title">Sign in — one door, two keys.</h1>
+
+  <div style="display:flex;gap:54px;margin-top:30px;">
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="atmos"><div class="spot-vig"></div><div class="spot-beam b1"></div><div class="spot-beam b2"></div><div class="spot-pool p1"></div><div class="spot-pool p2"></div><div class="spot-grain"></div></div>
+      <div class="scr">
+        <div class="statusbar"><span>9:41</span><span class="dots">●●●● 100%</span></div>
+        <div class="content">
+          <div class="topbar"><span class="logo">← Soniq</span><span style="color:var(--faint);font-family:var(--mono);font-size:10px;letter-spacing:.1em;">ACCOUNT</span></div>
+          <div class="seg"><div class="on">Sign in</div><div>Create account</div></div>
+          <h2 class="head" style="font-size:18px;">Welcome back.</h2>
+          <div class="body" style="margin-top:7px;">Pick up where your last release left off.</div>
+          <div style="margin-top:18px;"></div>
+          <div class="field">you@email.com</div>
+          <div class="pbtn">Continue →</div>
+          <div class="divider">or</div>
+          <div class="sso"><span class="dot" style="background:#1DB954;"></span>Continue with Spotify</div>
+          <div class="sso"><span class="dot" style="background:#fff;"></span>Continue with Apple</div>
+          <div style="margin-top:9px;font-size:8px;color:#8a8a96;text-align:center;line-height:1.5">By continuing, you agree to the <u style="color:#a78bfa">Terms of Service</u> &amp; <u style="color:#a78bfa">Privacy Policy</u></div>
+          <div class="note">New here? The <b>Create account</b> tab opens the same door — free account, no card. You pick a plan <b>after</b> your free drafts — never before.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1;padding-top:4px;">
+      <div class="col-head">WHY A COMBINED ENTRY</div>
+      <div class="col-sub">The top-right "Sign in" on Land stays as-is; this screen serves both keys.</div>
+      <div class="anno"><span class="num">1</span><p><b>Returning users see what they expect.</b> Most "Sign in" taps already have an account; the create path is one tab deeper, not competing on Land.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>Land keeps its single decision.</b> No second CTA above the fold — the Laser Yellow "Try with your release" stays the one loud action.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>Account ≠ membership.</b> "Create account" makes a <i>free</i> account. There's no pricing on Land, so the paid decision still lives later — at the fourth draft, where value and price sit together.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>SSO-first, Spotify on top.</b> Passwordless cuts the highest-friction step for an 11pm-in-the-studio user, and the Spotify credential doubles as catalog import downstream.</p></div>
+      <div class="anno"><span class="num">5</span><p><b>v7 · codified: the purple primary is deliberate.</b> Auth is a utility surface — zero Laser Yellow. Yellow is reserved for decisions about the music, not the account (Rule 1, utility exception).</p></div>
+      <div class="anno"><span class="num">6</span><p><b>v7.1 · assent rides the action.</b> The agreement line sits directly adjacent to every continue path (email + SSO) — the conspicuous-and-adjacent pattern courts enforce. Create-account logs a <b>versioned acceptance</b> (terms version + timestamp). Links are purple; the utility surface stays yellow-free. Counsel may escalate to an explicit checkbox — the layout reserves the room.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · SIGN-IN / CREATE ACCOUNT</span><span>PAGE 03 / 26</span></div>
+</section>
+
+<!-- ===== ROUND 02 · STAGE 01 HAND-OFF ===== -->
+<section class="page">
+  <div class="eyebrow">CHAPTER 02 · STAGE 01 · MOBILE HAND-OFF <span class="pill">V3 · DE-DUPLICATED</span></div>
+  <h1 class="title">Hand-off — one decision, one offer.</h1>
+
+  <div style="display:flex;gap:54px;margin-top:28px;">
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="atmos"><div class="spot-vig"></div><div class="spot-beam b1"></div><div class="spot-beam b2"></div><div class="spot-pool p1"></div><div class="spot-pool p2"></div><div class="spot-grain"></div></div>
+      <div class="scr">
+        <div class="statusbar"><span>9:43</span><span class="dots">●●●● 99%</span></div>
+        <div class="content">
+          <div class="topbar" style="margin-bottom:10px;"><span class="logo">Soniq</span></div>
+          <div style="text-align:center;margin-bottom:6px;">
+            <div style="width:54px;height:54px;border-radius:50%;border:2px solid var(--purple);display:flex;align-items:center;justify-content:center;margin:2px auto 10px;color:var(--purple-bright);font-size:22px;box-shadow:0 0 22px rgba(124,58,237,.4);">✓</div>
+            <div style="font-size:22px;font-weight:600;color:#fff;">You're in.</div>
+            <div style="font-size:10.5px;color:var(--muted);margin-top:5px;">Trial active · no card on file</div>
+          </div>
+          <div class="savedcard">
+            <div class="lbl">SAVED TO YOUR WORKSPACE</div>
+            <div class="ttl">Dark Moon · single</div>
+            <div class="li"><b>✓</b> Your sound — analyzed</div>
+            <div class="li"><b>✓</b> Slow-Core Quarterly — 89 fit · <span style="font-family:var(--mono);font-size:8.5px;letter-spacing:.04em;color:var(--faint);">UNVERIFIED</span></div>
+            <div class="li"><b>✓</b> Memory — started learning your voice</div>
+            <div class="working"><span class="pdot"></span>Soniq drafted your first pitch · 14s ago</div>
+          </div>
+          <div class="callout">
+            <div class="lap"></div>
+            <div class="ct"><b>The full workspace opens up on a laptop.</b> Link sent to maya@thresholds.band · <span class="resend">Resend</span></div>
+          </div>
+          <div class="yclr">Find your curators →</div>
+          <div class="subc">Right here on your phone — let's build your list.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1;padding-top:4px;">
+      <div class="col-head">WHAT CHANGED, AND WHY</div>
+      <div class="col-sub">Three competing controls became one decision plus one optional offer.</div>
+      <div class="anno"><span class="num">1</span><p><b>"Continue on mobile" is gone.</b> On a phone, tapping the primary already continues on mobile — the second button was a relabel of the first. Removing it restores one-decision-per-screen.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>The laptop offer is now a real callout, not a stranded footnote.</b> It's styled as <i>informational</i> (bordered, purple) — visible above the action but never competing for the yellow. The decision is "Find your curators"; the laptop is an offer she can take or ignore.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>Mobile = immediate reward, laptop = deep work.</b> "Find your curators" moves her straight into discovery on the device in her hand; the callout frames the laptop as where the full workspace opens up. Mobile never reads as second-class.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>The card reflects the preview, not a supplied list.</b> Sound analyzed, first pitch drafted, and the one curator she scored — a sampled score would not import here. No fabricated "12 matches."</p></div>
+      <div class="anno"><span class="num">5</span><p><b>Empty-workspace anxiety stays solved — honestly.</b> The saved card and the "drafted your first pitch" line prove Soniq worked, without claiming curators she never brought.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · STAGE 01 HAND-OFF</span><span>PAGE 04 / 26</span></div>
+</section>
+
+<!-- ===== ROUND 02 · STAGE 02 WORKSPACE ===== -->
+<section class="page">
+  <div class="eyebrow">CHAPTER 02 · STAGE 02 · WELCOME <span class="pill">V4 · WORKSPACE</span></div>
+  <h1 class="title">The workspace is a dashboard, not a doormat.</h1>
+
+  <div style="display:flex;gap:54px;margin-top:24px;">
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="scr">
+        <div class="statusbar"><span>9:44</span><span class="dots">●●●● 99%</span></div>
+        <div class="content">
+          <div class="ws-top">
+            <span class="logo">Soniq</span>
+            <span class="ws-ctx">Dark Moon ▾</span>
+            <span class="ws-av">MR</span>
+          </div>
+          <div class="ws-prep">SONIQ PREPARED THIS WHILE YOU SIGNED UP</div>
+
+          <div class="hero">
+            <div class="hk">▎START HERE · DARK MOON</div>
+            <div class="ht">Find curators for Dark Moon.</div>
+            <div class="hw">Search or paste playlists — Soniq scores each for fit with your sound, then drafts in your voice.</div>
+            <div class="hcta">Find your curators →</div>
+            <div class="hlink">How fit scoring works ↗</div>
+          </div>
+
+          <div class="snap">
+            <div class="sh"><span class="sk">SNAPSHOT</span><span class="chev">Full data ›</span></div>
+            <div class="empty" style="border:1px dashed var(--line);border-radius:9px;padding:12px 12px;text-align:center;color:var(--muted);margin-bottom:6px;">Bring your first curators to see fit scores here.</div>
+            <div class="empty">Plays &amp; replies appear once your first pitch ships.</div>
+          </div>
+
+          <div class="chatdock">
+            <div class="chatbar"><span>Ask Soniq — "last 3 reviews of similar artists"</span><span class="send">↑</span></div>
+            <div class="ws-nav">
+              <div class="nv act"><span class="ic"></span>Home</div>
+              <div class="nv"><span class="ic"></span>Campaigns</div>
+              <div class="nv"><span class="ic"></span>Ask</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1;padding-top:4px;">
+      <div class="col-head">THE FOUR JOBS OF THE WORKSPACE</div>
+      <div class="col-sub">Prepared work · one recommendation · a metrics snapshot · chat for everything else.</div>
+      <div class="anno"><span class="num">1</span><p><b>One hero recommendation, not a wall.</b> The single directive — "Find curators for Dark Moon" — carries the only Laser Yellow on screen. One-decision discipline survives inside a dashboard; it's the "Hero Brief top-of-Workspace" pattern from the Action Brief doc.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>Snapshot is an honest Day-0 state.</b> At first entry she has brought no curators yet, so the snapshot <i>invites the first ones</i> rather than showing fabricated counts — and never a deflating row of zeros.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>Chat is discoverable above the fold.</b> A docked "Ask Soniq" bar sits over the nav so she knows she can ask for things the dashboard doesn't natively show (her "last 3 reviews" example). Full thread expands below.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>Prepared work answers "now what?"</b> The "Soniq prepared this while you signed up" line plus the brief turn an empty room into a desk with work already on it.</p></div>
+      <div class="anno"><span class="num">5</span><p><b>Atmosphere removed.</b> Acquisition earns theatre; a working surface earns calm. Spotlights stops at the workspace door. <i>(The richer multi-pane desktop view is the "open on a laptop" destination — retained as a companion surface.)</i></p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · STAGE 02 WELCOME · MOBILE</span><span>PAGE 05 / 26</span></div>
+</section>
+
+</body>
+</html>

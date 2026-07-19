@@ -1,0 +1,26 @@
+/* Sonic Spotlights — design tokens (mirror of Sonic_Spotlights_UI_System.pdf · README §3) */
+:root{
+  /* Surfaces — dark-first */
+  --void:#050505; --surface-1:#16161c; --surface-2:#1c1c24;
+  /* Electric Purple — brand voice / secondary actions */
+  --purple-400:#a78bfa; --purple-500:#8b5cf6; --purple-600:#7c3aed;
+  /* Laser Yellow — the single primary action per screen (Rule 1) */
+  --yellow:#FACC15; --yellow-ink:#1c1605;
+  /* Functional — status / error / inferred (never buttons except red destructive) */
+  --emerald:#34d399; --emerald-600:#10b981;
+  --red:#ef4444; --red-600:#dc2626;
+  --amber:#f5a623;
+  /* Text on dark */
+  --ink:#f4f4f5; --muted:#a2a2ac; --faint:#6b6b76;
+  /* Type */
+  --font-display:'Plus Jakarta Sans',-apple-system,sans-serif;
+  --font-sans:'Figtree',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --font-mono:'JetBrains Mono','DejaVu Sans Mono',monospace;
+  /* Spacing — 8pt grid */
+  --sp-3xs:2px; --sp-2xs:4px; --sp-xs:8px; --sp-sm:12px; --sp-md:16px;
+  --sp-lg:24px; --sp-xl:32px; --sp-2xl:40px; --sp-3xl:48px; --sp-4xl:64px;
+  /* Radius */
+  --r-md:8px; --r-lg:12px;
+  /* Focus */
+  --focus-ring:0 0 0 3px rgba(139,92,246,.55);
+}

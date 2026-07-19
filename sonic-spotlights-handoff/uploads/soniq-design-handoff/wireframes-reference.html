@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Soniq v4 — new & corrected pages</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  :root{
+    --void:#050505;--charcoal:#121212;--line:#2a2a2a;--line-soft:#222;
+    --purple:#7C3AED;--pbright:#a78bfa;--yellow:#FACC15;--amber:#f5a623;--ok:#34d399;
+    --ink:#f4f4f5;--muted:#a2a2ac;--faint:#6b6b76;
+    --mono:'JetBrains Mono','DejaVu Sans Mono',monospace;
+    --disp:'Plus Jakarta Sans',-apple-system,sans-serif;
+    --sans:'Figtree',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#3a3a3f;color:var(--ink);font-family:var(--sans)}
+  body{padding:26px;display:flex;flex-direction:column;align-items:center;gap:26px}
+  .page{width:1056px;height:816px;background:#fff;color:#111;position:relative;overflow:hidden;
+    box-shadow:0 18px 50px rgba(0,0,0,.45);padding:46px 56px 44px}
+  .page.dark{background:var(--void);color:var(--ink)}
+  .topband{position:absolute;top:0;left:0;right:0;height:7px;background:var(--yellow)}
+  .eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:.16em;color:#7c3aed;font-weight:700;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+  .pill{background:#7C3AED;color:#fff;font-family:var(--sans);font-size:10px;letter-spacing:.06em;padding:3px 10px;border-radius:999px;font-weight:700}
+  .pill.y{background:var(--yellow);color:#111}
+  h1.title{font-family:var(--disp);font-size:30px;font-weight:700;letter-spacing:-.02em;margin-top:9px;color:#0c0c0c}
+  .lead{font-size:13px;color:#555;margin-top:10px;max-width:880px;line-height:1.55}
+  .pagefoot{position:absolute;left:56px;right:56px;bottom:26px;display:flex;justify-content:space-between;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#9a9aa2;border-top:1px solid #ececec;padding-top:13px}
+  .page.dark .pagefoot{color:#6b6b73;border-top:1px solid #1c1c1c}
+
+  /* changelog cards */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:24px}
+  .card{border:1px solid #ececec;border-left:3px solid var(--yellow);border-radius:8px;padding:14px 15px}
+  .card.proc{border-left-color:var(--purple)}
+  .card .ck{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:#7c3aed;margin-bottom:7px}
+  .card .ct{font-size:14px;font-weight:600;color:#0c0c0c;margin-bottom:6px;line-height:1.25}
+  .card .cd{font-size:11.5px;color:#444;line-height:1.45;margin-bottom:8px}
+  .card .cs{font-size:10.5px;color:#9a9aa2;font-style:italic}
+
+  /* annotation column */
+  .annocol{width:226px;flex:none}
+  .col-head{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#7c3aed;margin-bottom:3px}
+  .col-sub{font-size:12px;color:#6a6a72;font-style:italic;margin-bottom:14px}
+  .anno{display:flex;gap:9px;align-items:flex-start;margin-bottom:10px}
+  .anno .num{flex:none;width:18px;height:18px;border-radius:50%;border:1.4px solid #7C3AED;color:#7C3AED;font-family:var(--mono);font-size:9px;display:flex;align-items:center;justify-content:center;margin-top:1px;font-weight:700}
+  .anno p{font-size:11.5px;line-height:1.4;color:#33333a}
+  .anno p b{color:#0c0c0c;font-weight:600}
+  .quote{font-size:13px;color:#0c0c0c;font-weight:600;font-style:italic;margin-bottom:14px}
+
+  /* ===== desktop product chrome (dark) ===== */
+  .stage{display:flex;gap:20px;margin-top:18px;align-items:flex-start}
+  .brow{flex:1;min-width:0;border-radius:10px;overflow:hidden;border:1px solid #1d1d24;background:var(--void);box-shadow:0 12px 30px rgba(0,0,0,.4)}
+  .bchrome{display:flex;align-items:center;gap:6px;background:#020203;padding:7px 11px;border-bottom:1px solid #18181f}
+  .bdot{width:9px;height:9px;border-radius:50%;background:#34343c}
+  .burl{margin-left:9px;flex:1;background:#111118;border:1px solid #20202a;border-radius:5px;font-family:var(--mono);font-size:10px;color:var(--muted);padding:4px 9px}
+  .burl b{color:var(--ink);font-weight:500}
+  .app{display:grid;background:var(--void)}
+  .app.c{grid-template-columns:108px 1fr 40px}     /* collapsed edge */
+  .app.p{grid-template-columns:104px 1fr 188px}    /* expanded panel */
+  .tb{grid-column:1/-1;display:flex;align-items:center;padding:8px 13px;border-bottom:1px solid #1c1c24;background:#0a0a10}
+  .tb .lgmark{width:21px;height:21px;border-radius:6px;margin-right:8px}
+  .tb .lg{font-family:var(--disp);font-weight:700;font-size:13px;color:var(--ink)}
+  .tb .sr{margin-left:13px;background:#101019;border:1px solid #20202a;border-radius:6px;color:var(--faint);font-size:10.5px;padding:5px 9px}
+  .tb .av{margin-left:auto;width:23px;height:23px;border-radius:50%;background:#3a2f5e;display:grid;place-items:center;font-family:var(--mono);font-size:9px;color:var(--pbright);font-weight:600}
+  .sd{border-right:1px solid #1c1c24;padding:14px 0;display:flex;flex-direction:column;gap:1px}
+  .nv{position:relative;padding:7px 14px;color:var(--faint);font-size:12px}
+  .nv.act{color:var(--ink);font-weight:550}
+  .nv.act::before{content:"";position:absolute;left:0;top:5px;bottom:5px;width:2.5px;border-radius:0 2px 2px 0;background:var(--purple)}
+  .mn{padding:14px 16px;min-width:0}
+  .crumb{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.03em;margin-bottom:10px}
+  .crumb b{color:var(--muted);font-weight:500}
+
+  /* collapsed line-to-soniq edge */
+  .edge{border-left:1px solid #1c1c24;background:#040406;display:flex;flex-direction:column;align-items:center;padding:13px 0;gap:12px}
+  .edge .lv{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px rgba(52,211,153,.18)}
+  .edge .ab{width:26px;height:26px;border-radius:7px;background:rgba(124,58,237,.16);border:1px solid rgba(124,58,237,.45);color:var(--pbright);display:grid;place-items:center}
+  .edge .vl{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--mono);font-size:8px;letter-spacing:.16em;color:var(--faint)}
+
+  /* expanded panel (welcome) */
+  .panel{border-left:1px solid #1c1c24;background:#08080d;display:flex;flex-direction:column}
+  .ptabs{display:flex;border-bottom:1px solid #1c1c24}
+  .ptab{flex:1;text-align:center;font-size:10px;color:var(--faint);padding:8px 0;position:relative}
+  .ptab.on{color:var(--ink)}
+  .ptab.on::after{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:2px;background:var(--purple);border-radius:2px}
+  .feed{padding:11px 11px;display:flex;flex-direction:column}
+  .ev{position:relative;padding:0 0 11px 14px;border-left:1px solid #1c1c24}
+  .ev:last-child{border-left-color:transparent;padding-bottom:0}
+  .ev::before{content:"";position:absolute;left:-3.5px;top:3px;width:6px;height:6px;border-radius:50%;background:var(--purple)}
+  .ev .h{font-size:10.5px;color:var(--ink);line-height:1.3}
+  .ev .m{font-family:var(--mono);font-size:8.5px;color:var(--faint);margin-top:2px}
+
+  /* product content bits */
+  .pk{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--pbright);margin-bottom:6px}
+  .hero{background:#141414;border:1px solid var(--line-soft);border-left:3px solid var(--purple);border-radius:10px;padding:12px 13px;margin-bottom:11px}
+  .hero .ht{font-family:var(--disp);font-size:15px;color:#fff;font-weight:700;line-height:1.2}
+  .hero .hw{font-size:10px;color:var(--muted);line-height:1.5;margin-top:6px}
+  .hero .hw b{color:var(--ok)}
+  .yctan{display:inline-block;margin-top:9px;background:var(--yellow);color:#111;font-weight:700;font-size:11.5px;padding:8px 13px;border-radius:7px}
+  .hlink{margin-left:13px;font-size:10.5px;color:var(--pbright)}
+  .snaprow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+  .stat{background:#101019;border:1px solid var(--line-soft);border-radius:8px;padding:9px 10px}
+  .stat b{display:block;font-family:var(--mono);font-size:17px;color:#fff;font-weight:700;line-height:1}
+  .stat span{font-size:8.5px;color:var(--faint);display:block;margin-top:4px}
+  .stat.em{border-style:dashed;background:transparent}.stat.em b{color:var(--faint);font-size:15px}
+  .seclbl{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--faint);margin:0 0 7px}
+
+  /* curator/reply cards */
+  .ccard{background:#111118;border:1px solid var(--line-soft);border-radius:9px;padding:10px 11px;margin-bottom:7px;display:flex;gap:10px;align-items:flex-start}
+  .ccard .sc{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--purple);color:var(--pbright);font-family:var(--mono);font-size:11px;font-weight:700;display:grid;place-items:center}
+  .ccard .ci{flex:1;min-width:0}
+  .ccard .cn{font-family:var(--disp);font-size:12.5px;color:#fff;font-weight:600}
+  .ccard .cm{font-size:9.5px;color:var(--muted);margin-top:2px}
+  .ccard .why{font-size:10px;color:var(--pbright);white-space:nowrap}
+  .chips{display:flex;gap:6px;margin-bottom:9px}
+  .chip{font-family:var(--mono);font-size:9px;color:var(--muted);border:1px solid var(--line-soft);border-radius:14px;padding:3px 9px}
+  .chip.on{background:rgba(124,58,237,.16);border-color:rgba(124,58,237,.4);color:var(--pbright)}
+  .tag{font-family:var(--mono);font-size:8px;letter-spacing:.08em;border:1px solid var(--line-soft);border-radius:11px;padding:2px 7px;color:var(--muted)}
+  .badge-pos{color:var(--ok);border-color:rgba(52,211,153,.4)}
+
+  /* reasoning drawer */
+  .drawer{background:#0c0c12;border:1px solid #20202a;border-radius:10px;padding:13px;margin-top:2px}
+  .dtop{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line-soft);padding-bottom:9px;margin-bottom:11px}
+  .dtop .rk{font-family:var(--mono);font-size:9px;letter-spacing:.14em;color:var(--pbright)}
+  .dgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  .dcol .dl{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--faint);margin-bottom:6px}
+  .dcol .dv{font-size:10.5px;color:#d4d4da;line-height:1.45;margin-bottom:8px}
+  .dcol .dv b{color:#fff}
+  .srcline{font-family:var(--mono);font-size:9px;color:var(--pbright);margin-top:3px}
+
+  .cropnote{margin-top:14px;border:1px dashed #d8d8de;border-radius:8px;padding:8px 10px;font-size:10px;color:#7a7a82;line-height:1.45}
+  .cropnote b{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;color:#9a9aa2;display:block;margin-bottom:3px}
+  .errtag{font-family:var(--mono);font-size:8px;letter-spacing:.08em;border:1px solid rgba(239,68,68,.5);border-radius:11px;padding:2px 7px;color:#ef4444}
+  .warnbox{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.45);border-radius:9px;padding:10px 12px;font-size:10px;color:#d4d4da;line-height:1.5}
+  .warnbox b{color:#f5a623}
+  .ghostbtn{display:inline-block;margin-top:9px;border:1px solid var(--line);color:var(--muted);font-weight:600;font-size:11.5px;padding:8px 13px;border-radius:7px}
+  @media print{body{background:#fff;padding:0;gap:0}.page{box-shadow:none;page-break-after:always}@page{size:letter landscape;margin:0}}
+</style>
+</head>
+<body>
+
+<!-- ===== NEW v7.1 · TERMS RE-ACCEPTANCE GATE (legal-UX) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">ACCOUNT · TERMS RE-ACCEPTANCE <span class="pill y">V7.1 · NEW</span></div>
+  <h1 class="title">When the terms change — fresh assent, not silence.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/<b>terms-update</b> · redirected from /workspace</span></div>
+      <div style="background:radial-gradient(ellipse 55% 50% at 22% 0%,rgba(124,58,237,.20),transparent 70%),#050505;padding:26px 22px 24px;display:flex;justify-content:center">
+        <div style="width:430px">
+          <div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--pbright);margin-bottom:6px">UPDATED TERMS · EFFECTIVE AUG 1, 2026</div>
+          <div style="font-family:var(--disp);font-size:17px;color:#fff;font-weight:700;letter-spacing:-.01em;margin-bottom:7px">We’ve updated our Terms of Service.</div>
+          <div style="font-size:10px;color:var(--muted);line-height:1.6;margin-bottom:11px">Here’s what actually changed — in plain language, before the legal text:</div>
+          <div style="background:#101019;border:1px solid var(--line-soft);border-radius:10px;padding:11px 13px;margin-bottom:11px">
+            <div style="font-size:10px;color:#cfcfd4;line-height:1.6;margin-bottom:7px"><b style="color:var(--pbright)">·</b> &nbsp;<b style="color:#fff">Billing:</b> price changes now require 30 days’ notice before your renewal (was 14).</div>
+            <div style="font-size:10px;color:#cfcfd4;line-height:1.6;margin-bottom:7px"><b style="color:var(--pbright)">·</b> &nbsp;<b style="color:#fff">Your content:</b> clarified that backup copies purge within 60 days of deletion.</div>
+            <div style="font-size:10px;color:#cfcfd4;line-height:1.6"><b style="color:var(--pbright)">·</b> &nbsp;<b style="color:#fff">Nothing else changed.</b> Ownership and approve-before-send are untouched — your music is still yours, and nothing sends without your say-so.</div>
+          </div>
+          <div style="font-size:9px;color:var(--faint);margin-bottom:13px">Read the <u style="color:var(--pbright)">full updated Terms</u> · <u style="color:var(--pbright)">compare versions</u> · takes effect Aug 1 — changes apply going forward only</div>
+          <div style="display:flex;gap:9px;align-items:center">
+            <span style="background:transparent;border:1.5px solid var(--purple);color:var(--pbright);font-weight:600;font-size:11.5px;padding:9px 16px;border-radius:7px">I agree — continue to Dark Moon →</span>
+            <span class="hlink" style="margin-left:0">Remind me later</span>
+          </div>
+          <div style="margin-top:12px;font-size:9px;color:var(--faint);line-height:1.55">Don’t agree? You can keep using Soniq under the current terms until Aug 1, <u style="color:var(--pbright)">export your work</u>, or <u style="color:var(--pbright)">cancel</u> — your drafts, scores, and Context export with you.</div>
+        </div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">FRESH ASSENT, BY DESIGN</div>
+      <div class="col-sub">Silence is not a signature.</div>
+      <div class="anno"><span class="num">1</span><p><b>Material changes require a new affirmative act</b> (ToS §20) — not “continued use.” The gate appears once per version, after sign-in, before the workspace.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>Plain-language diff first.</b> What changed, in three lines, before the legal text — and an honest “nothing else changed.” The full document and a version compare are one tap away.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>Utility surface → purple primary, zero yellow</b> (Rule 1 exception). Agreeing to terms is an account decision, not a music decision.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>Escapes are honest.</b> “Remind me later” works until the effective date; declining shows export and cancel paths — assent under threat of losing your work isn’t assent.</p></div>
+      <div class="anno"><span class="num">5</span><p><b>Versioned acceptance logged</b> — terms version + timestamp — and every prior version stays archived (ToS §20).</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · TERMS RE-ACCEPTANCE</span><span>PAGE 06 / 26</span></div>
+</section>
+
+<!-- ===== PAGE 10b · WELCOME DESKTOP (panel = Activity, Day-0) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CHAPTER 02 · STAGE 02 · WELCOME <span class="pill y">V4 · DESKTOP</span></div>
+  <h1 class="title">The workspace, opened on a laptop.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/workspace/<b>dark-moon</b></span></div>
+      <div class="app p">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv act">Workspace</div><div class="nv">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Workspace › <b>Dark Moon</b></div>
+          <div class="pk">SONIQ PREPARED THIS WHILE YOU SIGNED UP</div>
+          <div class="hero"><div class="ht">Find curators for Dark Moon.</div><div class="hw">Search or paste playlists — Soniq scores each for <b>fit</b> with your sound, then drafts the pitch in your voice.</div><div><span class="yctan">Find your curators →</span><span class="hlink">How fit scoring works ↗</span></div></div>
+          <div class="seclbl">SNAPSHOT</div>
+          <div class="snaprow"><div class="stat em" style="flex:2.4"><b>—</b><span>Bring your first curators to see fit scores here</span></div><div class="stat em"><b>—</b><span>plays · after first send</span></div></div>
+        </div>
+        <aside class="panel">
+          <div class="ptabs"><div class="ptab on">Activity</div><div class="ptab">Ask</div></div>
+          <div class="feed">
+            <div class="ev"><div class="h">Drafted your first pitch</div><div class="m">14s ago · from your preview</div></div>
+            <div class="ev"><div class="h">Analyzed your sound</div><div class="m">lo-fi · shoegaze</div></div>
+            <div class="ev"><div class="h">Started learning your voice</div><div class="m">from your bio</div></div>
+            <div class="ev"><div class="h">Ready to score curators</div><div class="m">search or paste to begin</div></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">DESKTOP TRANSLATION</div>
+      <div class="col-sub">Same spine, more room.</div>
+      <div class="anno"><span class="num">1</span><p>The center column is the phone — prepared-line, snapshot, hero brief in mobile order. The gutters add the nav and the live panel.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>One Laser Yellow</b> survives the bigger canvas: "Find your curators" is the only yellow.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>The Line-to-Soniq panel opens to Activity on first entry</b> — Day-0 proof that the room was never empty. It collapses on return.</p></div>
+      <div class="anno"><span class="num">4</span><p>Snapshot is an <b>honest near-empty state</b> at Day-0 — it invites the first curators rather than showing fabricated counts or a deflating zero.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · STAGE 02 WELCOME · DESKTOP</span><span>PAGE 07 / 26</span></div>
+</section>
+
+
+<!-- ===== PAGE 11d · CURATOR DISCOVERY · SEARCH + BRING YOUR OWN (rebuilt as HTML, v7) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CHAPTER 02 · CURATOR DISCOVERY <span class="pill">LAUNCH MODEL · SEARCH + BRING YOUR OWN</span></div>
+  <h1 class="title">Find curators — search Soniq, or bring your own.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/workspace/<b>dark-moon</b>/find-curators</span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv act">Workspace</div><div class="nv">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Workspace › Dark Moon › <b>Find curators</b></div>
+          <div style="font-family:var(--disp);font-size:15px;color:#fff;font-weight:700;margin-bottom:3px">Where should Dark Moon go?</div>
+          <div style="font-size:9.5px;color:var(--muted);margin-bottom:9px">Search for a fit, or paste a playlist you already have in mind. Soniq scores any playlist by analyzing it.</div>
+          <div style="background:#0c0c12;border:1px solid #20202a;border-radius:9px;padding:10px 11px;margin-bottom:9px">
+            <div style="display:flex;gap:8px;align-items:center">
+              <div style="flex:1;background:#101019;border:1px solid var(--line);border-radius:7px;padding:8px 10px;font-size:10px;color:var(--faint)">⌕ Search a genre or vibe — or paste a Spotify / Apple Music playlist link</div>
+              <span style="border:1.5px solid var(--purple);color:var(--pbright);font-weight:600;font-size:10.5px;padding:7px 11px;border-radius:7px;white-space:nowrap">Analyze fit</span>
+            </div>
+            <div style="font-size:9px;color:var(--muted);line-height:1.5;margin-top:8px">Soniq scores any playlist by its genres, the artists on it, and how they compare to you — whether Soniq found it or you brought it.</div>
+            <div style="display:flex;gap:6px;margin-top:8px;align-items:center">
+              <span class="chip on">⌕ Search Soniq</span><span class="chip on">🔗 Paste a link · bring your own</span>
+              <span class="chip" style="border-style:dashed">✦ Verified network — coming via partner integration</span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;margin-bottom:7px"><span class="seclbl" style="margin:0">12 PLAYLISTS · SCORED BY FIT</span><span style="margin-left:auto;font-family:var(--mono);font-size:8.5px;color:var(--faint)">Sort: fit ▾</span></div>
+          <div class="ccard"><span class="sc">89</span><div class="ci"><div class="cn">Slow-Core Quarterly</div><div class="cm">Noa Vasquez · your genre + 3 artists like you</div></div><span style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span class="tag">UNVERIFIED</span><span class="why">Why? ↗</span></span></div>
+          <div class="ccard"><span class="sc">76</span><div class="ci"><div class="cn">Tape Warm</div><div class="cm">1.1k followers · lo-fi, female vocal lean</div></div><span style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span class="tag">UNVERIFIED</span><span class="why">Why? ↗</span></span></div>
+          <div class="ccard" style="border-color:rgba(124,58,237,.45)"><span class="sc">71</span><div class="ci"><div class="cn">Bedroom Pop Gems <span class="tag" style="color:var(--pbright);border-color:rgba(124,58,237,.4)">YOU ADDED</span></div><div class="cm">pasted link · analyzed · 2 artists like you</div></div><span style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span class="tag">UNVERIFIED</span><span class="why">Why? ↗</span></span></div>
+          <div style="margin-top:2px"><span class="yctan">Draft pitches for top 3 →</span><span class="hlink">Add another link</span></div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">THE LAUNCH MODEL</div>
+      <div class="col-sub">No verified network yet — so this is the front door.</div>
+      <div class="anno"><span class="num">1</span><p><b>One input, two routes.</b> Type a genre to search, or paste a playlist link. Bringing your own isn't a side door — it's the same field, scored the same way.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>Fit ≠ Verified.</b> Every result is scored for <i>fit</i> (Soniq's analysis) but marked <i>unverified</i> — Soniq hasn't vouched for the contact or how to reach them. Two signals, never merged.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>Self-supplied is first-class.</b> "You added" sits in the same ranked list with a real score and the same downstream pipeline — not a lesser lane.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>Verification is the goal, layered later.</b> Partner integration (e.g. Groover) adds send-on-behalf + status — it upgrades these from <i>unverified</i> to <i>verified</i> without changing the flow.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · CURATOR DISCOVERY · SEARCH + BRING YOUR OWN</span><span>PAGE 08 / 26</span></div>
+</section>
+
+
+<!-- ===== PAGE 11e · FIT REASONING (rebuilt as HTML, v7) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CURATOR DISCOVERY · FIT REASONING <span class="pill">SCORED WITHOUT A NETWORK</span></div>
+  <h1 class="title">Why this score — read from the playlist itself.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">workspace/dark-moon/find-curators?<b>why=slow-core-quarterly</b></span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv act">Workspace</div><div class="nv">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Find curators › <b>Slow-Core Quarterly · why</b></div>
+          <div class="drawer">
+            <div class="dtop"><div><div class="rk">FIT · ANALYZED FROM THE PLAYLIST</div><div style="font-family:var(--disp);font-size:13.5px;color:#fff;font-weight:600;margin-top:3px">Slow-Core Quarterly</div></div><span style="width:36px;height:36px;border-radius:50%;border:2.5px solid var(--purple);color:var(--pbright);font-family:var(--mono);font-size:13px;font-weight:700;display:grid;place-items:center">89</span></div>
+            <div class="dgrid">
+              <div class="dcol"><div class="dl">GENRE &amp; SOUND</div><div class="dv">Lo-fi, slow-core, shoegaze — <b>matches Dark Moon's profile</b>. <span class="tag">lo-fi</span> <span class="tag">slow-core</span> <span class="tag">shoegaze</span></div>
+              <div class="dl">AUDIO FIT</div><div class="dv">Playlist averages <b>112 BPM</b>, female-vocal lean, lots of negative space — close to your track's sonic scan.</div></div>
+              <div class="dcol"><div class="dl">ARTISTS LIKE YOU</div><div class="dv"><b>3 of the last 20 adds</b> are comparable to you by Soniq's similarity read — the kind of company Dark Moon keeps.</div>
+              <div class="dl">SIGNALS</div><div class="dv">1.2k followers · refreshed weekly · public submission note found.</div></div>
+            </div>
+            <div style="border-top:1px solid var(--line-soft);margin-top:9px;padding-top:8px;font-family:var(--mono);font-size:8.5px;color:var(--faint);line-height:1.6">Computed from the playlist's <b style="color:var(--muted)">public tracks</b> + your <b style="color:var(--muted)">sonic scan</b>. No verified relationship required. <span class="srcline">· Memory · 2 sources ↗</span></div>
+          </div>
+          <div class="warnbox" style="margin-top:9px"><b>⚠ Fit, not verification.</b> Soniq scored this; it hasn't confirmed the contact or how to reach them. That comes with partner integration.</div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">HOW THE SCORE WORKS</div>
+      <div class="col-sub">The engine that makes launch possible.</div>
+      <div class="anno"><span class="num">1</span><p><b>The playlist is the data.</b> Soniq reads its public tracks — genres, audio profile, and which artists resemble you — so it can score <i>any</i> playlist, found or pasted, with no verified network.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>Same drawer, honest basis.</b> The reasoning layer carries over — but the sources are playlist analysis + your sonic scan, not a curator-history database.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>The blank case stays honest.</b> A bare email or blog with nothing to analyze gets <b>no score</b> — Soniq drafts the pitch but says "no fit data," never a faked number.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>No Laser Yellow here.</b> A reasoning surface explains; it doesn't ask for a decision.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · CURATOR DISCOVERY · FIT REASONING</span><span>PAGE 09 / 26</span></div>
+</section>
+
+
+<!-- ===== PAGE 11f · THE HONEST BLANK (rebuilt as HTML, v7) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CURATOR DISCOVERY · THE HONEST BLANK <span class="pill">NOTHING TO ANALYZE</span></div>
+  <h1 class="title">When there's nothing to score — Soniq says so.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/workspace/<b>dark-moon</b>/find-curators</span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv act">Workspace</div><div class="nv">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Workspace › Dark Moon › <b>Find curators</b></div>
+          <div style="background:#0c0c12;border:1px solid #20202a;border-radius:9px;padding:10px 11px;margin-bottom:9px">
+            <div style="display:flex;gap:8px;align-items:center">
+              <div style="flex:1;background:#101019;border:1px solid var(--line);border-radius:7px;padding:8px 10px;font-size:10px;color:#cfcfd4">🔗 thequiethour.com/submit <span style="color:var(--faint)">— a blog, not a playlist</span></div>
+              <span style="border:1.5px solid var(--purple);color:var(--pbright);font-weight:600;font-size:10.5px;padding:7px 11px;border-radius:7px;white-space:nowrap">Analyze fit</span>
+            </div>
+            <div style="font-size:9px;color:var(--muted);margin-top:8px">You can add any contact — but only a playlist gives Soniq something to score.</div>
+          </div>
+          <div class="ccard" style="border-color:rgba(124,58,237,.45)"><span class="sc" style="border-style:dashed;border-color:var(--line);color:var(--faint)">—</span><div class="ci"><div class="cn">The Quiet Hour <span class="tag" style="color:var(--pbright);border-color:rgba(124,58,237,.4)">YOU ADDED</span></div><div class="cm">indie zine · no playlist to analyze</div></div><span style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span class="tag">NO FIT DATA</span><span class="why">Details ↗</span></span></div>
+          <div style="background:#111118;border:1px solid var(--line-soft);border-left:3px solid var(--purple);border-radius:9px;padding:10px 12px;font-size:10px;color:#cfcfd4;line-height:1.55;margin-bottom:2px"><b style="color:#fff">I can't score this one.</b> There's no playlist here to analyze, so I won't show a fit number rather than guess at one. I'll still draft a pitch from what I know about you — you decide whether it's worth sending.</div>
+          <div style="margin-top:9px"><span class="yctan">Draft a pitch anyway →</span><span class="hlink">Remove from list</span></div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">THE HONEST BLANK</div>
+      <div class="col-sub">Where Soniq says "I don't know."</div>
+      <div class="anno"><span class="num">1</span><p><b>No data, no number.</b> A bare email or blog gets no score — never a faked 0 or a guess. Same rule as "never show 0 sources."</p></div>
+      <div class="anno"><span class="num">2</span><p><b>Still useful.</b> Soniq can't rank it, but it can draft the pitch from your Context — the value narrows, it doesn't vanish.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>You own the call.</b> With no fit read, the judgment is yours; Soniq is explicit that it's deferring to you.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>One decision.</b> "Draft a pitch anyway" is the single yellow — proceeding in spite of the blank.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · CURATOR DISCOVERY · THE HONEST BLANK</span><span>PAGE 10 / 26</span></div>
+</section>
+
+
+<!-- ===== NEW v7 · FAILURE STATE A · ANALYSIS FAILED ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CURATOR DISCOVERY · FAILURE STATE <span class="pill y">V7 · NEW</span></div>
+  <h1 class="title">When analysis fails — loudly, and with a way forward.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/workspace/<b>dark-moon</b>/find-curators</span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv act">Workspace</div><div class="nv">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Workspace › Dark Moon › <b>Find curators</b></div>
+          <div style="background:#0c0c12;border:1px solid #20202a;border-radius:9px;padding:10px 11px;margin-bottom:9px">
+            <div style="display:flex;gap:8px;align-items:center">
+              <div style="flex:1;background:#101019;border:1px solid var(--red,#ef4444);border-radius:7px;padding:8px 10px;font-size:10px;color:#cfcfd4">🔗 open.spotify.com/playlist/4xK9…</div>
+              <span style="border:1.5px solid var(--purple);color:var(--pbright);font-weight:600;font-size:10.5px;padding:7px 11px;border-radius:7px;white-space:nowrap">Analyze fit</span>
+            </div>
+          </div>
+          <div class="ccard" style="border-color:rgba(239,68,68,.4)"><span class="sc" style="border-color:rgba(239,68,68,.6);color:#ef4444">!</span><div class="ci"><div class="cn">Couldn't analyze this playlist <span class="errtag">ANALYSIS FAILED</span></div><div class="cm">the link resolves to a private playlist — Soniq can only read public tracks</div></div></div>
+          <div style="background:#111118;border:1px solid var(--line-soft);border-left:3px solid var(--purple);border-radius:9px;padding:10px 12px;font-size:10px;color:#cfcfd4;line-height:1.55"><b style="color:#fff">I couldn't read this one.</b> The playlist is private, so there's nothing to analyze yet — no score, and I won't guess at one. Make it public (or paste another link) and I'll score it in seconds. Or keep it as a contact with no fit data and I'll still draft the pitch.</div>
+          <div style="margin-top:10px"><span class="yctan">Re-try analysis →</span><span class="hlink">Paste a different link</span><span class="hlink">Keep as no-fit contact</span></div>
+          <div style="margin-top:8px;font-size:9px;color:var(--faint)">Nothing was added or lost — the contact stays on your list either way.</div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">FAILURE, DESIGNED</div>
+      <div class="col-sub">Trust is won where things go wrong.</div>
+      <div class="anno"><span class="num">1</span><p><b>Failure inherits the honest blank.</b> No score, no guess — the no-fabrication rule doesn't bend under error.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>Loud, specific, recoverable.</b> The reason is named (private playlist) and every path forward is on the screen: retry, replace, or keep as a no-fit contact.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>Red marks the error, never an action.</b> Destructive red stays reserved (UI System); the recovery actions are yellow + purple as everywhere else.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>Nothing is lost.</b> A failed analysis never deletes her work — the contact persists, unscored.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · FAILURE STATE · ANALYSIS FAILED</span><span>PAGE 11 / 26</span></div>
+</section>
+
+<!-- ===== PAGE 11 · CURATOR MATCHES (corrected) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CHAPTER 02 · STAGE 03 · CURATOR MATCHES <span class="pill y">POST-INTEGRATION · NOT LAUNCH</span></div>
+  <h1 class="title">Curator matches — the proof becomes the workspace.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/workspace/dark-moon/<b>curators</b></span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv act">Workspace</div><div class="nv">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Workspace › Dark Moon › <b>Curator matches</b></div>
+          <div style="font-size:15px;color:#fff;font-weight:650;margin-bottom:3px">12 curator matches</div>
+          <div style="font-size:10px;color:var(--muted);margin-bottom:10px">Ranked by confidence. Tap any match to see Soniq's reasoning.</div>
+          <div class="chips"><span class="chip on">All · 12</span><span class="chip">Curator · 8</span><span class="chip">Press · 4</span></div>
+          <div class="ccard"><span class="sc">89</span><div class="ci"><div class="cn">Noa Vasquez · Slow-Core Quarterly</div><div class="cm">118 BPM avg · lo-fi vocal preference</div></div><span class="why">Why? ↗</span></div>
+          <div class="ccard"><span class="sc">72</span><div class="ci"><div class="cn">Adam Yoe · No Echo</div><div class="cm">features ed. · replies to indie pitches</div></div><span class="why">Why? ↗</span></div>
+          <div class="ccard"><span class="sc" style="border-color:#888;color:#cfcfd4">68</span><div class="ci"><div class="cn">Lila Chen · Folk Unwound <span class="tag">PRESS</span></div><div class="cm">staff · female lead vocal</div></div><span class="why">Why? ↗</span></div>
+          <div style="margin-top:11px"><span class="yctan">Draft pitches for top 3 →</span><span class="hlink">Pick individual matches ↗</span></div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">WHAT THIS SCREEN DOES</div>
+      <div class="quote">"Tap any one to see why."</div>
+      <div class="anno"><span class="num">1</span><p><b>v7: this page ships with the partner integration, not at launch.</b> Until then, Curator discovery (search + bring your own) is the front door.</p></div>
+      <div class="anno"><span class="num">2</span><p>The 12 from the preview, now navigable. Lock pattern gone — trial unlocked everything.</p></div>
+      <div class="anno"><span class="num">3</span><p>Confidence lenses on every card; each opens the reasoning drawer.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>v4:</b> Context left the sidebar; the LIVE feed is now the Activity tab of the collapsed Line-to-Soniq edge.</p></div>
+      <div class="cropnote"><b>✂ CROPPED SLIDE</b>This slide crops the screen to its decision region. The full composition lives in <i>wireframes-reference.html</i> — don’t read the empty space as the screen.</div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · CURATOR MATCHES · POST-INTEGRATION</span><span>PAGE 12 / 26</span></div>
+</section>
+
+
+<!-- ===== PAGE 11b · CONFIRM BEFORE PITCH ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">ROUND 02 · CAMPAIGN SETUP <span class="pill">CONTEXT · ENTRY POINT 2</span></div>
+  <h1 class="title">Confirm what I know — before a pitch goes out.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/workspace/dark-moon/<b>set-up</b></span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv">Workspace</div><div class="nv act">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Campaigns › <b>Dark Moon</b> › Set up</div>
+          <div class="pk">SONIQ · BEFORE I DRAFT</div>
+          <div style="font-size:15px;color:#fff;font-weight:650;margin-bottom:5px">Confirm what I'm working from.</div>
+          <div style="font-size:10.5px;color:var(--muted);line-height:1.5;margin-bottom:13px;max-width:420px">I read your track and pulled what I know about you. Fix anything off — it updates everywhere. I've flagged the one thing I'm guessing at.</div>
+          <div class="seclbl">THIS RELEASE</div>
+          <div class="ccard"><span class="tag" style="margin-top:2px">✓</span><div class="ci"><div class="cn" style="font-weight:500;font-size:11.5px">Dark Moon · single · releasing Jun 14</div><div class="cm">from your upload · 118 BPM · F# minor · lo-fi</div></div><span class="why">✎ correct</span></div>
+          <div class="seclbl" style="margin-top:9px">ABOUT YOU · FROM YOUR CONTEXT</div>
+          <div class="ccard"><span class="tag" style="margin-top:2px">✓</span><div class="ci"><div class="cn" style="font-weight:500;font-size:11.5px">Audience: 25–34, weekend-active listeners</div><div class="cm">your context · you corrected 2d ago</div></div><span class="why">✎ correct</span></div>
+          <div class="ccard" style="border-color:rgba(245,166,35,.4);background:rgba(245,166,35,.06)"><span class="tag" style="margin-top:2px;color:var(--amber);border-color:rgba(245,166,35,.5)">!</span><div class="ci"><div class="cn" style="font-weight:500;font-size:11.5px">Angle: lead with the live-to-tape detail <span class="tag" style="color:var(--amber);border-color:rgba(245,166,35,.5)">I INFERRED THIS</span></div><div class="cm">inferred from your sonic read · worth a glance</div></div><span class="why">✎ correct</span></div>
+          <div style="margin-top:13px;display:flex;align-items:center;gap:14px"><span class="yctan" style="margin-top:0">Looks right — draft 12 pitches →</span><span class="hlink" style="margin-left:0">Adjust targeting ↗</span><span style="margin-left:auto;font-size:9px;color:var(--faint);max-width:150px;text-align:right;line-height:1.35">Nothing sends from here. You approve every pitch.</span></div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">WHY THIS SCREEN</div>
+      <div class="col-sub">The cheapest place to be wrong.</div>
+      <div class="anno"><span class="num">1</span><p><b>Catch errors before they cost.</b> One tap here vs. a bad-fit pitch later — the targeting lever, pulled upstream.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>Entry point #2 into Context.</b> Same premises, same write-back — corrections update the canonical store.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>Mostly right, low friction.</b> Pre-filled; attention drawn only to the amber-flagged inference.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>Still proposes, never commits.</b> Confirming drafts — it doesn't send.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · CONFIRM BEFORE PITCH</span><span>PAGE 13 / 26</span></div>
+</section>
+
+
+<!-- ===== PAGE 12 · REVIEWER FLOW (corrected) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CHAPTER 02 · STAGE 04 · REVIEWER FLOW <span class="pill">V4 · CORRECTED</span></div>
+  <h1 class="title">Reviewer flow — the pitch is already written.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/workspace/dark-moon/pitches/<b>noa-vasquez</b></span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv">Workspace</div><div class="nv act">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Campaigns › Dark Moon › Pitches › <b>Noa Vasquez</b></div>
+          <div class="ccard"><span class="sc">89</span><div class="ci"><div class="cn">Noa Vasquez · Slow-Core Quarterly <span class="tag">DRAFT</span></div><div class="cm">drafted from her bio, Noa's last picks, your voice</div></div><span class="why">Why? ↗</span></div>
+          <div style="background:#101019;border:1px solid var(--line-soft);border-radius:9px;padding:11px 12px;margin-top:4px;font-size:10.5px;color:#cfcfd4;line-height:1.55">Hi Noa — <span style="color:var(--faint)">Dark Moon is a lo-fi shoegaze single built around live-to-tape restraint; given your run of patient, tape-warm picks in Slow-Core Quarterly, I thought it might sit well with your readers…</span></div>
+          <div style="margin-top:11px"><span class="yctan">Copy pitch →</span><span class="hlink">Open in email ↗</span><span class="hlink">Edit draft</span></div>
+          <div style="margin-top:9px;font-size:9px;color:var(--faint)">Mark it sent when you do. Soniq drafts; you copy and send — nothing leaves Soniq on its own.</div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">WHAT THIS SCREEN DOES</div>
+      <div class="quote">"Edit if needed. Copy it and send it yourself."</div>
+      <div class="anno"><span class="num">1</span><p>The artist is the reviewer. Soniq drafted the pitch; she edits or confirms.</p></div>
+      <div class="anno"><span class="num">2</span><p>Copy or open-in-email, then mark it sent — Soniq has no mailbox and cannot send. The artist is always the sender.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>v4:</b> Context removed from the sidebar.</p></div>
+      <div class="cropnote"><b>✂ CROPPED SLIDE</b>This slide crops the screen to its decision region. The full composition lives in <i>wireframes-reference.html</i> — don’t read the empty space as the screen.</div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · STAGE 04 REVIEWER FLOW</span><span>PAGE 14 / 26</span></div>
+</section>
+
+
+<!-- ===== NEW v7 · THE PLAN MOMENT (conversion) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CONVERSION · THE PLAN MOMENT <span class="pill y">V7 · NEW</span></div>
+  <h1 class="title">The plan moment — priced where the value is proven.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/workspace/<b>dark-moon</b>/plan</span></div>
+      <div style="background:radial-gradient(ellipse 60% 55% at 18% 0%,rgba(124,58,237,.22),transparent 70%),radial-gradient(ellipse 45% 45% at 86% 8%,rgba(250,204,21,.10),transparent 70%),#050505;padding:18px 20px 20px">
+        <div style="font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--pbright);margin-bottom:5px">YOU'VE USED YOUR 3 FREE DRAFTS</div>
+        <div style="font-family:var(--disp);font-size:18px;color:#fff;font-weight:700;letter-spacing:-.01em;margin-bottom:12px">Pick a plan to draft the rest.</div>
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;gap:11px;align-items:stretch">
+          <div style="background:rgba(16,16,25,.85);border:1px solid var(--line-soft);border-radius:10px;padding:11px 12px">
+            <div style="font-family:var(--mono);font-size:8px;letter-spacing:.13em;color:var(--faint);margin-bottom:8px">YOUR TRIAL ALREADY BUILT</div>
+            <div style="font-size:10px;color:#cfcfd4;line-height:1.5;margin-bottom:6px"><b style="color:var(--ok)">✓</b> 12 playlists scored to Dark Moon</div>
+            <div style="font-size:10px;color:#cfcfd4;line-height:1.5;margin-bottom:6px"><b style="color:var(--ok)">✓</b> 3 pitches drafted free — yours to send</div>
+            <div style="font-size:10px;color:#cfcfd4;line-height:1.5;margin-bottom:6px"><b style="color:var(--ok)">✓</b> 1 brief · reasoning attached</div>
+            <div style="border-top:1px solid var(--line-soft);margin-top:8px;padding-top:8px;font-size:9px;color:var(--faint);line-height:1.5">All of it stays yours on any plan — or none.</div>
+          </div>
+          <div style="background:#101019;border:1px solid var(--line-soft);border-radius:10px;padding:11px 12px;display:flex;flex-direction:column">
+            <div style="font-family:var(--disp);font-size:12.5px;color:#fff;font-weight:700">Solo</div>
+            <div style="font-family:var(--mono);font-size:15px;color:#fff;margin:5px 0 7px">$19<span style="font-size:9px;color:var(--faint)">/mo</span></div>
+            <div style="font-size:9.5px;color:var(--muted);line-height:1.55;flex:1">Draft beyond your free 3 · one campaign in motion · artist-logged replies · Context &amp; reasoning included.</div>
+            <span class="ghostbtn" style="text-align:center">Choose Solo</span>
+          </div>
+          <div style="background:#101019;border:1.5px solid rgba(250,204,21,.45);border-radius:10px;padding:11px 12px;display:flex;flex-direction:column;position:relative">
+            <span style="position:absolute;top:-8px;right:10px;background:var(--yellow);color:#111;font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;padding:2px 8px;border-radius:9px;font-weight:700">BUILT FOR YOUR CADENCE</span>
+            <div style="font-family:var(--disp);font-size:12.5px;color:#fff;font-weight:700">Momentum</div>
+            <div style="font-family:var(--mono);font-size:15px;color:#fff;margin:5px 0 7px">$39<span style="font-size:9px;color:var(--faint)">/mo</span></div>
+            <div style="font-size:9.5px;color:var(--muted);line-height:1.55;flex:1">Unlimited campaigns · curator + press outreach · cadence planning that carries forward what worked.</div>
+            <span class="yctan" style="margin-top:9px;text-align:center">Draft the full campaign →</span>
+          </div>
+        </div>
+        <div style="margin-top:11px;background:rgba(16,16,25,.85);border:1px solid var(--line-soft);border-radius:9px;padding:9px 12px;display:flex;align-items:flex-start;gap:9px">
+            <span style="width:13px;height:13px;border:1.4px solid var(--pbright);border-radius:3.5px;flex:none;margin-top:1px"></span>
+            <span style="font-size:9.5px;color:#cfcfd4;line-height:1.55"><b style="color:#fff">Auto-renewal consent (required, never pre-checked):</b> my plan renews monthly at the price shown until I cancel. I can cancel anytime in Settings — effective at the end of the paid period, no advance-notice deadline.</span>
+          </div>
+          <div style="margin-top:9px;font-size:9px;color:var(--faint);line-height:1.5">Card now, to draft beyond your free 3 — your 3 drafts, scores, and Context stay yours either way. Cancel anytime. · <u style="color:var(--pbright)">Terms</u> · <u style="color:var(--pbright)">Privacy</u></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">WHY THE GATE SITS HERE</div>
+      <div class="col-sub">"Three drafts free. The campaign is the product."</div>
+      <div class="anno"><span class="num">1</span><p><b>Priced at the fourth draft, not the first.</b> The trial proves value — scored, drafted, sendable — and the price arrives only to draft the rest of the campaign. A copy button can't be gated; the drafting can. "Account ≠ membership" closes here.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>Her own campaign is the pitch.</b> The left rail is literally what Soniq already built for Dark Moon — receipts, not feature marketing.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>One yellow</b> — the recommended plan. The other plan is a ghost, not a competing shout (Rule 1 survives the paywall).</p></div>
+      <div class="anno"><span class="num">4</span><p><b>Honest exits.</b> Cancel anytime; drafts and Context persist — commitment without hostage-taking.</p></div>
+      <div class="anno"><span class="num">5</span><p><b>The atmosphere returns here, deliberately.</b> The plan moment is acquisition's last page — the one workspace route that earns theatre (Rule 6 boundary). Pricing copy is illustrative; plans/prices TBD.</p></div>
+      <div class="anno"><span class="num">6</span><p><b>v7.1 · renewal consent is its own act.</b> ROSCA-grade: material terms disclosed adjacent to the purchase, and the auto-renewal gets a <b>separate, unchecked</b> consent box — buying and agreeing-to-renew are two affirmative acts. The cancel promise (anytime, in-app, no deadline) is stated where the card is taken.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · CONVERSION · THE PLAN MOMENT</span><span>PAGE 15 / 26</span></div>
+</section>
+
+
+<!-- ===== PAGE 12c · SENDING UNVERIFIED (rebuilt as HTML, v7 artist-logged) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CURATOR DISCOVERY · THE HANDOFF <span class="pill">V7.3 · COPY &amp; SEND YOURSELF</span></div>
+  <h1 class="title">No send button — you copy it and send from your own inbox.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">workspace/dark-moon/pitches/<b>slow-core-quarterly</b></span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv">Workspace</div><div class="nv act">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Campaigns › Dark Moon › Pitches › <b>Slow-Core Quarterly</b></div>
+          <div class="ccard"><span class="sc">89</span><div class="ci"><div class="cn">Slow-Core Quarterly <span class="tag">DRAFT</span></div><div class="cm">Noa Vasquez · drafted from her playlist + your voice</div></div><span class="tag">UNVERIFIED</span></div>
+          <div style="background:#101019;border:1px solid var(--line-soft);border-radius:9px;padding:11px 12px;margin-top:4px;font-size:10.5px;color:#cfcfd4;line-height:1.55">Hi Noa — <span style="color:var(--faint)">Dark Moon is a lo-fi, tape-warm single built around restraint; given the slow-core run on Slow-Core Quarterly, I thought it might sit well alongside…</span></div>
+          <div style="background:#0c0c12;border:1px solid rgba(124,58,237,.35);border-radius:9px;padding:10px 12px;margin-top:9px">
+            <div style="font-family:var(--disp);font-size:11.5px;color:#fff;font-weight:600;margin-bottom:6px">How you send this</div>
+            <div style="font-size:9.5px;color:#cfcfd4;line-height:1.55;margin-bottom:6px"><b style="color:#fff">Copy the pitch</b>, or open it in your own email — it lands in your client pre-filled, to / subject / body ready. You hit send. <b style="color:#fff">Soniq has no mailbox and never sends for you.</b> When Noa writes back to your inbox, log the reply with one tap.</div>
+            <div style="font-size:9px;color:var(--faint);line-height:1.55">No tracking pixels in your mail — your deliverability stays yours. ✦ Verified contacts (via partner integration) send through the partner with native status — same screen, stronger guarantees.</div>
+          </div>
+          <div style="margin-top:11px"><span class="yctan">Copy pitch →</span><span class="hlink">Open in email ↗</span><span class="hlink">Mark as sent</span></div>
+          <div style="margin-top:9px;font-size:9px;color:var(--faint)">Soniq can't send — you copy it and send it. You're always the sender.</div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">SENDING WITHOUT VERIFICATION</div>
+      <div class="col-sub">Copy-paste is the whole send path at launch.</div>
+      <div class="anno"><span class="num">1</span><p><b>You are the send mechanism.</b> With no platform integration, Soniq drafts and you send from your own inbox — copy-paste or open-in-email. A self-chosen contact can't burn anyone's network.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>Same pipeline, artist-logged.</b> Replies are logged by you — one tap, paste optional — so the pipeline still moves ready → sent → replied. <b>v7: no open-tracking</b>; pixels risk exactly the deliverability a self-sent pitch depends on.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>Approve-before-send is structural here.</b> There is no send to gate — Soniq drafts; you decide; you send. The gate gets real teeth when a partner channel can send on your behalf.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>Verified is the upgrade.</b> Partner integration swaps this for send-on-behalf with native status — without changing the screen.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · THE HANDOFF</span><span>PAGE 16 / 26</span></div>
+</section>
+
+
+<!-- ===== NEW v7 · FAILURE STATE B · SENDS PAUSED / BOUNCED ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CAMPAIGN · FAILURE STATE <span class="pill y">V7.3 · ARTIST-LOGGED</span></div>
+  <h1 class="title">When a contact bounces — you log it, Soniq rolls it back.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/workspace/<b>dark-moon</b></span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv">Workspace</div><div class="nv act">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Campaigns › <b>Dark Moon</b></div>
+          <div style="background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.45);border-radius:9px;padding:10px 12px;margin-bottom:9px;display:flex;align-items:center;gap:11px">
+            <div style="flex:1"><div style="font-family:var(--disp);font-size:11.5px;color:#fff;font-weight:600">Tape Warm bounced — you logged it, Soniq rolled it back.</div><div style="font-size:9px;color:var(--muted);margin-top:3px">The bounce landed in your inbox; one tap here returns the pitch to ready to send with the reason. Never counted as sent.</div></div>
+            <span class="yctan" style="margin-top:0;white-space:nowrap">Fix address &amp; re-draft →</span>
+          </div>
+          <div class="seclbl">PIPELINE · ONE ROLLED BACK</div>
+          <div class="ccard" style="border-color:rgba(239,68,68,.4)"><span class="sc" style="border-color:rgba(239,68,68,.6);color:#ef4444">!</span><div class="ci"><div class="cn">Tape Warm <span class="errtag">BOUNCED</span></div><div class="cm">you logged the bounce · rolled back to <b style="color:#cfcfd4">ready to send</b> with the reason — never counted as sent</div></div><span style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span class="hlink" style="margin-left:0">Edit address</span><span class="hlink" style="margin-left:0">Remove</span></span></div>
+          <div class="ccard"><span class="sc" style="border-style:dashed;border-color:var(--line);color:var(--faint)">…</span><div class="ci"><div class="cn">Slow-Core Quarterly <span class="tag">READY TO SEND</span></div><div class="cm">drafted &amp; approved · copy it whenever you're ready — unaffected by the bounce</div></div></div>
+          <div style="margin-top:8px;font-size:9px;color:var(--faint);line-height:1.5">Nothing silent, nothing automatic. A bounce only changes state when you log it — the rest of your pipeline is untouched.</div>
+        </div>
+        <div class="edge"><span class="lv" style="background:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,.18)"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">FAILURE, DESIGNED</div>
+      <div class="col-sub">A bounce you can see is a promise kept.</div>
+      <div class="anno"><span class="num">1</span><p><b>You own the only signal.</b> A bounce lands in your inbox, not Soniq's — so the rollback is something you log, with the fix attached. Soniq never guesses at delivery.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>A bounce is honest status.</b> The pitch rolls back to <i>ready to send</i> with the reason; it is never counted as sent. The pipeline only shows what truly happened.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>The rest is untouched.</b> One rolled-back pitch doesn't disturb the others — there is no queue to pause, because Soniq never held the sending.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>One yellow: the fix.</b> "Fix address &amp; re-draft" is the single decision on a broken screen. The live dot goes red while a bounce is unresolved.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · FAILURE STATE · LOGGED BOUNCE</span><span>PAGE 17 / 26</span></div>
+</section>
+
+<!-- ===== PAGE 15 · THE GLANCE (corrected) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CHAPTER 03 · SURFACE 01 · THE GLANCE <span class="pill">V7 · ARTIST-LOGGED</span></div>
+  <h1 class="title">The glance — the campaign home, in motion.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/workspace/<b>dark-moon</b></span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv">Workspace</div><div class="nv act">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Campaigns › <b>Dark Moon</b></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:11px"><span style="font-size:15px;color:#fff;font-weight:650">Dark Moon</span><span class="tag badge-pos">IN MOTION</span><span class="hlink" style="margin-left:auto">✓ Mark complete</span><span class="hlink" style="margin-left:0">Campaign settings ⚙</span></div>
+          <div class="seclbl">PIPELINE · FOUR LIFECYCLE STATES</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:9px">
+            <div class="stat"><b style="font-size:13px">5</b><span>queued</span></div>
+            <div class="stat"><b style="font-size:13px">7</b><span>sent</span></div>
+            <div class="stat"><b style="font-size:13px">2</b><span>replied · you log these</span></div>
+            <div class="stat"><b style="font-size:13px;color:var(--ok)">2</b><span>placed</span></div>
+          </div>
+          <div style="background:#111118;border:1px solid var(--line-soft);border-radius:9px;padding:8px 11px;margin-bottom:9px;display:flex;align-items:center;gap:9px">
+            <span style="width:13px;height:13px;border:1.4px solid var(--pbright);border-radius:3.5px;flex:none"></span>
+            <span style="font-size:10px;color:#cfcfd4">Tape Warm · sent 3d ago — <b style="color:var(--pbright);font-weight:600">heard back? Mark replied</b></span>
+            <span style="margin-left:auto;font-family:var(--mono);font-size:8px;color:var(--faint)">PASTE THE REPLY · OPTIONAL</span>
+          </div>
+          <div style="font-size:10px;color:var(--muted);line-height:1.5">The pipeline is the page — every pitch advances left to right. Sent → replied is yours: one tap when a curator writes back. No tracking pixels in your mail — your deliverability stays yours.</div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">WHAT THIS SCREEN DOES</div>
+      <div class="quote">"What's happening with Dark Moon?"</div>
+      <div class="anno"><span class="num">1</span><p>The pipeline is the page. <b>Four lifecycle states</b> render left to right — v7 retires "opened": open-tracking means pixels in her personal sends, a deliverability risk Soniq won’t take.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>Replied is artist-logged</b> — one tap when a curator writes back, paste optional. Honest states only: nothing shown that Soniq can’t truthfully know.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>“Mark complete” is hers.</b> Soniq proposes the wind-down (cadence loop); the artist can also declare it done anytime — propose vs. commit, applied to endings.</p></div>
+      <div class="cropnote"><b>✂ CROPPED SLIDE</b>This slide crops the screen to its decision region. The full composition lives in <i>wireframes-reference.html</i> — don’t read the empty space as the screen.</div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · SURFACE 01 THE GLANCE</span><span>PAGE 18 / 26</span></div>
+</section>
+
+
+<!-- ===== PAGE 16 · THE RECEIPT (corrected) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CHAPTER 03 · SURFACE 02 · THE RECEIPT <span class="pill">V7 · ARTIST-LOGGED</span></div>
+  <h1 class="title">The receipt — a reply becomes proof.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/workspace/dark-moon/replies/<b>noa-vasquez</b></span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv">Workspace</div><div class="nv act">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Campaigns › Dark Moon › Replies › <b>Noa Vasquez</b></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px"><span style="font-size:15px;color:#fff;font-weight:650">Noa Vasquez replied</span><span class="tag badge-pos">POSITIVE</span></div>
+          <div style="font-size:9.5px;color:var(--faint);margin-bottom:11px">you logged this reply 2 hours ago · Soniq classified intent and drafted a response for your review</div>
+          <div style="background:#101019;border:1px solid var(--line-soft);border-radius:9px;padding:11px 12px;font-size:10.5px;color:#cfcfd4;line-height:1.55;margin-bottom:9px">"Love this — patient and tape-warm, exactly our lane. Can you send the stems?"</div>
+          <div class="seclbl">SONIQ DRAFTED A REPLY · + STEMS LINK</div>
+          <div style="background:#141414;border:1px solid var(--line-soft);border-radius:9px;padding:10px 12px;font-size:10px;color:var(--muted);line-height:1.5">Thanks Noa — so glad it landed. Here’s a stems link — WAV stems + instrumental, via my media library…</div>
+          <div style="margin-top:11px"><span class="yctan">Copy reply + stems link →</span><span class="hlink">Open in email ↗</span><span class="hlink">Browse Media library</span></div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">WHAT THIS SCREEN DOES</div>
+      <div class="quote">"Noa said yes — and wants the stems."</div>
+      <div class="anno"><span class="num">1</span><p><b>She logged the reply</b> — one tap from the pipeline, paste optional. Soniq classifies intent (POSITIVE) and surfaces the ask (stems). No inbox scanning: the receipt exists because she logged it.</p></div>
+      <div class="anno"><span class="num">2</span><p>A reply drafted for review — still the artist's send, not an auto-response.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>v7: stems travel as a Media-library link, never an attachment</b> — multi-track WAVs bounce; a link can’t. This is also what the Media rail is for.</p></div>
+      <div class="cropnote"><b>✂ CROPPED SLIDE</b>This slide crops the screen to its decision region. The full composition lives in <i>wireframes-reference.html</i> — don’t read the empty space as the screen.</div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · SURFACE 02 THE RECEIPT</span><span>PAGE 19 / 26</span></div>
+</section>
+
+
+<!-- ===== PAGE 17 · CADENCE LOOP (corrected) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CHAPTER 03 · SURFACE 03 · THE CADENCE LOOP <span class="pill">V7 · PROPOSE, DON’T DECLARE</span></div>
+  <h1 class="title">The cadence loop — the next release begins.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/workspace/<b>dark-moon</b></span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv">Workspace</div><div class="nv act">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Campaigns › <b>Dark Moon</b></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px"><span style="font-size:15px;color:#fff;font-weight:650">Dark Moon</span><span class="tag badge-pos">WRAPPING · PROPOSED</span><span class="hlink" style="margin-left:auto">✓ Mark complete now</span></div>
+          <div style="font-size:9.5px;color:var(--faint);margin-bottom:11px">day 28 · 2 placements confirmed · activity cooling over the last 7 days — Soniq proposes the wrap; you commit (or mark it complete yourself, anytime)</div>
+          <div class="seclbl">THIS CAMPAIGN EARNED</div>
+          <div class="snaprow" style="grid-template-columns:repeat(3,1fr)"><div class="stat"><b>2</b><span>placements</span></div><div class="stat"><b>22%</b><span>reply rate</span></div><div class="stat"><b>~6.5h</b><span>time saved</span></div></div>
+          <div class="hero" style="border-left-color:var(--purple)"><div class="ht" style="font-size:14px">Start the next release?</div><div class="hw">Your cadence is ~6 weeks. I can carry forward what worked and draft the next brief.</div><div><span class="yctan">Plan the next release →</span><span class="hlink">Archive Dark Moon</span></div></div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">WHAT THIS SCREEN DOES</div>
+      <div class="quote">"Activity has cooled. Want to wrap up?"</div>
+      <div class="anno"><span class="num">1</span><p>Recap, not a dead end. Campaign earns are surfaced at the right moment.</p></div>
+      <div class="anno"><span class="num">2</span><p>The loop closes into the next release — Context entry point #3 lives here ("update before next release").</p></div>
+      <div class="anno"><span class="num">3</span><p><b>v7: endings are hers too.</b> “WRAPPING” is a proposal, not a verdict — the “Mark complete” control closes a campaign whenever the artist says so.</p></div>
+      <div class="cropnote"><b>✂ CROPPED SLIDE</b>This slide crops the screen to its decision region. The full composition lives in <i>wireframes-reference.html</i> — don’t read the empty space as the screen.</div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · SURFACE 03 THE CADENCE LOOP</span><span>PAGE 20 / 26</span></div>
+</section>
+
+
+<!-- ===== PAGE 19 · REASONING ANATOMY (corrected) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">CHAPTER 04 · STATE 01 · ANATOMY <span class="pill">V4 · CORRECTED</span></div>
+  <h1 class="title">The anatomy — every claim auditable.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/workspace/dark-moon/curators?<b>why=noa-vasquez</b></span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av">MR</span></div>
+        <nav class="sd"><div class="nv act">Workspace</div><div class="nv">Campaigns</div><div class="nv">Media</div></nav>
+        <div class="mn">
+          <div class="crumb">Dark Moon › <b>Curator matches</b></div>
+          <div class="drawer">
+            <div class="dtop"><div><div class="dtop rk" style="display:block">REASONING · 89 FIT</div><div style="font-size:12px;color:#fff;font-weight:600;margin-top:3px">Noa Vasquez · Slow-Core Quarterly</div></div><span style="color:var(--faint);font-size:15px">×</span></div>
+            <div class="dgrid">
+              <div class="dcol"><div class="dl">EVIDENCE</div><div class="dv">Sonics and curator history align strongly. Aesthetic register is <b>well-matched</b> — patient, tape-warm picks.</div><div class="dl">ASSUMPTIONS</div><div class="dv">Audience read: <b>25–34</b> (you corrected this). Lo-fi vocal preference inferred from last 9 picks.</div></div>
+              <div class="dcol"><div class="dl">RISK</div><div class="dv">Low. Noa replies to ~40% of well-fit indie pitches; queue depth moderate.</div><div class="dl">SOURCES</div><div class="dv">9 signals · curator-history.csv · your sonic scan.<div class="srcline">Memory · 3 files ↗ — opens your Context</div></div></div>
+            </div>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:14px;align-items:center"><span class="hlink" style="margin-left:0">Challenge an assumption</span><span class="hlink" style="margin-left:0">Apply mitigation</span></div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">WHAT THIS SURFACE DOES</div>
+      <div class="quote">"Show me everything you know."</div>
+      <div class="anno"><span class="num">1</span><p>Two-column XAI grid. Evidence + Assumptions left, Risk + Sources right.</p></div>
+      <div class="anno"><span class="num">2</span><p>Challenge an assumption → a correction loop that writes back to Context.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>v4:</b> the "Memory · 3 files" source link now opens <b>Context</b>; Context removed from the sidebar.</p></div>
+      <div class="cropnote"><b>✂ CROPPED SLIDE</b>This slide crops the screen to its decision region. The full composition lives in <i>wireframes-reference.html</i> — don’t read the empty space as the screen.</div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · STATE 01 REASONING ANATOMY</span><span>PAGE 21 / 26</span></div>
+</section>
+
+
+<!-- ===== PAGE 21b · ARTIST CONTEXT · DESKTOP ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">ARTIST CONTEXT · MEMORY OF RECORD <span class="pill">V4 · NEW</span></div>
+  <h1 class="title">What Soniq knows — kept where the artist lives.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/<b>maya-reyes</b>/context</span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av" style="border:1px solid rgba(124,58,237,.5)">MR</span></div>
+        <nav class="sd"><div class="nv">Workspace</div><div class="nv">Campaigns</div><div class="nv">Media</div><div style="margin-top:auto;font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;color:var(--faint);padding:10px 14px 0;line-height:1.6">CONTEXT IS NOT<br>A TASK — IT'S IN<br>THE ARTIST MENU ↗</div></nav>
+        <div class="mn">
+          <div class="crumb"><b>Maya Reyes</b> › What Soniq knows</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px"><div style="font-size:15px;color:#fff;font-weight:650">What Soniq knows about you</div><span class="tag" style="font-size:7.5px">● NEVER SHOWN TO CURATORS</span></div>
+          <div style="font-size:10px;color:var(--muted);margin:6px 0 12px;max-width:420px">The memory behind every match and pitch. Correct anything — it updates everywhere.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div class="ccard" style="display:block"><div class="pk" style="margin-bottom:5px">VOICE &amp; NARRATIVE</div><div style="font-size:10.5px;color:#e4e4e8;line-height:1.4">Warm, first-person. Craft over hype; live-to-tape.</div><div style="display:flex;justify-content:space-between;margin-top:7px"><span style="font-family:var(--mono);font-size:8px;color:var(--faint)">from bio + edits</span><span class="why">✎ correct</span></div></div>
+            <div class="ccard" style="display:block"><div class="pk" style="margin-bottom:5px">AUDIENCE <span class="tag" style="font-size:7px;color:var(--pbright);border-color:rgba(124,58,237,.4)">✓ corrected</span></div><div style="font-size:10.5px;color:#e4e4e8;line-height:1.4">25–34, weekend-active listeners.</div><div style="display:flex;justify-content:space-between;margin-top:7px"><span style="font-family:var(--mono);font-size:8px;color:var(--faint)">you corrected · 2d ago</span><span class="why">✎ correct</span></div></div>
+            <div class="ccard" style="display:block"><div class="pk" style="margin-bottom:5px">SONIC SIGNATURE</div><div style="font-size:10.5px;color:#e4e4e8;line-height:1.4">~118 BPM · lo-fi · negative space.</div><div style="display:flex;justify-content:space-between;margin-top:7px"><span style="font-family:var(--mono);font-size:8px;color:var(--faint)">soniq sonic scans</span><span class="why">re-scan ↻</span></div></div>
+            <div class="ccard" style="display:block"><div class="pk" style="margin-bottom:5px">PRESS HISTORY</div><div style="font-size:10.5px;color:#e4e4e8;line-height:1.4">No Echo (2025) · Quiet Hour zine.</div><div style="display:flex;justify-content:space-between;margin-top:7px"><span style="font-family:var(--mono);font-size:8px;color:var(--faint)">confirmed placements</span><span class="why">all · 4</span></div></div>
+          </div>
+          <div class="ccard" style="display:block;margin-top:8px"><div class="pk" style="margin-bottom:5px">CURATOR HISTORY</div><div style="font-size:10.5px;color:#cfcfd4"><b style="color:#fff">Noa Vasquez</b> placed Dark Moon · 8 contacted · 22% reply · 2 placements</div><div style="display:flex;justify-content:space-between;margin-top:7px"><span style="font-family:var(--mono);font-size:8px;color:var(--faint)">built from your campaigns</span><span class="why">view list ↗</span></div></div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">INTENT</div>
+      <div class="col-sub">Infrastructure, not a service.</div>
+      <div class="anno"><span class="num">1</span><p><b>Demoted by design.</b> Out of the task rail; reached from the artist menu. "Soniq remembers" is a proof point, not a product.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>One canonical store.</b> A correction here applies to every campaign — resolving "memory in two places."</p></div>
+      <div class="anno"><span class="num">3</span><p><b>Readable, not files.</b> Grouped with plain-language provenance; the .md metaphor stays under the hood.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>No Laser Yellow.</b> A reference surface carries no single decision; corrections are quiet purple.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · ARTIST CONTEXT · DESKTOP</span><span>PAGE 22 / 26</span></div>
+</section>
+
+
+<!-- ===== PAGE 21c · ARTIST CONTEXT · MOBILE ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">ARTIST CONTEXT · MEMORY OF RECORD <span class="pill">V4 · MOBILE</span></div>
+  <h1 class="title">What Soniq knows — between rehearsals.</h1>
+  <div style="display:flex;gap:46px;margin-top:22px;align-items:flex-start">
+    <div style="flex:none;width:262px;border:9px solid #1c1c1c;border-radius:34px;overflow:hidden;background:var(--void);box-shadow:0 18px 40px rgba(0,0,0,.4)">
+      <div style="display:flex;justify-content:space-between;padding:11px 16px 5px;font-family:var(--mono);font-size:9.5px;color:var(--muted)"><span>9:46</span><span>●●●● 100%</span></div>
+      <div style="display:flex;align-items:center;gap:9px;padding:5px 14px 11px;border-bottom:1px solid #1c1c24"><span style="color:var(--muted);font-size:15px">←</span><span style="font-size:13px;color:#fff;font-weight:600">What Soniq knows</span><span style="margin-left:auto;width:22px;height:22px;border-radius:50%;background:#3a2f5e;display:grid;place-items:center;font-family:var(--mono);font-size:8.5px;color:var(--pbright);border:1px solid rgba(124,58,237,.4)">MR</span></div>
+      <div style="padding:11px 13px">
+        <div style="font-family:var(--mono);font-size:7.5px;letter-spacing:.05em;color:var(--muted);border:1px solid var(--line-soft);border-radius:16px;padding:5px 9px;margin-bottom:9px;display:inline-block">● NEVER SHOWN TO CURATORS</div>
+        <div style="font-size:10.5px;color:var(--muted);line-height:1.4;margin-bottom:11px">Correct anything — it updates everywhere.</div>
+        <div style="border-top:1px solid var(--line-soft);padding:9px 0"><div class="pk" style="margin-bottom:4px">VOICE &amp; NARRATIVE</div><div style="font-size:10.5px;color:#e4e4e8;line-height:1.4">Warm, first-person. Craft over hype; live-to-tape.</div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:7px"><span style="font-family:var(--mono);font-size:8px;color:var(--faint)">from bio + edits</span><span style="font-size:10px;color:var(--pbright);border:1px solid rgba(124,58,237,.3);border-radius:6px;padding:4px 8px">✎ correct</span></div></div>
+        <div style="border-top:1px solid var(--line-soft);padding:9px 0"><div class="pk" style="margin-bottom:4px">AUDIENCE <span class="tag" style="font-size:7px;color:var(--pbright);border-color:rgba(124,58,237,.4)">✓ corrected</span></div><div style="font-size:10.5px;color:#e4e4e8;line-height:1.4">25–34, weekend-active listeners.</div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:7px"><span style="font-family:var(--mono);font-size:8px;color:var(--faint)">you corrected · 2d ago</span><span style="font-size:10px;color:var(--pbright);border:1px solid rgba(124,58,237,.3);border-radius:6px;padding:4px 8px">✎ correct</span></div></div>
+        <div style="border-top:1px solid var(--line-soft);padding:8px 0"><div class="pk" style="margin-bottom:4px">SONIC SIGNATURE</div><div style="font-size:10.5px;color:#e4e4e8;line-height:1.4">~118 BPM · lo-fi · negative space.</div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span style="font-family:var(--mono);font-size:8px;color:var(--faint)">soniq sonic scans</span><span style="font-size:10px;color:var(--pbright);border:1px solid rgba(124,58,237,.3);border-radius:6px;padding:4px 8px">re-scan ↻</span></div></div>
+        <div style="border-top:1px solid var(--line-soft);padding:8px 0"><div class="pk" style="margin-bottom:4px">PRESS HISTORY</div><div style="font-size:10.5px;color:#e4e4e8;line-height:1.4">No Echo (2025) · Quiet Hour zine.</div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span style="font-family:var(--mono);font-size:8px;color:var(--faint)">confirmed placements</span><span style="font-size:10px;color:var(--pbright);border:1px solid rgba(124,58,237,.3);border-radius:6px;padding:4px 8px">all · 4</span></div></div>
+        <div style="border-top:1px solid var(--line-soft);padding:8px 0"><div class="pk" style="margin-bottom:4px">CURATOR HISTORY</div><div style="font-size:10px;color:#cfcfd4;line-height:1.5"><b style="color:#fff">Noa Vasquez</b> · 8 contacted · 22% reply · 2 placed</div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:7px"><span style="font-family:var(--mono);font-size:8px;color:var(--faint)">your campaigns</span><span style="font-size:10px;color:var(--pbright);border:1px solid rgba(124,58,237,.3);border-radius:6px;padding:4px 8px">view list ↗</span></div></div>
+      </div>
+    </div>
+    <div class="annocol" style="width:auto;flex:1;max-width:560px">
+      <div class="col-head">HOW IT'S REACHED ON MOBILE</div>
+      <div class="col-sub" style="margin-bottom:16px">Tap your avatar → a menu sheet. Not in the bottom nav — Context isn't a task. It opens as a pushed screen; back returns you.</div>
+      <div class="col-head">MOBILE REFLOW</div>
+      <div class="anno"><span class="num">1</span><p><b>Sections stack, nothing cut.</b> The five desktop groups become one scrollable column — reflow, never reduce.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>Provenance survives.</b> Every fact keeps its "where it came from" line — the reason to trust the page.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>Correct stays thumb-reachable.</b> Each block's correct is a full-size tap target; the audit-and-fix loop works one-handed.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>Still no Laser Yellow,</b> and reached from identity, not the tab bar — the placement decision holds across devices.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · ARTIST CONTEXT · MOBILE</span><span>PAGE 23 / 26</span></div>
+</section>
+
+
+<!-- ===== PAGE 22a · LINE TO SONIQ ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">GLOBAL · LINE TO SONIQ <span class="pill">V4 · NEW</span></div>
+  <h1 class="title">One panel. Reachable from every page.</h1>
+  <p class="lead">Chat and the live activity feed fold into a single collapsible right-edge panel — two tabs, Activity and Ask. It lives in the app shell, collapsed by default; one click brings Soniq in, and it dismisses without losing your place.</p>
+  <div style="display:flex;gap:26px;margin-top:18px;align-items:flex-start">
+    <!-- collapsed -->
+    <div style="flex:0 0 300px">
+      <div class="brow">
+        <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">workspace/<b>dark-moon</b></span></div>
+        <div class="app c" style="min-height:200px">
+          <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="av">MR</span></div>
+          <nav class="sd"><div class="nv act">Workspace</div><div class="nv">Campaigns</div></nav>
+          <div class="mn"><div class="hero" style="margin:0"><div class="ht" style="font-size:13px">Find curators for Dark Moon.</div><div><span class="yctan" style="font-size:10.5px;padding:7px 10px">Find your curators →</span></div></div></div>
+          <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:#6a6a72;font-style:italic;margin-top:8px">① Collapsed — a thin edge, live dot when Soniq's working.</div>
+    </div>
+    <div style="align-self:center;color:var(--purple);font-size:22px">→</div>
+    <!-- expanded -->
+    <div style="flex:1;min-width:0">
+      <div class="brow">
+        <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">workspace/<b>dark-moon</b></span></div>
+        <div class="app p" style="grid-template-columns:96px 1fr 210px;min-height:200px">
+          <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search</span><span class="av">MR</span></div>
+          <nav class="sd"><div class="nv act">Workspace</div><div class="nv">Campaigns</div></nav>
+          <div class="mn" style="opacity:.45"><div class="hero" style="margin:0"><div class="ht" style="font-size:13px">Find curators for Dark Moon.</div></div></div>
+          <aside class="panel">
+            <div class="ptabs"><div class="ptab">Activity</div><div class="ptab on">Ask</div><span style="color:var(--faint);font-size:13px;padding:0 7px">×</span></div>
+            <div class="feed">
+              <div style="align-self:flex-end;background:rgba(124,58,237,.16);border:1px solid rgba(124,58,237,.3);border-radius:10px;padding:7px 9px;font-size:10px;color:#eae7f6;max-width:88%">Last 3 reviews of similar artists?</div>
+              <div style="align-self:flex-start;background:#141414;border:1px solid var(--line-soft);border-radius:10px;padding:8px 10px;font-size:10px;color:var(--muted);max-width:92%;margin-top:8px">3 recent reviews in your lane:<br>· <b style="color:var(--pbright)">Slow-Core Q.</b> — tape-warm<br>· <b style="color:var(--pbright)">No Echo</b> — best shoegaze<br>· <b style="color:var(--pbright)">Folk Unwound</b> — staff pick<div style="font-family:var(--mono);font-size:8px;color:var(--faint);margin-top:6px">CITES 3 SOURCES ↗</div></div>
+              <div style="margin-top:auto;display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:#141414;border-radius:8px;padding:7px 9px"><span style="flex:1;font-size:10px;color:var(--faint)">Ask Soniq anything…</span><span style="width:20px;height:20px;border-radius:5px;background:var(--purple);color:#fff;display:grid;place-items:center;font-size:11px">↑</span></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+      <div style="font-size:11px;color:#6a6a72;font-style:italic;margin-top:8px">② Expanded — overlays from the right, keeps your place. Activity = the old LIVE rail; Ask = chat.</div>
+    </div>
+    <div class="annocol" style="width:200px">
+      <div class="col-head">THE MODEL</div>
+      <div class="anno"><span class="num">1</span><p><b>One panel, two tabs.</b> The LIVE rail folds in as Activity; the right edge is one line to Soniq.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>Global chrome.</b> In the app shell — on every page, collapsed by default.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>⌘K stays separate.</b> Find &amp; navigate vs. converse &amp; ask. On mobile: docked bar → bottom sheet.</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · GLOBAL · LINE TO SONIQ</span><span>PAGE 24 / 26</span></div>
+</section>
+
+
+<!-- ===== PAGE 25 · SETTINGS · PRIVACY (SONIQ IMPROVEMENT OPT-OUT) ===== -->
+<section class="page">
+  <div class="topband"></div>
+  <div class="eyebrow">SETTINGS · PRIVACY <span class="pill">V7.1 · NEW</span></div>
+  <h1 class="title">Soniq Improvement — on by default, off in one tap.</h1>
+  <div class="stage">
+    <div class="brow">
+      <div class="bchrome"><span class="bdot"></span><span class="bdot"></span><span class="bdot"></span><span class="burl">sonicspotlights.app/<b>settings</b>/privacy</span></div>
+      <div class="app c">
+        <div class="tb"><img src="assets/logo/sonicspotlightsappicon.png" class="lgmark" alt=""><span class="lg">Sonic Spotlights</span><span class="sr">⌘K Search anything</span><span class="av" style="border:1px solid rgba(124,58,237,.5)">MR</span></div>
+        <nav class="sd"><div class="nv">Workspace</div><div class="nv">Campaigns</div><div class="nv">Media</div><div class="nv act">Settings</div><div style="margin-top:auto;font-family:var(--mono);font-size:7.5px;letter-spacing:.1em;color:var(--faint);padding:10px 14px 0;line-height:1.6">YOUR DATA, YOUR<br>CALL — PLAIN AND<br>REVERSIBLE ↗</div></nav>
+        <div class="mn">
+          <div class="crumb"><b>Settings</b> › Privacy</div>
+          <div style="display:flex;gap:18px;border-bottom:1px solid #1c1c24;margin-bottom:13px"><span style="font-size:10.5px;color:var(--faint);padding-bottom:8px">Account</span><span style="font-size:10.5px;color:var(--faint);padding-bottom:8px">Plan &amp; billing</span><span style="font-size:10.5px;color:#fff;font-weight:600;padding-bottom:8px;border-bottom:2px solid var(--purple)">Privacy</span><span style="font-size:10.5px;color:var(--faint);padding-bottom:8px">Connections</span></div>
+
+          <!-- Primary toggle row: Soniq Improvement -->
+          <div style="background:#111118;border:1px solid var(--line-soft);border-radius:10px;padding:14px 15px;margin-bottom:10px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+              <div style="flex:1;min-width:0">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><span style="font-size:13px;color:#fff;font-weight:650">Help improve Soniq</span><span class="tag badge-pos" style="font-size:7.5px">● ON</span></div>
+                <div style="font-size:10.5px;color:var(--muted);line-height:1.5;max-width:430px">Soniq uses your music, writing, and how you work to train and improve its own models — so matches and drafts get better over time. <b style="color:#cfcfd4">You can turn this off anytime.</b></div>
+              </div>
+              <!-- toggle: ON state, purple -->
+              <div style="flex:none;width:42px;height:24px;border-radius:999px;background:var(--purple);box-shadow:0 0 16px rgba(124,58,237,.4);position:relative;margin-top:2px"><span style="position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:#fff"></span></div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:11px;padding-top:11px;border-top:1px solid var(--line-soft)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--pbright)" stroke-width="2" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+              <div style="font-size:9.5px;color:var(--faint);line-height:1.55">Turning this off stops new content from being used going forward. It doesn't pull back anything already used to train — see <u style="color:var(--pbright)">how training works</u>.</div>
+            </div>
+          </div>
+
+          <!-- What's never used -->
+          <div class="seclbl" style="margin-top:14px">ALWAYS EXCLUDED — NOT A SETTING YOU MANAGE</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:11px">
+            <div style="background:#0c0c12;border:1px solid #20202a;border-radius:9px;padding:10px 11px"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg><span style="font-size:10px;color:#fff;font-weight:600">Streaming-platform data</span></div><div style="font-size:9.5px;color:var(--muted);line-height:1.45">Spotify &amp; similar metadata is never used for training — required by their terms.</div></div>
+            <div style="background:#0c0c12;border:1px solid #20202a;border-radius:9px;padding:10px 11px"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg><span style="font-size:10px;color:#fff;font-weight:600">Outside AI providers</span></div><div style="font-size:9.5px;color:var(--muted);line-height:1.45">The model vendors we call can't train on your data — locked by contract, regardless of this setting.</div></div>
+          </div>
+
+          <!-- Marketing use, separate consent -->
+          <div style="display:flex;justify-content:space-between;align-items:center;background:#101019;border:1px solid var(--line-soft);border-radius:9px;padding:11px 13px">
+            <div style="flex:1"><div style="font-size:10.5px;color:#e4e4e8;font-weight:600;margin-bottom:2px">Featuring your story</div><div style="font-size:9.5px;color:var(--faint);line-height:1.45">We'll always ask first before using your name or music in a case study or testimonial.</div></div>
+            <span class="tag" style="font-size:7.5px">ASK-FIRST · SEPARATE</span>
+          </div>
+        </div>
+        <div class="edge"><span class="lv"></span><span class="ab"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1.5-4.5a8.5 8.5 0 1 1 16.5-4z"/></svg></span><span class="vl">ASK SONIQ</span></div>
+      </div>
+    </div>
+    <div class="annocol">
+      <div class="col-head">INTENT</div>
+      <div class="col-sub">Default-on, but never hidden.</div>
+      <div class="anno"><span class="num">1</span><p><b>Opt-out, not opt-in</b> (ToS §4.3 / Policy §3). On by default, available to <b>every</b> user on every plan — never a paid-only privacy feature.</p></div>
+      <div class="anno"><span class="num">2</span><p><b>The toggle is real and reachable.</b> One tap, plain language, in a predictable place — for this audience a genuine opt-out is itself the trust signal.</p></div>
+      <div class="anno"><span class="num">3</span><p><b>Honest about scope.</b> States plainly that opting out is forward-only and doesn't undo prior training — matches the legal text, no overpromise.</p></div>
+      <div class="anno"><span class="num">4</span><p><b>Two things are not a setting:</b> platform data and third-party providers are excluded by contract, not user choice — shown so the toggle isn't read as the only safeguard.</p></div>
+      <div class="anno"><span class="num">5</span><p><b>No Laser Yellow.</b> A settings surface carries no single decision; the toggle is brand purple (Rule 1, reference-surface convention).</p></div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · SETTINGS · PRIVACY</span><span>PAGE 25 / 26</span></div>
+</section>
+
+<!-- ===== PAGE 26 · ROADMAP · THE CURATOR MODEL (v7.4) ===== -->
+<section class="page">
+  <div style="position:absolute;top:0;left:0;right:0;height:7px;background:#FACC15;"></div>
+  <div class="eyebrow">ON THE HORIZON · THE CURATOR MODEL <span class="pill">V7.4 · NEW</span></div>
+  <h1 class="title">Three phases — from bring-your-own to a verified network.</h1>
+  <div style="margin-top:22px;background:#0a0a0f;border:1px solid #1c1c24;border-radius:16px;padding:24px;">
+    <div style="display:flex;gap:16px;align-items:stretch;">
+      <div style="flex:1;background:#121218;border:1px solid #232330;border-radius:13px;padding:17px 17px 15px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#34d399;margin-bottom:3px;">● NOW · SHIPPING</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;color:#6b6b76;margin-bottom:10px;">PHASE 0 · MVP</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:-.01em;margin-bottom:10px;">Bring your own curator</div>
+        <div style="font-size:10.5px;color:#a2a2ac;line-height:1.5;margin-bottom:10px;">Search or paste any playlist; Soniq scores fit and drafts each pitch in your voice.</div>
+        <div style="font-size:10.5px;color:#cfcfd4;line-height:1.5;"><b style="color:#fff;">Send:</b> copy-paste / open in your own inbox. Soniq never sends.</div>
+        <div style="font-size:10.5px;color:#cfcfd4;line-height:1.5;margin-top:6px;"><b style="color:#fff;">Verification:</b> none yet — every match is fit-only, honestly unverified.</div>
+        <div style="font-size:10.5px;color:#cfcfd4;line-height:1.5;margin-top:6px;"><b style="color:#fff;">Tracking:</b> artist-logged — mark sent, log replies and placements.</div>
+      </div>
+      <div style="flex:1;background:#121218;border:1px solid #232330;border-radius:13px;padding:17px 17px 15px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#a78bfa;margin-bottom:3px;">▸ NEXT</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;color:#6b6b76;margin-bottom:10px;">PHASE 1 · PARTNER INTEGRATION</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:-.01em;margin-bottom:10px;">Verified send (e.g. Groover)</div>
+        <div style="font-size:10.5px;color:#a2a2ac;line-height:1.5;margin-bottom:10px;">Suggested <b style='color:#cfcfd4'>verified</b> curators from the partner network — discovery beyond your own list.</div>
+        <div style="font-size:10.5px;color:#cfcfd4;line-height:1.5;"><b style="color:#fff;">Send:</b> on-behalf, through the partner's own channel to curators who opted in.</div>
+        <div style="font-size:10.5px;color:#cfcfd4;line-height:1.5;margin-top:6px;"><b style="color:#fff;">Verification:</b> the signal appears — fit and verified stay separate, never merged.</div>
+        <div style="font-size:10.5px;color:#cfcfd4;line-height:1.5;margin-top:6px;"><b style="color:#fff;">Tracking:</b> automatic status + receipts on that path.</div>
+      </div>
+      <div style="flex:1;background:#121218;border:1px solid #232330;border-radius:13px;padding:17px 17px 15px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:#6b6b76;margin-bottom:3px;">◇ LATER</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;color:#6b6b76;margin-bottom:10px;">PHASE 2 · OWNED CATALOG</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:-.01em;margin-bottom:10px;">A verified list we own</div>
+        <div style="font-size:10.5px;color:#a2a2ac;line-height:1.5;margin-bottom:10px;">Curators <b style='color:#cfcfd4'>request to be listed</b>; Soniq vets and builds a proprietary catalog.</div>
+        <div style="font-size:10.5px;color:#cfcfd4;line-height:1.5;"><b style="color:#fff;">Send:</b> consent is built in — a listed curator has invited the pitch.</div>
+        <div style="font-size:10.5px;color:#cfcfd4;line-height:1.5;margin-top:6px;"><b style="color:#fff;">Verification:</b> the moat — a verified network Soniq owns, not rents.</div>
+        <div style="font-size:10.5px;color:#cfcfd4;line-height:1.5;margin-top:6px;"><b style="color:#fff;">Tracking:</b> owned, end to end — no partner dependency.</div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #232330;margin-top:18px;padding-top:14px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;color:#6b6b76;margin-bottom:6px;">CARRIES ACROSS ALL THREE</div>
+      <div style="font-size:11px;color:#cfcfd4;line-height:1.5;"><b style="color:#fff;">Fit and verification never merge</b> — two independent signals. And <b style="color:#fff;">the artist is always the sender</b> until a partner channel earns that role. The lens doesn't change; the reach does.</div>
+    </div>
+  </div>
+  <div class="pagefoot"><span>SONIQ · WIREFRAMES V7.4 · ROADMAP · THE CURATOR MODEL</span><span>PAGE 26 / 26</span></div>
+</section>
+
+</body>
+</html>
