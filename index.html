@@ -1,279 +1,476 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Soniq — Home (v2 proposal)</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-        <style>:root { --bg: #08080d; --surface: #141419; --surface-2: #0e0e14; --ink: #0b0b10; --line: rgba(255,255,255,.08); --line-strong: rgba(255,255,255,.16); --text: #f2f2f6; --muted: #9a9aa8; --dim: #6b6b7a; --purple: #8b7cf8; --purple-dim: #6c5ce7; --purple-soft: rgba(139,124,248,.12); --yellow: #ffd426; --green: #3ddc97; --amber: #ffb84d; --red: #ff7a6b; --r: 16px; --r-sm: 10px; --sans: 'Plus Jakarta Sans',system-ui,-apple-system,sans-serif; --mono: 'JetBrains Mono',ui-monospace,SFMono-Regular,monospace; } * { box-sizing: border-box; margin: 0; padding: 0; } html { scroll-behavior: smooth; } body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; } body.glow { background: radial-gradient(900px 600px at -5% -5%, rgba(120,80,220,.22), transparent 60%),
-  radial-gradient(700px 500px at 105% -5%, rgba(200,170,40,.14), transparent 60%),
-  var(--bg); } a { color: var(--purple); text-decoration: none; } a:hover { text-decoration: underline; } img { max-width: 100%; } .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; } .narrow { max-width: 640px; margin: 0 auto; } /* mockup bar */.mockbar { position: sticky; top: 0; z-index: 50; background: #000; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: .08em; padding: 8px 16px; display: flex; gap: 14px; align-items: center; overflow-x: auto; white-space: nowrap; } .mockbar b { color: var(--yellow); font-weight: 600; } .mockbar a { color: var(--muted); } .mockbar a.on { color: var(--text); } /* type */.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--dim); } .eyebrow.purple { color: var(--purple); } h1 { font-size: clamp(34px,4.6vw,54px); line-height: 1.12; font-weight: 700; letter-spacing: -.02em; } h2 { font-size: clamp(26px,3vw,34px); line-height: 1.2; font-weight: 700; letter-spacing: -.015em; } h3 { font-size: 19px; font-weight: 600; } .sub { color: var(--muted); font-size: 18px; line-height: 1.6; } .small { font-size: 13.5px; color: var(--muted); } .mono { font-family: var(--mono); } .tiny-mono { font-family: var(--mono); font-size: 12.5px; color: var(--dim); } /* buttons */.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--sans); font-weight: 700; font-size: 16px; border-radius: 12px; padding: 14px 26px; border: 1px solid transparent; cursor: pointer; transition: .15s; } .btn-yellow { background: var(--yellow); color: #151203; } .btn-yellow:hover { filter: brightness(1.06); text-decoration: none; } .btn-outline { background: transparent; color: var(--purple); border-color: var(--purple); } .btn-outline:hover { background: var(--purple-soft); text-decoration: none; } .btn-quiet { background: var(--surface); color: var(--text); border-color: var(--line-strong); } .btn-quiet:hover { border-color: var(--purple); text-decoration: none; } .btn-sm { padding: 9px 16px; font-size: 14px; border-radius: 10px; } .btn[disabled], .btn.is-disabled { opacity: .35; cursor: not-allowed; filter: grayscale(.4); } /* cards + inputs */.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 28px; } .card.inset { background: var(--surface-2); } .input, .field input, .field textarea { width: 100%; background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 12px; color: var(--text); font-family: var(--sans); font-size: 17px; padding: 15px 18px; outline: none; } .input:focus, .field input:focus { border-color: var(--purple); } .input::placeholder { color: var(--dim); } .field { margin-bottom: 18px; } .field label { display: block; font-size: 15px; color: var(--text); margin-bottom: 8px; font-weight: 600; } .dropzone { border: 1.5px dashed var(--line-strong); border-radius: 12px; padding: 22px; text-align: center; color: var(--muted); font-size: 15px; cursor: pointer; } .dropzone:hover { border-color: var(--purple); color: var(--text); } .dropzone b { color: var(--purple); } /* pills + badges */.pill { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; border: 1px solid var(--line-strong); border-radius: 999px; padding: 4px 11px; color: var(--muted); } .pill.green { color: var(--green); border-color: rgba(61,220,151,.4); } .pill.amber { color: var(--amber); border-color: rgba(255,184,77,.4); } .pill.purple { color: var(--purple); border-color: rgba(139,124,248,.45); } .chip { display: inline-block; font-size: 12.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; } /* checks */.checks { display: flex; gap: 26px; flex-wrap: wrap; justify-content: center; color: var(--muted); font-size: 15px; } .checks span::before { content: "✓"; color: var(--green); margin-right: 8px; font-weight: 700; } /* score ring */.ring { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 22px; flex: none; border: 2.5px solid var(--purple); color: var(--text); } .ring.g { border-color: var(--green); } .ring.a { border-color: var(--amber); } .ring.r { border-color: var(--red); } .ring-label { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--dim); text-align: center; margin-top: 6px; } /* fit scale */.scale { margin-top: 14px; } .scale-bar { position: relative; height: 6px; border-radius: 3px; background: linear-gradient(90deg,var(--red) 0 40%,var(--amber) 40% 70%,var(--green) 70% 100%); opacity: .85; } .scale-bar i { position: absolute; top: -5px; width: 3px; height: 16px; background: #fff; border-radius: 2px; } .scale-legend { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; color: var(--dim); margin-top: 7px; text-transform: uppercase; } /* placeholder flag */.placeholder { border: 1.5px dashed rgba(255,184,77,.5); border-radius: 12px; padding: 14px 16px; color: var(--muted); font-size: 14.5px; position: relative; margin-top: 10px; } .placeholder::before { content: "VERIFY BEFORE PUBLISH"; font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; color: var(--amber); display: block; margin-bottom: 6px; } /* sections */section { padding: 88px 0; } .section-head { text-align: center; max-width: 680px; margin: 0 auto 52px; } .section-head .eyebrow { display: block; margin-bottom: 14px; } .section-head p { margin-top: 14px; } /* homepage top nav */.topnav { display: flex; align-items: center; justify-content: space-between; padding: 26px 0; } .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text); } .brand .dot { width: 30px; height: 30px; border-radius: 8px; background: conic-gradient(from 40deg,#4dd0e1,#8b7cf8,#ffd426,#4dd0e1); flex: none; } .topnav nav { display: flex; gap: 26px; align-items: center; font-size: 15px; } .topnav nav a { color: var(--muted); } .topnav nav a:hover { color: var(--text); text-decoration: none; } .topnav nav a.signin { color: var(--purple); } /* grids */.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; } .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; } @media (max-width:920px){ .grid-2, .grid-3 {  grid-template-columns: 1fr; } } /* how-it-works connector */.steps { position: relative; } .step-num { font-family: var(--mono); color: var(--purple); font-size: 13px; margin-bottom: 14px; } .step-card p { color: var(--muted); font-size: 15px; margin-top: 10px; } /* pricing */.tier { display: flex; flex-direction: column; gap: 0; position: relative; } .tier .price { font-size: 38px; font-weight: 800; margin: 10px 0 2px; } .tier .price span { font-size: 15px; color: var(--muted); font-weight: 500; } .tier ul { list-style: none; margin-top: 18px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; color: var(--muted); } .tier ul li::before { content: "✓"; color: var(--green); margin-right: 9px; font-weight: 700; } .tier .who { color: var(--dim); font-size: 14px; } .tier.hot { border-color: var(--purple); box-shadow: 0 0 0 1px var(--purple); } .tier .flag { position: absolute; top: -12px; left: 24px; background: var(--purple); color: #0b0b10; font-family: var(--mono); font-size: 10px; letter-spacing: .15em; padding: 4px 10px; border-radius: 999px; font-weight: 700; } .tier .btn { margin-top: 22px; } /* faq */.faq details { border-bottom: 1px solid var(--line); padding: 20px 4px; } .faq summary { cursor: pointer; font-weight: 600; font-size: 17px; list-style: none; display: flex; justify-content: space-between; align-items: center; } .faq summary::after { content: "+"; color: var(--purple); font-size: 22px; font-weight: 400; } .faq details[open] summary::after { content: "–"; } .faq details p { color: var(--muted); margin-top: 12px; font-size: 15.5px; max-width: 60ch; } /* footer */footer { border-top: 1px solid var(--line); padding: 34px 0; display: flex; justify-content: space-between; color: var(--dim); font-size: 14px; } footer nav { display: flex; gap: 22px; } /* flow card pages */.flow-wrap { max-width: 720px; margin: 0 auto; padding: 56px 24px; } .flow-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 40px; } .flow-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; } .captured { font-family: var(--mono); font-size: 12.5px; letter-spacing: .18em; color: var(--purple); margin-bottom: 14px; } .captured::before { content: "✓ "; } /* search results */.result-row { display: flex; align-items: center; gap: 14px; background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 12px; padding: 14px 16px; margin-top: 10px; cursor: pointer; } .result-row:hover { border-color: var(--purple); } .result-row.sel { border-color: var(--purple); box-shadow: 0 0 0 1px var(--purple); } .result-row .meta { font-size: 13px; color: var(--dim); } .result-row .name { font-weight: 700; } .result-row .chips { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; } /* dashboard shell */.shell { display: grid; grid-template-columns: 248px 1fr; min-height: 100vh; } .side { border-right: 1px solid var(--line); padding: 22px 18px; display: flex; flex-direction: column; background: #0a0a10; } .side .brand { margin-bottom: 34px; font-size: 16px; } .side nav a { display: block; padding: 10px 12px; border-radius: 10px; color: var(--muted); font-size: 15.5px; margin-bottom: 4px; } .side nav a.on { color: var(--text); background: var(--surface); font-weight: 600; } .side nav a:hover { color: var(--text); text-decoration: none; } .side .foot { margin-top: auto; display: flex; gap: 10px; align-items: center; font-size: 14px; } .side .foot .av { width: 34px; height: 34px; border-radius: 50%; background: var(--purple-soft); color: var(--purple); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; } .main { padding: 0 40px 80px; } .topbar { display: flex; align-items: center; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px; } .searchbox { flex: 1; max-width: 480px; display: flex; align-items: center; gap: 10px; background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 12px; padding: 11px 16px; color: var(--dim); font-size: 15px; } .crumb { font-family: var(--mono); font-size: 12.5px; letter-spacing: .1em; color: var(--dim); margin: 8px 0 22px; } .crumb b { color: var(--muted); font-weight: 500; } /* target rows */.target { display: flex; gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-bottom: 14px; align-items: flex-start; } .target.sel { border-color: var(--purple); box-shadow: 0 0 0 1px var(--purple); } .target input[type=checkbox] { margin-top: 22px; accent-color: var(--purple); width: 16px; height: 16px; } .target .body { flex: 1; } .target .headrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; } .target .why { margin-left: auto; font-size: 14px; } .target p.reason { color: var(--muted); font-size: 14.5px; margin-top: 8px; max-width: 75ch; } .target .metaline { font-size: 13px; color: var(--dim); margin-top: 2px; } .selectbar { position: sticky; bottom: 0; background: #000; border: 1px solid var(--line-strong); border-radius: 14px; padding: 14px 20px; display: flex; align-items: center; gap: 16px; margin-top: 8px; } /* pipeline board */.board { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; align-items: start; } @media (max-width:1000px){ .board {  grid-template-columns: 1fr 1fr; } } .col-head { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; color: var(--dim); text-transform: uppercase; margin-bottom: 12px; display: flex; justify-content: space-between; } .pcard { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 12px; } .pcard .nm { font-weight: 700; font-size: 15px; display: flex; gap: 8px; align-items: center; } .pcard .meta { font-size: 12.5px; color: var(--dim); margin-top: 5px; } .pcard .act { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; } .col-empty { border: 1.5px dashed var(--line-strong); border-radius: 12px; padding: 18px; color: var(--dim); font-size: 13.5px; } /* stats strip */.stats { display: flex; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin: 26px 0; } .stats div { flex: 1; padding: 22px 26px; border-right: 1px solid var(--line); } .stats div:last-child { border-right: 0; } .stats b { font-size: 28px; font-weight: 800; margin-right: 10px; } .stats span { color: var(--muted); font-size: 15px; } /* design notes */.notes { max-width: 1120px; margin: 40px auto 80px; padding: 0 32px; } .notes details { background: #000; border: 1px dashed var(--line-strong); border-radius: 12px; padding: 18px 22px; } .notes summary { font-family: var(--mono); font-size: 12px; letter-spacing: .2em; color: var(--amber); cursor: pointer; text-transform: uppercase; } .notes ul { margin: 14px 0 4px 18px; color: var(--muted); font-size: 14.5px; display: flex; flex-direction: column; gap: 8px; } @media (max-width:920px){ .shell {  grid-template-columns: 1fr; }  .side {  flex-direction: row;  align-items: center;  border-right: 0;  border-bottom: 1px solid var(--line); }  .side nav {  display: flex; }  .side .brand {  margin-bottom: 0; }  .side .foot {  display: none; }  .main {  padding: 0 20px 60px; }  .board {  grid-template-columns: 1fr; }  section {  padding: 56px 0; } }</style>
-    </head>
-    <body class="glow">
-        <div class="mockbar">
-            <b>SONIQ V2 MOCKUP</b> <a class="on" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Soniq — Home (v2 · DS-aligned)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>/* ============================================================
+   Soniq v2 mockups — aligned to Sonic Spotlights DS
+   Token values from DEVELOPER_HANDOFF.md §5 + RECONCILIATION.md.
+   tokens/ folder absent from upload; inferred values are marked.
+   ============================================================ */
+:root{
+  /* palette + semantic aliases (handoff vocabulary) */
+  --bg-app:#050505; --bg-surface:#16161c; --bg-raised:#1c1c24;
+  --text-primary:#f4f4f5; --text-secondary:#a2a2ac; --text-meta:#6b6b76; --text-disabled:#4a4a54;
+  --voice:#8b5cf6; --voice-hover:#a78bfa; --voice-quiet:rgba(139,92,246,.12); --voice-soft:var(--voice-quiet);
+  --action:#facc15; --action-hover:#ffd83a; --action-ink:#1c1605; --action-glow:0 2px 12px rgba(250,204,21,.22);
+  --positive:#10b981; --positive-soft:rgba(16,185,129,.14); --danger:#ef4444; --inferred:#f5a623;
+  --yellow:var(--action); --emerald:#34d399; --amber:var(--inferred); --red:var(--danger); --field-bg:#101019; --bg-sunken:#0d0d11;
+  --line:rgba(244,244,245,.10); --line-strong:rgba(244,244,245,.18);
+  --focus-ring:0 0 0 3px rgba(139,92,246,.55);
+  /* radius: 8 default · 12 cards · 16 large/modal · 4 tags · full pills */
+  --r-def:8px; --r-card:12px; --r-lg:16px; --r-tag:4px;
+  --ease:cubic-bezier(0.2,0.8,0.2,1); --dur-fast:120ms; --dur-base:200ms; --dur-slow:320ms;
+  --font-display:'Plus Jakarta Sans',system-ui,sans-serif;
+  --font-sans:'Figtree',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{background:var(--bg-app);color:var(--text-primary);font-family:var(--font-sans);font-size:16px;line-height:1.55}
+::selection{background:rgba(139,92,246,.35)}
+a{color:var(--voice);text-decoration:none}
+a:hover{color:var(--voice-hover);text-decoration:underline}
+:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--r-def)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+.narrow{max-width:640px;margin:0 auto}
+
+/* SpotlightsAtmosphere stand-in — entry surfaces ONLY (Cardinal Rule 8) */
+body.glow{background:
+  radial-gradient(720px 560px at 12% -8%, rgba(139,92,246,.20), transparent 62%),
+  radial-gradient(560px 460px at 88% -6%, rgba(250,204,21,.10), transparent 60%),
+  var(--bg-app)}
+
+/* mockup bar (tooling chrome, not product UI) */
+.mockbar{position:sticky;top:0;z-index:50;background:#000;border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;padding:8px 16px;display:flex;gap:14px;align-items:center;overflow-x:auto;white-space:nowrap}
+.mockbar b{color:var(--action);font-weight:600}
+.mockbar a{color:var(--text-meta)} .mockbar a.on{color:var(--text-primary)}
+
+/* type */
+.eyebrow{font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-meta)}
+.eyebrow.purple{color:var(--voice)}
+h1,h2,h3{font-family:var(--font-display)}
+h1{font-size:clamp(34px,4.6vw,54px);line-height:1.12;font-weight:700;letter-spacing:-.02em}
+h2{font-size:clamp(26px,3vw,34px);line-height:1.2;font-weight:700;letter-spacing:-.015em}
+h3{font-size:19px;font-weight:600}
+.sub{color:var(--text-secondary);font-size:18px;line-height:1.6}
+.small{font-size:13.5px;color:var(--text-secondary)}
+.tiny-mono{font-family:var(--font-sans);font-size:12.5px;color:var(--text-meta)} /* meta text (was mono; DS: mono ≠ labels) */
+.mono{font-family:var(--font-mono);font-size:12.5px} /* scores · timestamps · citations only */
+
+/* buttons — DS Button: primary(yellow) · secondary(outlined purple) · ghost */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-sans);font-weight:700;font-size:16px;border-radius:var(--r-def);padding:14px 26px;border:1px solid transparent;cursor:pointer;transition:all var(--dur-base) var(--ease);min-height:44px}
+.btn-yellow{background:var(--action);color:var(--action-ink);box-shadow:var(--action-glow)}
+.btn-yellow:hover{background:var(--action-hover);text-decoration:none;color:var(--action-ink)}
+.btn-outline{background:transparent;color:var(--voice);border-color:var(--voice)}
+.btn-outline:hover{background:var(--voice-soft);text-decoration:none;color:var(--voice-hover)}
+.btn-quiet{background:var(--bg-surface);color:var(--text-primary);border-color:var(--line-strong)}
+.btn-quiet:hover{border-color:var(--voice);text-decoration:none}
+.btn-sm{padding:9px 16px;font-size:14px;min-height:36px}
+.btn[disabled],.btn.is-disabled{opacity:.35;cursor:not-allowed}
+
+/* icons — Lucide-style inline SVG (flagged substitution), no emoji in chrome */
+.ic{width:16px;height:16px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-2px}
+
+/* cards + inputs */
+.card{background:var(--bg-surface);border:1px solid var(--line);border-radius:var(--r-card);padding:28px}
+.card.inset{background:var(--bg-raised)}
+.input,.field input{width:100%;background:var(--field-bg);border:1px solid var(--line-strong);border-radius:var(--r-def);color:var(--text-primary);font-family:var(--font-sans);font-size:17px;padding:15px 18px;outline:none;transition:box-shadow var(--dur-base) var(--ease)}
+.input:focus,.field input:focus{border-color:var(--voice);box-shadow:var(--focus-ring)}
+.input::placeholder{color:var(--text-meta)}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:15px;margin-bottom:8px;font-weight:600}
+.dropzone{border:1.5px dashed var(--line-strong);border-radius:var(--r-card);padding:22px;text-align:center;color:var(--text-secondary);font-size:15px;cursor:pointer;transition:border-color var(--dur-base) var(--ease)}
+.dropzone:hover{border-color:var(--voice);color:var(--text-primary)}
+.dropzone b{color:var(--voice)}
+
+/* Badge (pill, soft) · Tag (4px radius — signals, small labels) */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line-strong);border-radius:999px;padding:4px 11px;color:var(--text-secondary)}
+.pill.green{color:var(--positive);border-color:rgba(52,211,153,.4)}
+.pill.purple{color:var(--voice);border-color:rgba(139,92,246,.45)}
+.tag{display:inline-block;font-size:12px;color:var(--text-secondary);border:1px solid var(--line);border-radius:var(--r-tag);padding:3px 8px;letter-spacing:.02em}
+.chip{display:inline-block;font-size:12.5px;color:var(--text-secondary);border:1px solid var(--line);border-radius:var(--r-tag);padding:3px 10px}
+
+/* checks — ✓ is the one recurring brand affordance (emerald) */
+.checks{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;color:var(--text-secondary);font-size:15px}
+.checks span::before{content:"✓";color:var(--positive);margin-right:8px;font-weight:700}
+.checks ul{list-style:none;margin:0;padding:0;display:flex;gap:26px;flex-wrap:wrap;justify-content:center}
+
+/* ConfidenceMeter stand-in — fit only, never merged with any verified state */
+.ring{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-weight:700;font-size:21px;flex:none;border:2.5px solid var(--voice)}
+.ring.g{border-color:var(--positive)} .ring.a{border-color:var(--inferred)} .ring.r{border-color:var(--danger)}
+.ring-label{font-family:var(--font-display);font-weight:600;font-size:10px;letter-spacing:.06em;color:var(--text-meta);text-align:center;margin-top:6px;text-transform:uppercase}
+
+.scale{margin-top:14px}
+.scale-bar{position:relative;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--danger) 0 40%,var(--inferred) 40% 70%,var(--positive) 70% 100%);opacity:.85}
+.scale-bar i{position:absolute;top:-5px;width:3px;height:16px;background:#fff;border-radius:2px}
+.scale-legend{display:flex;justify-content:space-between;font-size:10.5px;letter-spacing:.05em;color:var(--text-meta);margin-top:7px;text-transform:uppercase;font-weight:600}
+
+/* sample framing (BYOC honesty — worked examples announce themselves) */
+.sample-flag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--voice);border:1px solid rgba(139,92,246,.45);border-radius:var(--r-tag);padding:3px 9px}
+
+section{padding:88px 0}
+.section-head{text-align:center;max-width:680px;margin:0 auto 52px}
+.section-head .eyebrow{display:block;margin-bottom:14px}
+.section-head p{margin-top:14px}
+
+.topnav{display:flex;align-items:center;justify-content:space-between;padding:26px 0}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--text-primary)}
+.brand img{display:block} .brand .appicon{width:28px;height:28px;border-radius:8px;flex:none}
+.topnav nav{display:flex;gap:26px;align-items:center;font-size:15px}
+.topnav nav a{color:var(--text-secondary)} .topnav nav a:hover{color:var(--text-primary);text-decoration:none}
+.topnav nav a.signin{color:var(--voice)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:920px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.step-num{font-family:var(--font-mono);color:var(--voice);font-size:13px;margin-bottom:14px}
+.step-card p{color:var(--text-secondary);font-size:15px;margin-top:10px}
+
+.tier{display:flex;flex-direction:column;position:relative}
+.tier .price{font-family:var(--font-display);font-size:38px;font-weight:800;margin:10px 0 2px}
+.tier .price span{font-size:15px;color:var(--text-secondary);font-weight:500;font-family:var(--font-sans)}
+.tier ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:10px;font-size:15px;color:var(--text-secondary)}
+.tier ul li::before{content:"✓";color:var(--positive);margin-right:9px;font-weight:700}
+.tier .who{color:var(--text-meta);font-size:14px}
+.tier.hot{border-color:var(--voice);box-shadow:0 0 0 1px var(--voice)}
+.tier .flag{position:absolute;top:-12px;left:24px;background:var(--voice);color:#fff;font-size:10px;letter-spacing:.15em;padding:4px 10px;border-radius:999px;font-weight:700;text-transform:uppercase}
+.tier .btn{margin-top:22px}
+
+.faq details{border-bottom:1px solid var(--line);padding:20px 4px}
+.faq summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::after{content:"+";color:var(--voice);font-size:22px;font-weight:400}
+.faq details[open] summary::after{content:"–"}
+.faq details p{color:var(--text-secondary);margin-top:12px;font-size:15.5px;max-width:60ch}
+
+footer{border-top:1px solid var(--line);padding:34px 0;display:flex;justify-content:space-between;color:var(--text-meta);font-size:14px}
+footer nav{display:flex;gap:22px}
+
+.flow-wrap{max-width:720px;margin:0 auto;padding:56px 24px}
+.flow-card{background:var(--bg-surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:40px}
+.flow-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.captured{font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--voice);margin-bottom:14px;text-transform:uppercase}
+.captured::before{content:"✓ "}
+
+.result-row{display:flex;align-items:center;gap:14px;background:var(--bg-raised);border:1px solid var(--line-strong);border-radius:var(--r-card);padding:14px 16px;margin-top:10px;cursor:pointer;transition:border-color var(--dur-base) var(--ease)}
+.result-row:hover{border-color:var(--voice)}
+.result-row.sel{border-color:var(--voice);box-shadow:0 0 0 1px var(--voice)}
+.result-row .meta{font-size:13px;color:var(--text-meta)}
+.result-row .name{font-weight:700}
+.result-row .chips{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+
+.shell{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+.side{border-right:1px solid var(--line);padding:22px 18px;display:flex;flex-direction:column;background:#0a0a0f}
+.side .brand{margin-bottom:34px;font-size:16px}
+.side nav a{display:block;padding:10px 12px;border-radius:var(--r-def);color:var(--text-secondary);font-size:15.5px;margin-bottom:4px}
+.side nav a.on{color:var(--text-primary);background:var(--bg-surface);font-weight:600}
+.side nav a:hover{color:var(--text-primary);text-decoration:none}
+.side .foot{margin-top:auto;display:flex;gap:10px;align-items:center;font-size:14px}
+.side .foot .av{width:36px;height:36px;border-radius:50%;background:var(--voice-soft);color:var(--voice);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;cursor:pointer;border:1px solid rgba(139,92,246,.4)}
+.main{padding:0 40px 80px}
+.topbar{display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);margin-bottom:28px}
+.searchbox{flex:1;max-width:480px;display:flex;align-items:center;gap:10px;background:var(--bg-raised);border:1px solid var(--line-strong);border-radius:var(--r-def);padding:11px 16px;color:var(--text-meta);font-size:15px}
+.crumb{font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--text-meta);margin:8px 0 22px;text-transform:uppercase}
+.crumb b{color:var(--text-secondary);font-weight:600}
+
+.target{display:flex;gap:16px;background:var(--bg-surface);border:1px solid var(--line);border-radius:var(--r-card);padding:20px;margin-bottom:14px;align-items:flex-start}
+.target.sel{border-color:var(--voice);box-shadow:0 0 0 1px var(--voice)}
+.target input[type=checkbox]{margin-top:22px;accent-color:var(--voice);width:16px;height:16px}
+.target .body{flex:1}
+.target .headrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.target .why{margin-left:auto;font-size:14px}
+.target p.reason{color:var(--text-secondary);font-size:14.5px;margin-top:8px;max-width:75ch}
+.target .metaline{font-size:13px;color:var(--text-meta);margin-top:2px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.selectbar{position:sticky;bottom:0;background:#000;border:1px solid var(--line-strong);border-radius:var(--r-card);padding:14px 20px;display:flex;align-items:center;gap:16px;margin-top:8px}
+
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
+@media(max-width:1000px){.board{grid-template-columns:1fr 1fr}}
+.col-head{font-family:var(--font-display);font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--text-meta);text-transform:uppercase;margin-bottom:12px;display:flex;justify-content:space-between}
+.pcard{background:var(--bg-surface);border:1px solid var(--line);border-radius:var(--r-card);padding:16px;margin-bottom:12px}
+.pcard .nm{font-weight:700;font-size:15px;display:flex;gap:8px;align-items:center}
+.pcard .meta{font-size:12.5px;color:var(--text-meta);margin-top:5px}
+.pcard .act{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.col-empty{border:1.5px dashed var(--line-strong);border-radius:var(--r-card);padding:18px;color:var(--text-meta);font-size:13.5px}
+
+.stats{display:flex;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;margin:26px 0}
+.stats div{flex:1;padding:22px 26px;border-right:1px solid var(--line)}
+.stats div:last-child{border-right:0}
+.stats b{font-family:var(--font-mono);font-size:26px;font-weight:700;margin-right:10px}
+.stats span{color:var(--text-secondary);font-size:15px}
+
+.notes{max-width:1120px;margin:40px auto 80px;padding:0 32px}
+.notes details{background:#000;border:1px dashed var(--line-strong);border-radius:var(--r-card);padding:18px 22px}
+.notes summary{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--inferred);cursor:pointer;text-transform:uppercase}
+.notes ul{margin:14px 0 4px 18px;color:var(--text-secondary);font-size:14.5px;display:flex;flex-direction:column;gap:8px}
+.notes .nh{margin-top:16px;font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--text-secondary);text-transform:uppercase}
+
+@media(max-width:920px){
+  .shell{grid-template-columns:1fr}
+  .side{flex-direction:row;align-items:center;border-right:0;border-bottom:1px solid var(--line)}
+  .side nav{display:flex} .side .brand{margin-bottom:0} .side .foot{display:none}
+  .main{padding:0 20px 60px}
+  .board{grid-template-columns:1fr}
+  section{padding:56px 0}
+}
+</style>
+</head><body class="glow">
+<div class="mockbar"><b>SONIQ V2 · DS-ALIGNED</b> <a class="on" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
+<div class="wrap">
+  <header class="topnav">
+    <div class="brand"><img class="appicon" src="app-icon.png" alt="">Soniq</div>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="signin" href="#">Sign in</a>
+    </nav>
+  </header>
+
+  <!-- HERO — carries the page's single Laser Yellow action -->
+  <section style="padding-top:64px;text-align:center">
+    <span class="eyebrow">For independent artists</span>
+    <h1 style="max-width:820px;margin:22px auto 0">Your next release, pitched to curators who actually listen.</h1>
+    <p class="sub" style="max-width:640px;margin:24px auto 0">Paste the playlists and press you want. Soniq scores each one for real fit, explains why, and drafts the pitch in your voice. You send it from your own inbox, so the relationship stays yours.</p>
+    <div style="margin-top:36px"><a class="btn btn-yellow" href="#try">Try with your release →</a></div>
+    <p class="small" style="margin-top:18px"><span class="mono" style="color:var(--voice)">~60s</span> to your first fit score · one link + one line</p>
+    <div class="checks" style="margin-top:30px">
+      <ul>
+        <li><span>Free to start, no credit card.</span></li>
+        <li><span>You send every pitch yourself.</span></li>
+        <li><span>No pay-for-placement, ever.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- WORKED EXAMPLE (product proof, reframed per review C4) -->
+  <section id="proof">
+    <div class="section-head">
+      <span class="eyebrow">What you get</span>
+      <h2>The score shows its work. Even when it's a no.</h2>
+      <p class="sub">Every playlist gets a 0–100 fit score with the reasoning in plain language, then a pitch drafted in your voice. Here's a worked example, and it's a weak fit on purpose: telling you when to skip is the whole point.</p>
+      <p style="margin-top:16px"><span class="sample-flag">Sample data · not a real playlist</span></p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div style="display:flex;gap:20px;align-items:flex-start">
+          <div>
+            <div class="ring r">38</div>
+            <div class="ring-label">Fit</div>
+          </div>
+          <div style="flex:1">
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+              <h3>actual emo music</h3>
+              <span class="tag">updated 1w ago</span>
+              <span class="tag">4,700 followers</span>
+            </div>
+            <p style="color:var(--text-secondary);font-size:15px;margin-top:12px">Playlist genre distribution is dominated by heavier emo variants: screamo, pop punk, post-hardcore. The artist self-describes as an emo band, which is a surface-level match only.</p>
+            <div class="scale">
+              <div class="scale-bar"><i style="left:38%"></i></div>
+              <div class="scale-legend"><span>Weak &lt;40</span><span>Possible 40–69</span><span>Strong 70+</span></div>
+            </div>
+            <div class="card inset" style="padding:14px 16px;margin-top:14px">
+              <p class="eyebrow" style="color:var(--voice)">Soniq's read</p>
+              <p style="font-size:14.5px;color:var(--text-secondary);margin-top:6px">Weak fit. Skip this one, or lean on the one honest hook: the playlist's name.</p>
+            </div>
+          </div>
         </div>
-        <div class="wrap">
-            <header class="topnav">
-                <div class="brand">
-                    <span class="dot"></span>Soniq
-                </div>
-                <nav>
-                    <a href="#how">How it works</a>
-                    <a href="#pricing">Pricing</a>
-                    <a href="#faq">FAQ</a>
-                    <a class="signin" href="#">Sign in</a>
-                </nav>
-            </header>
-            <!-- HERO -->
-            <section style="padding-top:64px;text-align:center">
-                <span class="eyebrow">For independent artists</span>
-                <h1 style="max-width:820px;margin:22px auto 0">Your next release, pitched to curators who actually listen.</h1>
-                <p class="sub" style="max-width:640px;margin:24px auto 0">Paste the playlists and press you want. Soniq scores each one for real fit, explains why, and drafts the pitch in your voice. You send it from your own inbox, so the relationship stays yours.</p>
-                <div style="margin-top:36px">
-                    <a class="btn btn-yellow" href="#try">Try with your release →</a>
-                </div>
-                <p class="tiny-mono" style="margin-top:18px"><b style="color:var(--purple)">~60s</b> to your first fit score · one link + one line</p>
-                <div class="checks" style="margin-top:30px">
-                    <ul style="list-style:none;margin:0;padding:0;display:flex;gap:26px;flex-wrap:wrap;justify-content:center">
-                        <li>
-                            <span>Free to start, no credit card.</span>
-                        </li>
-                        <li>
-                            <span>You send every pitch yourself.</span>
-                        </li>
-                        <li>
-                            <span>We never email anyone for you.</span>
-                        </li>
-                        <li>
-                            <span>No pay-for-placement, ever.</span>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-            <!-- PRODUCT PROOF -->
-            <section id="proof">
-                <div class="section-head">
-                    <span class="eyebrow">What you get</span>
-                    <h2>The score shows its work.</h2>
-                    <p class="sub">Every playlist gets a 0–100 fit score with the reasoning in plain language, then a pitch drafted in your voice. Here's what that looks like.</p>
-                </div>
-                <div class="grid-2">
-                    <div class="card">
-                        <div style="display:flex;gap:20px;align-items:flex-start">
-                            <div>
-                                <div class="ring g">82</div>
-                                <div class="ring-label">FIT</div>
-                            </div>
-                            <div style="flex:1">
-                                <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-                                    <h3>Midwest Emo Revival</h3>
-                                    <span class="pill green">Verified</span>
-                                </div>
-                                <p class="small" style="margin-top:2px">Dani K · 12,400 followers · updated this week</p>
-                                <p style="color:var(--muted);font-size:15px;margin-top:12px">Curator favors slow-build, twinkly guitar work with clean production. 7 of the last 10 adds are early-00s revival bands, and your stated reference points overlap directly with three artists already on the list.</p>
-                                <div class="scale">
-                                    <div class="scale-bar">
-                                        <i style="left:82%"></i>
-                                    </div>
-                                    <div class="scale-legend">
-                                        <span>Weak &lt;40</span>
-                                        <span>Possible 40–69</span>
-                                        <span>Strong 70+</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="small" style="margin-top:20px;border-top:1px solid var(--line);padding-top:16px">A real fit score, with the reasoning behind it. Soniq will also tell you when <b style="color:var(--text)">not</b> to pitch. A 38 saves you a burned contact.</p>
-                    </div>
-                    <div class="card inset">
-                        <p class="tiny-mono" style="color:var(--green);letter-spacing:.18em">YOUR DRAFT · IN YOUR VOICE</p>
-                        <p style="font-weight:700;margin-top:14px">Subject: Cleveland emo for "Midwest Emo Revival"</p>
-                        <p style="color:var(--muted);font-size:15px;margin-top:14px">Hi Dani,<br><br>We're a Cleveland emo band rooted in the early-00s Midwestern underground. Your last few adds sit right in that lineage, so this felt like a natural one to send your way. New single below, no pressure either way.<br><br><span style="color:var(--purple)">open.spotify.com/track/…</span><br><br>Thanks for listening,</p>
-                        <p class="small" style="margin-top:20px;border-top:1px solid var(--line);padding-top:16px">Drafted from how you describe your own sound. You edit it, you send it.</p>
-                    </div>
-                </div>
-            </section>
-            <!-- HOW IT WORKS -->
-            <section id="how">
-                <div class="section-head">
-                    <span class="eyebrow">How it works</span>
-                    <h2>Three steps. You stay the sender.</h2>
-                </div>
-                <div class="grid-3 steps">
-                    <div class="card step-card">
-                        <div class="step-num">01</div>
-                        <h3>Drop your music</h3>
-                        <p>Paste a release link and one line on the sound, or upload the track for a sonic-level read.</p>
-                    </div>
-                    <div class="card step-card">
-                        <div class="step-num">02</div>
-                        <h3>Get fit scores that show their work</h3>
-                        <p>Every playlist you paste or search gets a 0–100 score plus the reasoning behind it. No black box.</p>
-                    </div>
-                    <div class="card step-card">
-                        <div class="step-num">03</div>
-                        <h3>Send it yourself, in your voice</h3>
-                        <p>Soniq drafts the pitch. You approve it and send from your own inbox, so it never reads as spam.</p>
-                    </div>
-                </div>
-            </section>
-            <!-- CURATOR SOURCING / TRUST -->
-            <section id="sourcing" style="padding-top:0">
-                <div class="section-head">
-                    <span class="eyebrow">Where curators come from</span>
-                    <h2>Real curators. No pay-for-placement.</h2>
-                </div>
-                <div class="grid-3">
-                    <div class="card">
-                        <h3>Where lists come from</h3>
-                        <div class="placeholder">[Placeholder — confirm sourcing before publishing: public playlist data? curator-submitted profiles? partner network?]</div>
-                    </div>
-                    <div class="card">
-                        <h3>How verification works</h3>
-                        <div class="placeholder">[Placeholder — confirm process: activity checks, follower-quality screening, opt-in status, refresh cadence?]</div>
-                    </div>
-                    <div class="card">
-                        <h3>What we never do</h3>
-                        <p style="color:var(--muted);font-size:15px;margin-top:12px">We never sell placement, never blast contact lists, and never send email on your behalf. Every pitch leaves from your inbox with your name on it.</p>
-                    </div>
-                </div>
-            </section>
-            <!-- INLINE STEP 1 -->
-            <section id="try" style="padding-top:0">
-                <div class="section-head">
-                    <h2>Try it now. No account needed.</h2>
-                </div>
-                <div class="narrow">
-                    <div class="flow-card">
-                        <div class="flow-top">
-                            <span class="eyebrow">Step 1 of 2 · Your sound</span>
-                            <span class="tiny-mono">Next: pick a curator</span>
-                        </div>
-                        <h3 style="font-size:24px">First, your sound.</h3>
-                        <p class="small" style="margin:8px 0 24px">Add a release link and one line on the sound, or upload a track. No sign-up yet.</p>
-                        <div class="field">
-                            <label>Your release link</label>
-                            <input class="input" placeholder="Spotify / Bandcamp / SoundCloud link">
-                        </div>
-                        <div class="field">
-                            <label>One line on the vibe</label>
-                            <input class="input" placeholder='e.g. "gauzy shoegaze with metal roots"'>
-                        </div>
-                        <p class="tiny-mono" style="margin:22px 0 10px">OR DROP YOUR TRACK</p>
-                        <div class="dropzone">Drag a track here, or <b>browse</b> · mp3 / wav
-                        </div>
-                        <div style="margin-top:26px">
-                            <button class="btn btn-yellow" style="width:100%">Next →</button>
-                        </div>
-                        <p class="small" style="margin-top:14px;text-align:center">By continuing you agree to the <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a></p>
-                    </div>
-                </div>
-            </section>
-            <!-- PRICING -->
-            <section id="pricing" style="padding-top:0">
-                <div class="section-head">
-                    <span class="eyebrow">Pricing</span>
-                    <h2>Start free. Pay when it's working.</h2>
-                </div>
-                <div class="grid-3">
-                    <div class="card tier">
-                        <h3>Free</h3>
-                        <p class="who">For your first release</p>
-                        <div class="price">$0</div>
-                        <ul>
-                            <li>1 active release</li>
-                            <li>5 fit scores per month</li>
-                            <li>Pitch drafts in your voice</li>
-                            <li>Send from your own inbox</li>
-                        </ul>
-                        <a class="btn btn-quiet" href="#try">Start free</a>
-                    </div>
-                    <div class="card tier hot">
-                        <span class="flag">Most popular</span>
-                        <h3>Releasing</h3>
-                        <p class="who">For a 4–8 week release cadence</p>
-                        <div class="price">$19<span>/mo</span>
-                        </div>
-                        <ul>
-                            <li>Unlimited fit scores</li>
-                            <li>3 active releases</li>
-                            <li>Verified-curator checks</li>
-                            <li>Follow-up reminders</li>
-                            <li>Shareable media kit links</li>
-                        </ul>
-                        <a class="btn btn-yellow" href="#try">Start free, upgrade later</a>
-                    </div>
-                    <div class="card tier">
-                        <h3>Label</h3>
-                        <p class="who">For labels and managers</p>
-                        <div class="price">$39<span>/mo</span>
-                        </div>
-                        <ul>
-                            <li>Everything in Releasing</li>
-                            <li>Up to 10 artists</li>
-                            <li>Team seats</li>
-                            <li>Coverage tracking</li>
-                            <li>Priority scoring</li>
-                        </ul>
-                        <a class="btn btn-quiet" href="#try">Start free</a>
-                    </div>
-                </div>
-                <p class="small" style="text-align:center;margin-top:26px">No card to start. Cancel anytime. You always send from your own inbox, on every plan.</p>
-            </section>
-            <!-- FAQ -->
-            <section id="faq" style="padding-top:0">
-                <div class="section-head">
-                    <span class="eyebrow">FAQ</span>
-                    <h2>The questions artists actually ask.</h2>
-                </div>
-                <div class="faq narrow" style="max-width:720px">
-                    <details open>
-                        <summary>What's a fit score?</summary>
-                        <p>A 0–100 estimate of how well your release matches a specific playlist or outlet, built from the curator's recent adds, genre distribution, and how you describe your own sound. Every score comes with the reasoning in plain language, including when the honest answer is "skip this one."</p>
-                    </details>
-                    <details>
-                        <summary>Do you email curators for me?</summary>
-                        <p>No, and that's the point. Soniq drafts the pitch; you approve it and send it from your own inbox. Curators see a real email from a real artist, and the relationship stays yours.</p>
-                    </details>
-                    <details>
-                        <summary>Where do the curators come from?</summary>
-                        <p>[Placeholder — confirm sourcing story before publishing. Should match the section above.]</p>
-                    </details>
-                    <details>
-                        <summary>What does "unverified" mean on a score?</summary>
-                        <p>[Placeholder — confirm exact verification criteria.] An unverified score is computed from public signals only. Verification adds activity and follower-quality checks so you don't pitch a dormant or botted list.</p>
-                    </details>
-                    <details>
-                        <summary>What does it cost?</summary>
-                        <p>Free for your first release, with 5 fit scores a month. Releasing is $19/mo for unlimited scoring, and Label is $39/mo for teams. No card required to start.</p>
-                    </details>
-                </div>
-            </section>
-            <footer>
-                <span>© 2026 Sonic Spotlights LLC</span>
-                <nav>
-                    <a href="#">Terms</a>
-                    <a href="#">Privacy Policy</a>
-                </nav>
-            </footer>
+        <p class="small" style="margin-top:20px;border-top:1px solid var(--line);padding-top:16px">A 38 saves you a burned contact. Most tools would tell you to pitch anyway.</p>
+      </div>
+      <div class="card inset">
+        <p class="eyebrow" style="color:var(--positive)">Your draft · in your voice</p>
+        <p style="font-weight:700;margin-top:14px">Subject: Cleveland emo for "actual emo music"</p>
+        <p style="color:var(--text-secondary);font-size:15px;margin-top:14px">Hi,<br><br>We're a Cleveland emo band rooted in the early-00s Midwestern underground. I know your playlist leans harder and bigger than that vein, but the name "actual emo music" made me think you might have a soft spot for where the genre started.<br><br><span style="color:var(--voice)">open.spotify.com/track/…</span><br><br>Happy to hear your thoughts either way.</p>
+        <p class="small" style="margin-top:20px;border-top:1px solid var(--line);padding-top:16px">Even a skip gets a real draft, written from how you describe your own sound. You edit it, you send it. When the fit is strong, the score says so and the pitch leans on real overlap instead.</p>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:26px"><a href="#try">Run this sample yourself with your own release →</a></p>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps. You stay the sender.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card step-card">
+        <div class="step-num">01</div>
+        <h3>Drop your music</h3>
+        <p>Paste a release link and one line on the sound, or upload the track for a sonic-level read.</p>
+      </div>
+      <div class="card step-card">
+        <div class="step-num">02</div>
+        <h3>Get fit scores that show their work</h3>
+        <p>Every playlist you paste or search gets a 0–100 score plus the reasoning behind it. No black box.</p>
+      </div>
+      <div class="card step-card">
+        <div class="step-num">03</div>
+        <h3>Send it yourself, in your voice</h3>
+        <p>Soniq drafts the pitch. You approve it and send from your own inbox, so it never reads as spam.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURATOR TRUTH (BYOC — resolved per review C1) -->
+  <section id="sourcing" style="padding-top:0">
+    <div class="section-head">
+      <span class="eyebrow">Where curators come from</span>
+      <h2>You bring them. We read the signals.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Your list, your relationships</h3>
+        <p style="color:var(--text-secondary);font-size:15px;margin-top:12px">Paste any playlist, blog, or press contact you have in mind. Soniq works from the targets you choose. There is no pay-to-access curator database.</p>
+      </div>
+      <div class="card">
+        <h3>Signals, not certificates</h3>
+        <p style="color:var(--text-secondary);font-size:15px;margin-top:12px">For public playlists, Soniq reads what's observable: recent adds, update recency, follower counts, genre distribution. We show you what we see. We never certify what we can't.</p>
+      </div>
+      <div class="card">
+        <h3>What we never do</h3>
+        <p style="color:var(--text-secondary);font-size:15px;margin-top:12px">We never sell placement, never blast contact lists, and never send email on your behalf. Every pitch leaves from your inbox with your name on it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INLINE STEP 1 — Next renders secondary; the hero above holds the page's yellow -->
+  <section id="try" style="padding-top:0">
+    <div class="section-head">
+      <h2>Try it now. No account needed.</h2>
+    </div>
+    <div class="narrow">
+      <div class="flow-card">
+        <div class="flow-top">
+          <span class="eyebrow">Step 1 of 2 · Your sound</span>
+          <span class="tiny-mono">Next: pick a curator</span>
         </div>
-        <div class="notes">
-            <details>
-                <summary>Design notes · Homepage</summary>
-                <ul>
-                    <li>
-                        <b>Product proof section is the highest-leverage addition.</b> Sample fit score + sample draft, using an 82 so the first impression is aspirational. The "a 38 saves you a burned contact" line turns honest low scores into a selling point.
-                    </li>
-                    <li>Hero: "curators who actually listen" replaces "people." Subhead now leads with the paste-your-targets action and lands on the own-inbox differentiator.</li>
-                    <li>Trust checks replaced "Built for 4–8wk release cadence" (internal metric language) with the two real objections: no auto-emailing, no pay-for-placement. Placeholder section on the first two blocks as I'm not completely clear on where we're sourcing our playlists and how the curator verification works.</li>
-                    <li>Step 1 form: Next is a full-strength enabled button that validates on click with inline field errors. Upload is a dashed dropzone so it stops competing with Next. Terms consent moved here from the hero, next to the actual data collection.</li>
-                    <li>Added a pricing block. I wasn't sure of the exact feature splits per tier. We can adjust these to reflect reality.</li>
-                    <li>Sourcing section and two FAQ answers are flagged with amber placeholder boxes. Do not ship until the sourcing and verification stories are confirmed.</li>
-                    <li>Nav gains How it works / Pricing / FAQ anchors so the page stops reading as a splash screen.</li>
-                </ul>
-            </details>
+        <h3 style="font-size:24px">First, your sound.</h3>
+        <p class="small" style="margin:8px 0 24px">Add a release link and one line on the sound, or upload a track. No sign-up yet.</p>
+        <div class="field">
+          <label>Your release link</label>
+          <input class="input" placeholder="Spotify / Bandcamp / SoundCloud link">
         </div>
-    </body>
-</html>
+        <div class="field">
+          <label>One line on the vibe</label>
+          <input class="input" placeholder='e.g. "gauzy shoegaze with metal roots"'>
+        </div>
+        <p class="eyebrow" style="margin:22px 0 10px">Or drop your track</p>
+        <div class="dropzone">Drag a track here, or <b>browse</b> · mp3 / wav</div>
+        <div style="margin-top:26px"><button class="btn btn-outline" style="width:100%">Next →</button></div>
+        <p class="small" style="margin-top:14px;text-align:center">By continuing you agree to the <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING — gate at the 4th draft; scoring never metered (review C2) -->
+  <section id="pricing" style="padding-top:0">
+    <div class="section-head">
+      <span class="eyebrow">Pricing</span>
+      <h2>Score everything free. Pay at your fourth draft.</h2>
+      <p class="sub">Fit scoring is unlimited on every plan, forever. The paywall shows up after Soniq has drafted three real pitches for you.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card tier">
+        <h3>Free</h3>
+        <p class="who">For your first release</p>
+        <div class="price">$0</div>
+        <ul>
+          <li>Unlimited fit scores</li>
+          <li>3 pitch drafts in your voice</li>
+          <li>1 active release</li>
+          <li>Send from your own inbox</li>
+        </ul>
+        <a class="btn btn-quiet" href="#try">Start free</a>
+      </div>
+      <div class="card tier hot">
+        <h3>Solo</h3>
+        <p class="who">For a 4–8 week release cadence</p>
+        <div class="price">$19<span>/mo</span></div>
+        <ul>
+          <li>Unlimited pitch drafts</li>
+          <li>Voice profile that learns your edits</li>
+          <li>Follow-up reminders</li>
+          <li>3 active releases</li>
+          <li>Shareable media kit links</li>
+        </ul>
+        <a class="btn btn-outline" href="#try">Start free, upgrade later</a>
+      </div>
+      <div class="card tier">
+        <h3>Momentum</h3>
+        <p class="who">For labels and managers</p>
+        <div class="price">$39<span>/mo</span></div>
+        <ul>
+          <li>Everything in Solo</li>
+          <li>Up to 10 artists</li>
+          <li>Team seats</li>
+          <li>Coverage tracking</li>
+        </ul>
+        <a class="btn btn-quiet" href="#try">Start free</a>
+      </div>
+    </div>
+    <p class="small" style="text-align:center;margin-top:26px">No credit card to start. Cancel anytime. You always send from your own inbox, on every plan.</p>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="padding-top:0">
+    <div class="section-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>The questions artists actually ask.</h2>
+    </div>
+    <div class="faq narrow" style="max-width:720px">
+      <details open>
+        <summary>What's a fit score?</summary>
+        <p>A 0–100 estimate of how well your release matches a specific playlist or outlet, built from the curator's recent adds, genre distribution, and how you describe your own sound. Every score comes with the reasoning in plain language, including when the honest answer is "skip this one."</p>
+      </details>
+      <details>
+        <summary>What signals does Soniq read?</summary>
+        <p>For public playlists: recent adds, update recency, follower counts, and genre distribution. For your release: your links, your one-line description, and the track itself if you upload it. We show you what we observe; we don't certify curators, and we'll tell you when the signal is thin.</p>
+      </details>
+      <details>
+        <summary>Do you email curators for me?</summary>
+        <p>No, and that's the point. Soniq drafts the pitch; you approve it and send it from your own inbox. Curators see a real email from a real artist, and the relationship stays yours.</p>
+      </details>
+      <details>
+        <summary>Where do the curators come from?</summary>
+        <p>You bring them. Paste the playlists and press you already have in mind, or search public playlists by genre or vibe. Soniq doesn't sell access to a contact database, and there's no pay-for-placement anywhere in the product.</p>
+      </details>
+      <details>
+        <summary>What does it cost?</summary>
+        <p>Fit scoring is unlimited and free on every plan. Your first three pitch drafts are free too; the paywall appears at the fourth. Solo is $19/mo for unlimited drafts, and Momentum is $39/mo for teams. No credit card to start.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Sonic Spotlights LLC</span>
+    <nav><a href="#">Terms</a><a href="#">Privacy Policy</a></nav>
+  </footer>
+</div>
+
+<div class="notes">
+  <details>
+    <summary>Design notes · Homepage</summary>
+    <p class="nh">Token truth-up (this pass)</p>
+    <ul>
+      <li>Now built on the real tokens/ files from the repo: ink ramp #a2a2ac / #6b6b76, semantic positive = emerald-500 #10b981 (bare --emerald stays #34d399), inferred amber #f5a623, action ink #1c1605 with hover #ffd83a and the action glow, borders at rgba(244,244,245,.10/.18), inputs on the dedicated #101019 field background, labels in the ss-label pattern (Plus Jakarta 600, .06em caps), motion at 120/200/320ms. Real assets in place: app-icon.png in the nav, logo-horizontal-dark.png in the dashboard sidebars. Both image files ship alongside the HTML; upload them with the pages.</li>
+    </ul>
+    <p class="nh">Review feedback applied</p>
+    <ul>
+      <li>C1: no verified state anywhere; signal tags only. Sourcing section is BYOC truth, which dissolved the amber placeholders. FAQ verification answer replaced with "What signals does Soniq read?"</li>
+      <li>C2: pricing rebuilt around unlimited free scoring with the gate at the fourth draft; tiers named Solo / Momentum (working names).</li>
+      <li>C3: sample data flagged explicitly; no invented counts, users, or popularity claims on the page.</li>
+      <li>Y1: the hero CTA holds the page's single Laser Yellow; step-1 Next is secondary; pricing CTAs are quiet/secondary.</li>
+    </ul>
+    <p class="nh">C4 · Product proof and public pricing — status and reasoning</p>
+    <ul>
+      <li>The review recommended cutting both the proof section and public pricing (path a), but explicitly offered path b: keep them if the philosophy is updated — sample-labeled proof that leads with the honest 38 rather than an aspirational 82, and pricing with corrected splits and no popularity flag. This page now takes path b in full.</li>
+      <li>Pricing stays, with reasoning on the record: hidden pricing reads as a dark pattern to artists who've been burned by playlist-pitching bait, and publishing it makes the fourth-draft plan moment a reminder instead of a reveal. The trade against "value before price" is real, but the price is also part of the trust story: no card, three free drafts, and you can see the ceiling before you start. The two conditions are met — splits corrected per C2, and the "Most popular" flag is gone (a popularity claim with zero users is fabricated proof; the middle tier is emphasized by the purple border alone).</li>
+      <li>Proof stays because most landing visitors never run the demo: they're skimming from a link on a phone, researching for a bandmate, or evaluating without a release ready to paste. For them this section is the only exposure to the reasoning quality. It now leads with the honest 38 and "Soniq's read: skip this one," which is the strongest anti-scam artifact the brand has — the aspirational-sample aesthetic belongs to the scams. "Run this sample yourself" feeds the real flow, and section engagement should decide its long-term fate with data.</li>
+      <li>Voice fix from C5-adjacent guidance: the block is labeled "Soniq's read," third person, not "Our take" — first-person-plural stays reserved for company policy statements.</li>
+    </ul>
+  </details>
+</div>
+
+</body></html>

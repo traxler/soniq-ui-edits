@@ -1,79 +1,277 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Soniq — Step 2: Pick a curator</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-        <style>:root { --bg: #08080d; --surface: #141419; --surface-2: #0e0e14; --ink: #0b0b10; --line: rgba(255,255,255,.08); --line-strong: rgba(255,255,255,.16); --text: #f2f2f6; --muted: #9a9aa8; --dim: #6b6b7a; --purple: #8b7cf8; --purple-dim: #6c5ce7; --purple-soft: rgba(139,124,248,.12); --yellow: #ffd426; --green: #3ddc97; --amber: #ffb84d; --red: #ff7a6b; --r: 16px; --r-sm: 10px; --sans: 'Plus Jakarta Sans',system-ui,-apple-system,sans-serif; --mono: 'JetBrains Mono',ui-monospace,SFMono-Regular,monospace; } * { box-sizing: border-box; margin: 0; padding: 0; } html { scroll-behavior: smooth; } body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; } body.glow { background: radial-gradient(900px 600px at -5% -5%, rgba(120,80,220,.22), transparent 60%),
-  radial-gradient(700px 500px at 105% -5%, rgba(200,170,40,.14), transparent 60%),
-  var(--bg); } a { color: var(--purple); text-decoration: none; } a:hover { text-decoration: underline; } img { max-width: 100%; } .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; } .narrow { max-width: 640px; margin: 0 auto; } /* mockup bar */.mockbar { position: sticky; top: 0; z-index: 50; background: #000; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: .08em; padding: 8px 16px; display: flex; gap: 14px; align-items: center; overflow-x: auto; white-space: nowrap; } .mockbar b { color: var(--yellow); font-weight: 600; } .mockbar a { color: var(--muted); } .mockbar a.on { color: var(--text); } /* type */.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--dim); } .eyebrow.purple { color: var(--purple); } h1 { font-size: clamp(34px,4.6vw,54px); line-height: 1.12; font-weight: 700; letter-spacing: -.02em; } h2 { font-size: clamp(26px,3vw,34px); line-height: 1.2; font-weight: 700; letter-spacing: -.015em; } h3 { font-size: 19px; font-weight: 600; } .sub { color: var(--muted); font-size: 18px; line-height: 1.6; } .small { font-size: 13.5px; color: var(--muted); } .mono { font-family: var(--mono); } .tiny-mono { font-family: var(--mono); font-size: 12.5px; color: var(--dim); } /* buttons */.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--sans); font-weight: 700; font-size: 16px; border-radius: 12px; padding: 14px 26px; border: 1px solid transparent; cursor: pointer; transition: .15s; } .btn-yellow { background: var(--yellow); color: #151203; } .btn-yellow:hover { filter: brightness(1.06); text-decoration: none; } .btn-outline { background: transparent; color: var(--purple); border-color: var(--purple); } .btn-outline:hover { background: var(--purple-soft); text-decoration: none; } .btn-quiet { background: var(--surface); color: var(--text); border-color: var(--line-strong); } .btn-quiet:hover { border-color: var(--purple); text-decoration: none; } .btn-sm { padding: 9px 16px; font-size: 14px; border-radius: 10px; } .btn[disabled], .btn.is-disabled { opacity: .35; cursor: not-allowed; filter: grayscale(.4); } /* cards + inputs */.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 28px; } .card.inset { background: var(--surface-2); } .input, .field input, .field textarea { width: 100%; background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 12px; color: var(--text); font-family: var(--sans); font-size: 17px; padding: 15px 18px; outline: none; } .input:focus, .field input:focus { border-color: var(--purple); } .input::placeholder { color: var(--dim); } .field { margin-bottom: 18px; } .field label { display: block; font-size: 15px; color: var(--text); margin-bottom: 8px; font-weight: 600; } .dropzone { border: 1.5px dashed var(--line-strong); border-radius: 12px; padding: 22px; text-align: center; color: var(--muted); font-size: 15px; cursor: pointer; } .dropzone:hover { border-color: var(--purple); color: var(--text); } .dropzone b { color: var(--purple); } /* pills + badges */.pill { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; border: 1px solid var(--line-strong); border-radius: 999px; padding: 4px 11px; color: var(--muted); } .pill.green { color: var(--green); border-color: rgba(61,220,151,.4); } .pill.amber { color: var(--amber); border-color: rgba(255,184,77,.4); } .pill.purple { color: var(--purple); border-color: rgba(139,124,248,.45); } .chip { display: inline-block; font-size: 12.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; } /* checks */.checks { display: flex; gap: 26px; flex-wrap: wrap; justify-content: center; color: var(--muted); font-size: 15px; } .checks span::before { content: "✓"; color: var(--green); margin-right: 8px; font-weight: 700; } /* score ring */.ring { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 22px; flex: none; border: 2.5px solid var(--purple); color: var(--text); } .ring.g { border-color: var(--green); } .ring.a { border-color: var(--amber); } .ring.r { border-color: var(--red); } .ring-label { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; color: var(--dim); text-align: center; margin-top: 6px; } /* fit scale */.scale { margin-top: 14px; } .scale-bar { position: relative; height: 6px; border-radius: 3px; background: linear-gradient(90deg,var(--red) 0 40%,var(--amber) 40% 70%,var(--green) 70% 100%); opacity: .85; } .scale-bar i { position: absolute; top: -5px; width: 3px; height: 16px; background: #fff; border-radius: 2px; } .scale-legend { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; color: var(--dim); margin-top: 7px; text-transform: uppercase; } /* placeholder flag */.placeholder { border: 1.5px dashed rgba(255,184,77,.5); border-radius: 12px; padding: 14px 16px; color: var(--muted); font-size: 14.5px; position: relative; margin-top: 10px; } .placeholder::before { content: "VERIFY BEFORE PUBLISH"; font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; color: var(--amber); display: block; margin-bottom: 6px; } /* sections */section { padding: 88px 0; } .section-head { text-align: center; max-width: 680px; margin: 0 auto 52px; } .section-head .eyebrow { display: block; margin-bottom: 14px; } .section-head p { margin-top: 14px; } /* homepage top nav */.topnav { display: flex; align-items: center; justify-content: space-between; padding: 26px 0; } .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text); } .brand .dot { width: 30px; height: 30px; border-radius: 8px; background: conic-gradient(from 40deg,#4dd0e1,#8b7cf8,#ffd426,#4dd0e1); flex: none; } .topnav nav { display: flex; gap: 26px; align-items: center; font-size: 15px; } .topnav nav a { color: var(--muted); } .topnav nav a:hover { color: var(--text); text-decoration: none; } .topnav nav a.signin { color: var(--purple); } /* grids */.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; } .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; } @media (max-width:920px){ .grid-2, .grid-3 {  grid-template-columns: 1fr; } } /* how-it-works connector */.steps { position: relative; } .step-num { font-family: var(--mono); color: var(--purple); font-size: 13px; margin-bottom: 14px; } .step-card p { color: var(--muted); font-size: 15px; margin-top: 10px; } /* pricing */.tier { display: flex; flex-direction: column; gap: 0; position: relative; } .tier .price { font-size: 38px; font-weight: 800; margin: 10px 0 2px; } .tier .price span { font-size: 15px; color: var(--muted); font-weight: 500; } .tier ul { list-style: none; margin-top: 18px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; color: var(--muted); } .tier ul li::before { content: "✓"; color: var(--green); margin-right: 9px; font-weight: 700; } .tier .who { color: var(--dim); font-size: 14px; } .tier.hot { border-color: var(--purple); box-shadow: 0 0 0 1px var(--purple); } .tier .flag { position: absolute; top: -12px; left: 24px; background: var(--purple); color: #0b0b10; font-family: var(--mono); font-size: 10px; letter-spacing: .15em; padding: 4px 10px; border-radius: 999px; font-weight: 700; } .tier .btn { margin-top: 22px; } /* faq */.faq details { border-bottom: 1px solid var(--line); padding: 20px 4px; } .faq summary { cursor: pointer; font-weight: 600; font-size: 17px; list-style: none; display: flex; justify-content: space-between; align-items: center; } .faq summary::after { content: "+"; color: var(--purple); font-size: 22px; font-weight: 400; } .faq details[open] summary::after { content: "–"; } .faq details p { color: var(--muted); margin-top: 12px; font-size: 15.5px; max-width: 60ch; } /* footer */footer { border-top: 1px solid var(--line); padding: 34px 0; display: flex; justify-content: space-between; color: var(--dim); font-size: 14px; } footer nav { display: flex; gap: 22px; } /* flow card pages */.flow-wrap { max-width: 720px; margin: 0 auto; padding: 56px 24px; } .flow-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 40px; } .flow-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; } .captured { font-family: var(--mono); font-size: 12.5px; letter-spacing: .18em; color: var(--purple); margin-bottom: 14px; } .captured::before { content: "✓ "; } /* search results */.result-row { display: flex; align-items: center; gap: 14px; background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 12px; padding: 14px 16px; margin-top: 10px; cursor: pointer; } .result-row:hover { border-color: var(--purple); } .result-row.sel { border-color: var(--purple); box-shadow: 0 0 0 1px var(--purple); } .result-row .meta { font-size: 13px; color: var(--dim); } .result-row .name { font-weight: 700; } .result-row .chips { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; } /* dashboard shell */.shell { display: grid; grid-template-columns: 248px 1fr; min-height: 100vh; } .side { border-right: 1px solid var(--line); padding: 22px 18px; display: flex; flex-direction: column; background: #0a0a10; } .side .brand { margin-bottom: 34px; font-size: 16px; } .side nav a { display: block; padding: 10px 12px; border-radius: 10px; color: var(--muted); font-size: 15.5px; margin-bottom: 4px; } .side nav a.on { color: var(--text); background: var(--surface); font-weight: 600; } .side nav a:hover { color: var(--text); text-decoration: none; } .side .foot { margin-top: auto; display: flex; gap: 10px; align-items: center; font-size: 14px; } .side .foot .av { width: 34px; height: 34px; border-radius: 50%; background: var(--purple-soft); color: var(--purple); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; } .main { padding: 0 40px 80px; } .topbar { display: flex; align-items: center; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); margin-bottom: 28px; } .searchbox { flex: 1; max-width: 480px; display: flex; align-items: center; gap: 10px; background: var(--surface-2); border: 1px solid var(--line-strong); border-radius: 12px; padding: 11px 16px; color: var(--dim); font-size: 15px; } .crumb { font-family: var(--mono); font-size: 12.5px; letter-spacing: .1em; color: var(--dim); margin: 8px 0 22px; } .crumb b { color: var(--muted); font-weight: 500; } /* target rows */.target { display: flex; gap: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin-bottom: 14px; align-items: flex-start; } .target.sel { border-color: var(--purple); box-shadow: 0 0 0 1px var(--purple); } .target input[type=checkbox] { margin-top: 22px; accent-color: var(--purple); width: 16px; height: 16px; } .target .body { flex: 1; } .target .headrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; } .target .why { margin-left: auto; font-size: 14px; } .target p.reason { color: var(--muted); font-size: 14.5px; margin-top: 8px; max-width: 75ch; } .target .metaline { font-size: 13px; color: var(--dim); margin-top: 2px; } .selectbar { position: sticky; bottom: 0; background: #000; border: 1px solid var(--line-strong); border-radius: 14px; padding: 14px 20px; display: flex; align-items: center; gap: 16px; margin-top: 8px; } /* pipeline board */.board { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; align-items: start; } @media (max-width:1000px){ .board {  grid-template-columns: 1fr 1fr; } } .col-head { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; color: var(--dim); text-transform: uppercase; margin-bottom: 12px; display: flex; justify-content: space-between; } .pcard { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 12px; } .pcard .nm { font-weight: 700; font-size: 15px; display: flex; gap: 8px; align-items: center; } .pcard .meta { font-size: 12.5px; color: var(--dim); margin-top: 5px; } .pcard .act { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; } .col-empty { border: 1.5px dashed var(--line-strong); border-radius: 12px; padding: 18px; color: var(--dim); font-size: 13.5px; } /* stats strip */.stats { display: flex; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin: 26px 0; } .stats div { flex: 1; padding: 22px 26px; border-right: 1px solid var(--line); } .stats div:last-child { border-right: 0; } .stats b { font-size: 28px; font-weight: 800; margin-right: 10px; } .stats span { color: var(--muted); font-size: 15px; } /* design notes */.notes { max-width: 1120px; margin: 40px auto 80px; padding: 0 32px; } .notes details { background: #000; border: 1px dashed var(--line-strong); border-radius: 12px; padding: 18px 22px; } .notes summary { font-family: var(--mono); font-size: 12px; letter-spacing: .2em; color: var(--amber); cursor: pointer; text-transform: uppercase; } .notes ul { margin: 14px 0 4px 18px; color: var(--muted); font-size: 14.5px; display: flex; flex-direction: column; gap: 8px; } @media (max-width:920px){ .shell {  grid-template-columns: 1fr; }  .side {  flex-direction: row;  align-items: center;  border-right: 0;  border-bottom: 1px solid var(--line); }  .side nav {  display: flex; }  .side .brand {  margin-bottom: 0; }  .side .foot {  display: none; }  .main {  padding: 0 20px 60px; }  .board {  grid-template-columns: 1fr; }  section {  padding: 56px 0; } }</style>
-    </head>
-    <body class="glow">
-        <div class="mockbar">
-            <b>SONIQ V2 MOCKUP</b> <a class="" href="index.html">Home</a> <a class="on" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Soniq — Step 2: Pick a curator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>/* ============================================================
+   Soniq v2 mockups — aligned to Sonic Spotlights DS
+   Token values from DEVELOPER_HANDOFF.md §5 + RECONCILIATION.md.
+   tokens/ folder absent from upload; inferred values are marked.
+   ============================================================ */
+:root{
+  /* palette + semantic aliases (handoff vocabulary) */
+  --bg-app:#050505; --bg-surface:#16161c; --bg-raised:#1c1c24;
+  --text-primary:#f4f4f5; --text-secondary:#a2a2ac; --text-meta:#6b6b76; --text-disabled:#4a4a54;
+  --voice:#8b5cf6; --voice-hover:#a78bfa; --voice-quiet:rgba(139,92,246,.12); --voice-soft:var(--voice-quiet);
+  --action:#facc15; --action-hover:#ffd83a; --action-ink:#1c1605; --action-glow:0 2px 12px rgba(250,204,21,.22);
+  --positive:#10b981; --positive-soft:rgba(16,185,129,.14); --danger:#ef4444; --inferred:#f5a623;
+  --yellow:var(--action); --emerald:#34d399; --amber:var(--inferred); --red:var(--danger); --field-bg:#101019; --bg-sunken:#0d0d11;
+  --line:rgba(244,244,245,.10); --line-strong:rgba(244,244,245,.18);
+  --focus-ring:0 0 0 3px rgba(139,92,246,.55);
+  /* radius: 8 default · 12 cards · 16 large/modal · 4 tags · full pills */
+  --r-def:8px; --r-card:12px; --r-lg:16px; --r-tag:4px;
+  --ease:cubic-bezier(0.2,0.8,0.2,1); --dur-fast:120ms; --dur-base:200ms; --dur-slow:320ms;
+  --font-display:'Plus Jakarta Sans',system-ui,sans-serif;
+  --font-sans:'Figtree',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{background:var(--bg-app);color:var(--text-primary);font-family:var(--font-sans);font-size:16px;line-height:1.55}
+::selection{background:rgba(139,92,246,.35)}
+a{color:var(--voice);text-decoration:none}
+a:hover{color:var(--voice-hover);text-decoration:underline}
+:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--r-def)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+.narrow{max-width:640px;margin:0 auto}
+
+/* SpotlightsAtmosphere stand-in — entry surfaces ONLY (Cardinal Rule 8) */
+body.glow{background:
+  radial-gradient(720px 560px at 12% -8%, rgba(139,92,246,.20), transparent 62%),
+  radial-gradient(560px 460px at 88% -6%, rgba(250,204,21,.10), transparent 60%),
+  var(--bg-app)}
+
+/* mockup bar (tooling chrome, not product UI) */
+.mockbar{position:sticky;top:0;z-index:50;background:#000;border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;padding:8px 16px;display:flex;gap:14px;align-items:center;overflow-x:auto;white-space:nowrap}
+.mockbar b{color:var(--action);font-weight:600}
+.mockbar a{color:var(--text-meta)} .mockbar a.on{color:var(--text-primary)}
+
+/* type */
+.eyebrow{font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-meta)}
+.eyebrow.purple{color:var(--voice)}
+h1,h2,h3{font-family:var(--font-display)}
+h1{font-size:clamp(34px,4.6vw,54px);line-height:1.12;font-weight:700;letter-spacing:-.02em}
+h2{font-size:clamp(26px,3vw,34px);line-height:1.2;font-weight:700;letter-spacing:-.015em}
+h3{font-size:19px;font-weight:600}
+.sub{color:var(--text-secondary);font-size:18px;line-height:1.6}
+.small{font-size:13.5px;color:var(--text-secondary)}
+.tiny-mono{font-family:var(--font-sans);font-size:12.5px;color:var(--text-meta)} /* meta text (was mono; DS: mono ≠ labels) */
+.mono{font-family:var(--font-mono);font-size:12.5px} /* scores · timestamps · citations only */
+
+/* buttons — DS Button: primary(yellow) · secondary(outlined purple) · ghost */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-sans);font-weight:700;font-size:16px;border-radius:var(--r-def);padding:14px 26px;border:1px solid transparent;cursor:pointer;transition:all var(--dur-base) var(--ease);min-height:44px}
+.btn-yellow{background:var(--action);color:var(--action-ink);box-shadow:var(--action-glow)}
+.btn-yellow:hover{background:var(--action-hover);text-decoration:none;color:var(--action-ink)}
+.btn-outline{background:transparent;color:var(--voice);border-color:var(--voice)}
+.btn-outline:hover{background:var(--voice-soft);text-decoration:none;color:var(--voice-hover)}
+.btn-quiet{background:var(--bg-surface);color:var(--text-primary);border-color:var(--line-strong)}
+.btn-quiet:hover{border-color:var(--voice);text-decoration:none}
+.btn-sm{padding:9px 16px;font-size:14px;min-height:36px}
+.btn[disabled],.btn.is-disabled{opacity:.35;cursor:not-allowed}
+
+/* icons — Lucide-style inline SVG (flagged substitution), no emoji in chrome */
+.ic{width:16px;height:16px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-2px}
+
+/* cards + inputs */
+.card{background:var(--bg-surface);border:1px solid var(--line);border-radius:var(--r-card);padding:28px}
+.card.inset{background:var(--bg-raised)}
+.input,.field input{width:100%;background:var(--field-bg);border:1px solid var(--line-strong);border-radius:var(--r-def);color:var(--text-primary);font-family:var(--font-sans);font-size:17px;padding:15px 18px;outline:none;transition:box-shadow var(--dur-base) var(--ease)}
+.input:focus,.field input:focus{border-color:var(--voice);box-shadow:var(--focus-ring)}
+.input::placeholder{color:var(--text-meta)}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:15px;margin-bottom:8px;font-weight:600}
+.dropzone{border:1.5px dashed var(--line-strong);border-radius:var(--r-card);padding:22px;text-align:center;color:var(--text-secondary);font-size:15px;cursor:pointer;transition:border-color var(--dur-base) var(--ease)}
+.dropzone:hover{border-color:var(--voice);color:var(--text-primary)}
+.dropzone b{color:var(--voice)}
+
+/* Badge (pill, soft) · Tag (4px radius — signals, small labels) */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line-strong);border-radius:999px;padding:4px 11px;color:var(--text-secondary)}
+.pill.green{color:var(--positive);border-color:rgba(52,211,153,.4)}
+.pill.purple{color:var(--voice);border-color:rgba(139,92,246,.45)}
+.tag{display:inline-block;font-size:12px;color:var(--text-secondary);border:1px solid var(--line);border-radius:var(--r-tag);padding:3px 8px;letter-spacing:.02em}
+.chip{display:inline-block;font-size:12.5px;color:var(--text-secondary);border:1px solid var(--line);border-radius:var(--r-tag);padding:3px 10px}
+
+/* checks — ✓ is the one recurring brand affordance (emerald) */
+.checks{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;color:var(--text-secondary);font-size:15px}
+.checks span::before{content:"✓";color:var(--positive);margin-right:8px;font-weight:700}
+.checks ul{list-style:none;margin:0;padding:0;display:flex;gap:26px;flex-wrap:wrap;justify-content:center}
+
+/* ConfidenceMeter stand-in — fit only, never merged with any verified state */
+.ring{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-weight:700;font-size:21px;flex:none;border:2.5px solid var(--voice)}
+.ring.g{border-color:var(--positive)} .ring.a{border-color:var(--inferred)} .ring.r{border-color:var(--danger)}
+.ring-label{font-family:var(--font-display);font-weight:600;font-size:10px;letter-spacing:.06em;color:var(--text-meta);text-align:center;margin-top:6px;text-transform:uppercase}
+
+.scale{margin-top:14px}
+.scale-bar{position:relative;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--danger) 0 40%,var(--inferred) 40% 70%,var(--positive) 70% 100%);opacity:.85}
+.scale-bar i{position:absolute;top:-5px;width:3px;height:16px;background:#fff;border-radius:2px}
+.scale-legend{display:flex;justify-content:space-between;font-size:10.5px;letter-spacing:.05em;color:var(--text-meta);margin-top:7px;text-transform:uppercase;font-weight:600}
+
+/* sample framing (BYOC honesty — worked examples announce themselves) */
+.sample-flag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--voice);border:1px solid rgba(139,92,246,.45);border-radius:var(--r-tag);padding:3px 9px}
+
+section{padding:88px 0}
+.section-head{text-align:center;max-width:680px;margin:0 auto 52px}
+.section-head .eyebrow{display:block;margin-bottom:14px}
+.section-head p{margin-top:14px}
+
+.topnav{display:flex;align-items:center;justify-content:space-between;padding:26px 0}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--text-primary)}
+.brand img{display:block} .brand .appicon{width:28px;height:28px;border-radius:8px;flex:none}
+.topnav nav{display:flex;gap:26px;align-items:center;font-size:15px}
+.topnav nav a{color:var(--text-secondary)} .topnav nav a:hover{color:var(--text-primary);text-decoration:none}
+.topnav nav a.signin{color:var(--voice)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:920px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.step-num{font-family:var(--font-mono);color:var(--voice);font-size:13px;margin-bottom:14px}
+.step-card p{color:var(--text-secondary);font-size:15px;margin-top:10px}
+
+.tier{display:flex;flex-direction:column;position:relative}
+.tier .price{font-family:var(--font-display);font-size:38px;font-weight:800;margin:10px 0 2px}
+.tier .price span{font-size:15px;color:var(--text-secondary);font-weight:500;font-family:var(--font-sans)}
+.tier ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:10px;font-size:15px;color:var(--text-secondary)}
+.tier ul li::before{content:"✓";color:var(--positive);margin-right:9px;font-weight:700}
+.tier .who{color:var(--text-meta);font-size:14px}
+.tier.hot{border-color:var(--voice);box-shadow:0 0 0 1px var(--voice)}
+.tier .flag{position:absolute;top:-12px;left:24px;background:var(--voice);color:#fff;font-size:10px;letter-spacing:.15em;padding:4px 10px;border-radius:999px;font-weight:700;text-transform:uppercase}
+.tier .btn{margin-top:22px}
+
+.faq details{border-bottom:1px solid var(--line);padding:20px 4px}
+.faq summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::after{content:"+";color:var(--voice);font-size:22px;font-weight:400}
+.faq details[open] summary::after{content:"–"}
+.faq details p{color:var(--text-secondary);margin-top:12px;font-size:15.5px;max-width:60ch}
+
+footer{border-top:1px solid var(--line);padding:34px 0;display:flex;justify-content:space-between;color:var(--text-meta);font-size:14px}
+footer nav{display:flex;gap:22px}
+
+.flow-wrap{max-width:720px;margin:0 auto;padding:56px 24px}
+.flow-card{background:var(--bg-surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:40px}
+.flow-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.captured{font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--voice);margin-bottom:14px;text-transform:uppercase}
+.captured::before{content:"✓ "}
+
+.result-row{display:flex;align-items:center;gap:14px;background:var(--bg-raised);border:1px solid var(--line-strong);border-radius:var(--r-card);padding:14px 16px;margin-top:10px;cursor:pointer;transition:border-color var(--dur-base) var(--ease)}
+.result-row:hover{border-color:var(--voice)}
+.result-row.sel{border-color:var(--voice);box-shadow:0 0 0 1px var(--voice)}
+.result-row .meta{font-size:13px;color:var(--text-meta)}
+.result-row .name{font-weight:700}
+.result-row .chips{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+
+.shell{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+.side{border-right:1px solid var(--line);padding:22px 18px;display:flex;flex-direction:column;background:#0a0a0f}
+.side .brand{margin-bottom:34px;font-size:16px}
+.side nav a{display:block;padding:10px 12px;border-radius:var(--r-def);color:var(--text-secondary);font-size:15.5px;margin-bottom:4px}
+.side nav a.on{color:var(--text-primary);background:var(--bg-surface);font-weight:600}
+.side nav a:hover{color:var(--text-primary);text-decoration:none}
+.side .foot{margin-top:auto;display:flex;gap:10px;align-items:center;font-size:14px}
+.side .foot .av{width:36px;height:36px;border-radius:50%;background:var(--voice-soft);color:var(--voice);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;cursor:pointer;border:1px solid rgba(139,92,246,.4)}
+.main{padding:0 40px 80px}
+.topbar{display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);margin-bottom:28px}
+.searchbox{flex:1;max-width:480px;display:flex;align-items:center;gap:10px;background:var(--bg-raised);border:1px solid var(--line-strong);border-radius:var(--r-def);padding:11px 16px;color:var(--text-meta);font-size:15px}
+.crumb{font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--text-meta);margin:8px 0 22px;text-transform:uppercase}
+.crumb b{color:var(--text-secondary);font-weight:600}
+
+.target{display:flex;gap:16px;background:var(--bg-surface);border:1px solid var(--line);border-radius:var(--r-card);padding:20px;margin-bottom:14px;align-items:flex-start}
+.target.sel{border-color:var(--voice);box-shadow:0 0 0 1px var(--voice)}
+.target input[type=checkbox]{margin-top:22px;accent-color:var(--voice);width:16px;height:16px}
+.target .body{flex:1}
+.target .headrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.target .why{margin-left:auto;font-size:14px}
+.target p.reason{color:var(--text-secondary);font-size:14.5px;margin-top:8px;max-width:75ch}
+.target .metaline{font-size:13px;color:var(--text-meta);margin-top:2px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.selectbar{position:sticky;bottom:0;background:#000;border:1px solid var(--line-strong);border-radius:var(--r-card);padding:14px 20px;display:flex;align-items:center;gap:16px;margin-top:8px}
+
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
+@media(max-width:1000px){.board{grid-template-columns:1fr 1fr}}
+.col-head{font-family:var(--font-display);font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--text-meta);text-transform:uppercase;margin-bottom:12px;display:flex;justify-content:space-between}
+.pcard{background:var(--bg-surface);border:1px solid var(--line);border-radius:var(--r-card);padding:16px;margin-bottom:12px}
+.pcard .nm{font-weight:700;font-size:15px;display:flex;gap:8px;align-items:center}
+.pcard .meta{font-size:12.5px;color:var(--text-meta);margin-top:5px}
+.pcard .act{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.col-empty{border:1.5px dashed var(--line-strong);border-radius:var(--r-card);padding:18px;color:var(--text-meta);font-size:13.5px}
+
+.stats{display:flex;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;margin:26px 0}
+.stats div{flex:1;padding:22px 26px;border-right:1px solid var(--line)}
+.stats div:last-child{border-right:0}
+.stats b{font-family:var(--font-mono);font-size:26px;font-weight:700;margin-right:10px}
+.stats span{color:var(--text-secondary);font-size:15px}
+
+.notes{max-width:1120px;margin:40px auto 80px;padding:0 32px}
+.notes details{background:#000;border:1px dashed var(--line-strong);border-radius:var(--r-card);padding:18px 22px}
+.notes summary{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--inferred);cursor:pointer;text-transform:uppercase}
+.notes ul{margin:14px 0 4px 18px;color:var(--text-secondary);font-size:14.5px;display:flex;flex-direction:column;gap:8px}
+.notes .nh{margin-top:16px;font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--text-secondary);text-transform:uppercase}
+
+@media(max-width:920px){
+  .shell{grid-template-columns:1fr}
+  .side{flex-direction:row;align-items:center;border-right:0;border-bottom:1px solid var(--line)}
+  .side nav{display:flex} .side .brand{margin-bottom:0} .side .foot{display:none}
+  .main{padding:0 20px 60px}
+  .board{grid-template-columns:1fr}
+  section{padding:56px 0}
+}
+</style>
+</head><body class="glow">
+<div class="mockbar"><b>SONIQ V2 · DS-ALIGNED</b> <a class="" href="index.html">Home</a> <a class="on" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
+<div class="flow-wrap">
+  <div class="flow-card">
+    <div class="flow-top">
+      <span class="eyebrow">Step 2 of 2 · Pick a curator</span>
+      <a href="index.html#try" style="font-size:15px">← your sound</a>
+    </div>
+    <div class="captured">YOUR SOUND · CAPTURED · <a href="index.html#try" style="font-size:11px">edit</a></div>
+    <h3 style="font-size:26px">Now, a curator to score.</h3>
+    <p class="small" style="margin:8px 0 24px">Paste one you have in mind, or search. Still no sign-up.</p>
+
+    <div class="field">
+      <label>Paste a playlist · or search</label>
+      <input class="input" value="emo">
+    </div>
+    <button class="btn btn-quiet btn-sm">Search playlists</button>
+
+    <div style="margin-top:16px">
+      <div class="result-row">
+        <div>
+          <div class="name">Emo Songs Everyone Knows</div>
+          <div class="meta">nisha · 8,900 followers · 193 tracks · updated 3d ago</div>
         </div>
-        <div class="flow-wrap">
-            <div class="flow-card">
-                <div class="flow-top">
-                    <span class="eyebrow">Step 2 of 2 · Pick a curator</span>
-                    <a href="index.html#try" style="font-size:15px">← your sound</a>
-                </div>
-                <div class="captured">YOUR SOUND · CAPTURED · <a href="index.html#try" style="font-size:11px">edit</a>
-                </div>
-                <h3 style="font-size:26px">Now, a curator to score.</h3>
-                <p class="small" style="margin:8px 0 24px">Paste one you have in mind, or search. Still no sign-up.</p>
-                <div class="field">
-                    <label>Paste a playlist · or search</label>
-                    <input class="input" value="emo">
-                </div>
-                <button class="btn btn-quiet btn-sm">Search playlists</button>
-                <div style="margin-top:16px">
-                    <div class="result-row">
-                        <div>
-                            <div class="name">Emo Songs Everyone Knows</div>
-                            <div class="meta">nisha · 8,900 followers · 193 tracks · updated 3d ago</div>
-                        </div>
-                        <div class="chips">
-                            <span class="chip">emo</span>
-                            <span class="chip">pop punk</span>
-                        </div>
-                    </div>
-                    <div class="result-row sel">
-                        <div>
-                            <div class="name">actual emo music <span style="color:var(--purple)">✓</span>
-                            </div>
-                            <div class="meta">Aimz!! · 4,700 followers · 257 tracks · updated 1w ago</div>
-                        </div>
-                        <div class="chips">
-                            <span class="chip">emo</span>
-                            <span class="chip">screamo</span>
-                            <span class="chip">post-hardcore</span>
-                        </div>
-                    </div>
-                </div>
-                <p style="margin:22px 0 6px;border-top:1px solid var(--line);padding-top:18px"><a href="#">No curator yet? Try a sample →</a></p>
-                <div style="margin-top:18px">
-                    <a class="btn btn-yellow" style="width:100%" href="flow-result.html">Score the fit →</a>
-                </div>
-                <p class="tiny-mono" style="margin-top:14px">This scores fit only. Verification runs when you save it to a workspace. Soniq never contacts anyone.</p>
-                <p class="small" style="margin-top:10px">By continuing you agree to the <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a></p>
-            </div>
+        <div class="chips"><span class="chip">emo</span><span class="chip">pop punk</span></div>
+      </div>
+      <div class="result-row sel">
+        <div>
+          <div class="name">actual emo music <span style="color:var(--voice)">✓</span></div>
+          <div class="meta">Aimz!! · 4,700 followers · 257 tracks · updated 1w ago</div>
         </div>
-        <div class="notes">
-            <details>
-                <summary>Design notes · Step 2</summary>
-                <ul>
-                    <li>
-                        <b>Search results now carry decision-making metadata:</b> curator name, follower count, track count, last-updated, and genre chips. "Updated 3d ago" matters enormously; a stale playlist is a dead pitch, and showing recency here builds trust in the scoring before the user ever sees a score.
-                    </li>
-                    <li>Selected state gets a purple border + check so the relationship between picking a row and the Score button is unambiguous. Button is full-strength yellow once a selection exists.</li>
-                    <li>"Fit only — verification comes later" was cryptic; users don't know what's being verified or by whom. Rewrote to say what actually happens and to repeat the no-contact promise at the moment of highest suspicion.</li>
-                    <li>Added an edit link on "YOUR SOUND · CAPTURED" so users can fix a typo'd link without hunting for the back arrow.</li>
-                    <li>Header dropped the em-dash construction for a cleaner "Now, a curator to score."</li>
-                </ul>
-            </details>
-        </div>
-    </body>
-</html>
+        <div class="chips"><span class="chip">emo</span><span class="chip">screamo</span><span class="chip">post-hardcore</span></div>
+      </div>
+    </div>
+
+    <p style="margin:22px 0 6px;border-top:1px solid var(--line);padding-top:18px"><a href="#">No curator yet? Try a sample →</a></p>
+
+    <div style="margin-top:18px"><a class="btn btn-yellow" style="width:100%" href="flow-result.html">Score the fit →</a></div>
+    <p class="tiny-mono" style="margin-top:14px">This scores fit only. Verification runs when you save it to a workspace. Soniq never contacts anyone.</p>
+    <p class="small" style="margin-top:10px">By continuing you agree to the <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a></p>
+  </div>
+</div>
+
+<div class="notes">
+  <details>
+    <summary>Design notes · Step 2</summary>
+    <p class="nh">Design-system alignment</p>
+    <ul>
+      <li>Tokens swapped to the DS values (Void Black canvas, Electric Purple, Laser Yellow); the flow card is a 16px large surface, result rows are 12px cards, genre chips are 4px Tags. Body is Figtree; the step label and captured line moved off JetBrains Mono, which is reserved for scores and timestamps. Purple focus rings on the input.</li>
+      <li>Entry surface, so the spotlights atmosphere stays (Rule 8). "Score the fit" is this screen's single Laser Yellow action; "Search playlists" is quiet, links are purple.</li>
+    </ul>
+    <p class="nh">Review feedback applied</p>
+    <ul>
+      <li>C1: result rows carry observable signals only (followers, track count, update recency, genre tags); no verified or unverified state exists anywhere in the flow. The pre-score note keeps the no-contact promise and drops the "verification comes later" language, since verification isn't a launch capability.</li>
+      <li>Adopted from the alpha punch list per the review: richer result metadata and the enabled-on-selection button pattern were already on the internal list; no changes requested.</li>
+    </ul>
+  </details>
+</div>
+
+</body></html>
