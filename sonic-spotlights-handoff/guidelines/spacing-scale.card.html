@@ -1,0 +1,29 @@
+<!-- @dsCard group="Spacing" viewport="700x340" name="Spacing scale — 8-pt grid" subtitle="3xs–xs bind inside a component; lg–4xl separate sections." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { padding: 24px; }
+  .row { display: grid; grid-template-columns: 76px 56px 1fr; align-items: center; gap: 14px; padding: 5px 0; }
+  .tok { font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); }
+  .val { font-family: var(--font-mono); font-size: 12px; color: var(--text-meta); text-align: right; }
+  .bar { height: 14px; background: var(--purple-500); border-radius: 3px; }
+  .use { font-family: var(--font-body); font-size: 12px; color: var(--text-secondary); }
+  .cell { display: flex; align-items: center; gap: 12px; }
+</style>
+</head>
+<body>
+  <div class="row"><span class="tok">--sp-3xs</span><span class="val">2</span><div class="cell"><div class="bar" style="width:2px"></div><span class="use">Borders · focus indicators</span></div></div>
+  <div class="row"><span class="tok">--sp-2xs</span><span class="val">4</span><div class="cell"><div class="bar" style="width:4px"></div><span class="use">Icon padding · tight gaps</span></div></div>
+  <div class="row"><span class="tok">--sp-xs</span><span class="val">8</span><div class="cell"><div class="bar" style="width:8px"></div><span class="use">Field gaps · list item padding</span></div></div>
+  <div class="row"><span class="tok">--sp-sm</span><span class="val">12</span><div class="cell"><div class="bar" style="width:12px"></div><span class="use">Button padding · icon-text gaps</span></div></div>
+  <div class="row"><span class="tok">--sp-md</span><span class="val">16</span><div class="cell"><div class="bar" style="width:16px"></div><span class="use">Component padding · text spacing</span></div></div>
+  <div class="row"><span class="tok">--sp-lg</span><span class="val">24</span><div class="cell"><div class="bar" style="width:24px"></div><span class="use">Card padding · section gaps</span></div></div>
+  <div class="row"><span class="tok">--sp-xl</span><span class="val">32</span><div class="cell"><div class="bar" style="width:32px"></div><span class="use">Layout padding · modal spacing</span></div></div>
+  <div class="row"><span class="tok">--sp-2xl</span><span class="val">40</span><div class="cell"><div class="bar" style="width:40px"></div><span class="use">Section separation · headers</span></div></div>
+  <div class="row"><span class="tok">--sp-3xl</span><span class="val">48</span><div class="cell"><div class="bar" style="width:48px"></div><span class="use">Major sections · page headers</span></div></div>
+  <div class="row"><span class="tok">--sp-4xl</span><span class="val">64</span><div class="cell"><div class="bar" style="width:64px"></div><span class="use">Hero sections · page margins</span></div></div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!-- @dsCard group="App" viewport="1280x720" name="Soniq app — workspace" subtitle="Interactive: Welcome → discovery → reviewer → glance, plus the plan moment, failure states & Context." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Soniq — App UI Kit</title>
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  html, body { height: 100%; margin: 0; }
+  #app { height: 100vh; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 999px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+</style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="../../_ds_bundle.js"></script>
+  <script src="data.js"></script>
+
+  <script type="text/babel" src="AppShell.jsx" data-presets="react"></script>
+  <script type="text/babel" src="Welcome.jsx" data-presets="react"></script>
+  <script type="text/babel" src="Discovery.jsx" data-presets="react"></script>
+  <script type="text/babel" src="AnalysisFailed.jsx" data-presets="react"></script>
+  <script type="text/babel" src="ReasoningDrawer.jsx" data-presets="react"></script>
+  <script type="text/babel" src="ConfirmBeforePitch.jsx" data-presets="react"></script>
+  <script type="text/babel" src="Reviewer.jsx" data-presets="react"></script>
+  <script type="text/babel" src="Plan.jsx" data-presets="react"></script>
+  <script type="text/babel" src="Glance.jsx" data-presets="react"></script>
+  <script type="text/babel" src="Bounced.jsx" data-presets="react"></script>
+  <script type="text/babel" src="Receipt.jsx" data-presets="react"></script>
+  <script type="text/babel" src="Cadence.jsx" data-presets="react"></script>
+  <script type="text/babel" src="Context.jsx" data-presets="react"></script>
+  <script type="text/babel" src="Media.jsx" data-presets="react"></script>
+  <script type="text/babel" src="Privacy.jsx" data-presets="react"></script>
+  <script type="text/babel" src="TermsGate.jsx" data-presets="react"></script>
+
+  <script type="text/babel" data-presets="react">
+    const muted = { color: "var(--muted)" };
+
+    function App() {
+      const [view, setView] = React.useState("welcome");
+
+      // sidebar sections map to a default view; in-screen links pass explicit view names.
+      const sectionDefault = { Workspace: "discovery", Campaigns: "glance", Media: "media" };
+      const go = (target) => {
+        setView(sectionDefault[target] || target);
+        const scroller = document.querySelector("#app main > div > div");
+        if (scroller) scroller.scrollTop = 0;
+      };
+
+      const screens = {
+        welcome:        { section: "Workspace", panelOpen: true, panelTab: "activity",
+                          crumb: <>Workspace › <b style={muted}>Dark Moon</b></>, el: <window.Welcome onNavigate={go} /> },
+        discovery:      { section: "Workspace",
+                          crumb: <>Workspace › Dark Moon › <b style={muted}>Find curators</b></>, el: <window.Discovery onNavigate={go} /> },
+        analysisFailed: { section: "Workspace",
+                          crumb: <>Workspace › Dark Moon › <b style={muted}>Find curators</b></>, el: <window.AnalysisFailed onNavigate={go} /> },
+        reasoning:      { section: "Workspace",
+                          crumb: <>Workspace › Dark Moon › Find curators › <b style={muted}>Why this scored</b></>, el: <window.ReasoningDrawer onNavigate={go} /> },
+        confirm:        { section: "Campaigns",
+                          crumb: <>Campaigns › Dark Moon › Pitches › <b style={muted}>Confirm</b></>, el: <window.ConfirmBeforePitch onNavigate={go} /> },
+        reviewer:       { section: "Campaigns",
+                          crumb: <>Campaigns › Dark Moon › Pitches › <b style={muted}>Slow-Core Quarterly</b></>, el: <window.Reviewer onNavigate={go} /> },
+        plan:           { section: null,
+                          crumb: <>Workspace › Dark Moon › <b style={muted}>Plan</b></>, el: <window.Plan onNavigate={go} /> },
+        glance:         { section: "Campaigns",
+                          crumb: <>Campaigns › <b style={muted}>Dark Moon</b></>, el: <window.Glance onNavigate={go} /> },
+        media:          { section: "Media",
+                          crumb: <><b style={muted}>Media</b></>, el: <window.Media /> },
+        bounced:        { section: "Campaigns", paused: true,
+                          crumb: <>Campaigns › <b style={muted}>Dark Moon</b></>, el: <window.Bounced onNavigate={go} /> },
+        receipt:        { section: "Campaigns",
+                          crumb: <>Campaigns › Dark Moon › Replies › <b style={muted}>Tape Warm</b></>, el: <window.Receipt onNavigate={go} /> },
+        cadence:        { section: "Campaigns",
+                          crumb: <>Campaigns › Dark Moon › <b style={muted}>Recap</b></>, el: <window.Cadence onNavigate={go} /> },
+        context:        { section: null, activeKey: "__context",
+                          crumb: <><b style={muted}>Maya Reyes</b> › What Soniq knows</>, el: <window.Context /> },
+        privacy:        { section: null, activeKey: "__privacy",
+                          crumb: <>Settings › <b style={muted}>Privacy</b></>, el: <window.Privacy onNavigate={go} /> },
+        terms:          { section: null,
+                          crumb: <>Account › <b style={muted}>Terms update</b></>, el: <window.TermsGate onNavigate={go} /> },
+      };
+      const s = screens[view] || screens.welcome;
+
+      return (
+        <window.AppShell
+          active={s.activeKey || s.section}
+          onNavigate={go}
+          crumb={s.crumb}
+          panelOpen={s.panelOpen}
+          panelTab={s.panelTab}
+          paused={s.paused}
+        >
+          {s.el}
+        </window.AppShell>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+  </script>
+</body>
+</html>

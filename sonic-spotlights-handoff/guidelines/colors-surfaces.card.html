@@ -1,0 +1,38 @@
+<!-- @dsCard group="Colors" viewport="700x180" name="Surfaces — void to raised" subtitle="Depth comes from surface lightening, not heavy shadows." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { padding: 24px; }
+  .row { display: flex; gap: 12px; }
+  .sw { flex: 1; border-radius: var(--radius-md); border: 1px solid var(--border); overflow: hidden; }
+  .chip { height: 64px; border-bottom: 1px solid var(--border); }
+  .meta { padding: 9px 12px 12px; }
+  .name { font-family: var(--font-heading); font-weight: 700; font-size: 13px; color: var(--text-primary); }
+  .hex { font-family: var(--font-mono); font-size: 11px; color: var(--text-meta); margin-top: 3px; }
+  .use { font-family: var(--font-body); font-size: 11px; color: var(--text-secondary); margin-top: 6px; line-height: 1.35; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw">
+      <div class="chip" style="background: var(--surface-sunken);"></div>
+      <div class="meta"><div class="name">Sunken</div><div class="hex">#0d0d11</div><div class="use">Wells · inset fields.</div></div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background: var(--void-black);"></div>
+      <div class="meta"><div class="name">Void Black</div><div class="hex">#050505</div><div class="use">App canvas.</div></div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background: var(--surface);"></div>
+      <div class="meta"><div class="name">Surface</div><div class="hex">#16161c</div><div class="use">Cards on void.</div></div>
+    </div>
+    <div class="sw">
+      <div class="chip" style="background: var(--surface-raised);"></div>
+      <div class="meta"><div class="name">Raised</div><div class="hex">#1c1c24</div><div class="use">Popovers · raised.</div></div>
+    </div>
+  </div>
+</body>
+</html>

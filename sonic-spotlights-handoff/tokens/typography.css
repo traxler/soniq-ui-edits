@@ -1,0 +1,58 @@
+/* ============================================================
+   Sonic Spotlights — Typography tokens
+   Plus Jakarta Sans (headings) · Figtree (body) · JetBrains Mono (precision)
+   ============================================================ */
+
+:root {
+  /* ---- Families ---- */
+  --font-heading: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:    "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Official aliases (mirror of handoff tokens.css / tokens.json — the names the
+     engineer's code references: --font-display = headings, --font-sans = body) */
+  --font-display: var(--font-heading);
+  --font-sans:    var(--font-body);
+
+  /* ---- Weights ---- */
+  --fw-regular:  400; /* @kind font */
+  --fw-medium:   500; /* @kind font */
+  --fw-semibold: 600; /* @kind font */
+  --fw-bold:     700; /* @kind font */
+  --fw-extra:    800; /* @kind font */
+
+  /* ---- Type scale (px) ---- */
+  --fs-display: 64px;  /* Hero        · Plus Jakarta · 800 */
+  --fs-h1:      48px;  /* Page title  · Plus Jakarta · 700 */
+  --fs-h2:      32px;  /* Section     · Plus Jakarta · 700 */
+  --fs-h3:      24px;  /* Component   · Plus Jakarta · 600 */
+  --fs-lg:      18px;  /* Body large  · Figtree · 400 */
+  --fs-body:    16px;  /* Body default· Figtree · 400 */
+  --fs-sm:      14px;  /* Body small  · Figtree · 400 */
+  --fs-mono:    13px;  /* Precision   · JetBrains Mono · 12–13 */
+  --fs-mono-sm: 12px;
+
+  /* ---- Line heights ---- */
+  --lh-tight:   1.05;  /* @kind font */
+  --lh-heading: 1.15;  /* @kind font */
+  --lh-snug:    1.4;   /* @kind font */
+  --lh-body:    1.6;   /* @kind font */
+
+  /* ---- Letter spacing ---- */
+  --ls-display: -0.02em; /* @kind font */
+  --ls-heading: -0.01em; /* @kind font */
+  --ls-body:     0;       /* @kind font */
+  --ls-mono:     0.01em;  /* @kind font */
+  --ls-caps:     0.06em;  /* @kind font */
+}
+
+/* ---- Optional utility classes (semantic, reusable) ---- */
+.ss-display { font-family: var(--font-heading); font-weight: var(--fw-extra);    font-size: var(--fs-display); line-height: var(--lh-tight);   letter-spacing: var(--ls-display); color: var(--text-primary); }
+.ss-h1      { font-family: var(--font-heading); font-weight: var(--fw-bold);     font-size: var(--fs-h1);      line-height: var(--lh-heading); letter-spacing: var(--ls-heading); color: var(--text-primary); }
+.ss-h2      { font-family: var(--font-heading); font-weight: var(--fw-bold);     font-size: var(--fs-h2);      line-height: var(--lh-heading); letter-spacing: var(--ls-heading); color: var(--text-primary); }
+.ss-h3      { font-family: var(--font-heading); font-weight: var(--fw-semibold); font-size: var(--fs-h3);      line-height: var(--lh-heading); color: var(--text-primary); }
+.ss-body-lg { font-family: var(--font-body);    font-weight: var(--fw-regular);  font-size: var(--fs-lg);      line-height: var(--lh-body); color: var(--text-primary); }
+.ss-body    { font-family: var(--font-body);    font-weight: var(--fw-regular);  font-size: var(--fs-body);    line-height: var(--lh-body); color: var(--text-primary); }
+.ss-body-sm { font-family: var(--font-body);    font-weight: var(--fw-regular);  font-size: var(--fs-sm);      line-height: var(--lh-snug); color: var(--text-secondary); }
+.ss-mono    { font-family: var(--font-mono);    font-weight: var(--fw-medium);   font-size: var(--fs-mono);    line-height: var(--lh-snug); letter-spacing: var(--ls-mono); color: var(--text-secondary); }
+.ss-label   { font-family: var(--font-heading); font-weight: var(--fw-semibold); font-size: var(--fs-mono-sm); line-height: 1; letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--text-meta); }

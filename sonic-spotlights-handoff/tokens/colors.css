@@ -1,0 +1,136 @@
+/* ============================================================
+   Sonic Spotlights — Color tokens
+   Dark-first. Void Black is the canvas. Electric Purple is the
+   brand voice (frequent). Laser Yellow is the one decision (rare).
+   ============================================================ */
+
+:root {
+  /* ---- Brand gradient (logo / hero accents) ----
+     Purple → blue → teal → green → gold. The full-spectrum mark. */
+  --grad-1: #7c4dff;   /* violet   */
+  --grad-2: #4f8bf0;   /* blue     */
+  --grad-3: #22b8d6;   /* cyan     */
+  --grad-4: #36c98e;   /* green    */
+  --grad-5: #e8b53f;   /* gold     */
+  --brand-gradient: linear-gradient(120deg,
+      var(--grad-1) 0%, var(--grad-2) 28%, var(--grad-3) 52%,
+      var(--grad-4) 76%, var(--grad-5) 100%);
+
+  /* ---- Core palette (base values) ---- */
+  --void-black:   #050505;  /* app background — the calm workspace */
+  --surface:      #16161c;  /* cards on void (--surface-1) */
+  --surface-raised:#1c1c24; /* raised elements / popovers (--surface-2) */
+  --surface-sunken:#0d0d11; /* wells, inset fields */
+  --field-bg:     #101019;  /* form input background (UI System) */
+
+  /* Official short aliases (mirror of tokens.css / wireframe vocabulary) */
+  --void:        var(--void-black);
+  --surface-1:   var(--surface);
+  --surface-2:   var(--surface-raised);
+
+  --purple-300:   #c4b5fd;
+  --purple-400:   #a78bfa;  /* purple on dark / secondary text */
+  --purple-500:   #8b5cf6;  /* Electric Purple — brand voice */
+  --purple-600:   #7c3aed;  /* hover */
+  --pbright:      var(--purple-400);
+  --purple-glow:  rgba(139, 92, 246, 0.25); /* soft wash */
+
+  --yellow-400:   #facc15;  /* Laser Yellow — the one primary action */
+  --yellow-500:   #eab308;
+  --yellow-ink:   #1c1605;  /* dark ink for AA on yellow fill */
+
+  --emerald-400:  #34d399;
+  --emerald-500:  #10b981;  /* confirmed · positive · live · STATUS ONLY, never a button */
+  --red-500:      #ef4444;  /* error states */
+  --red-600:      #dc2626;  /* destructive button fill */
+  --amber-500:    #f5a623;  /* "I inferred this" flag — never a button */
+
+  /* Official bare aliases (mirror of handoff tokens.css / tokens.json — the
+     names the engineer's code references directly; keep values identical) */
+  --yellow:       var(--yellow-400);   /* #facc15 */
+  --emerald:      var(--emerald-400);  /* #34d399 */
+  --emerald-600:  var(--emerald-500);  /* #10b981 — note: handoff numbers this 600 */
+  --red:          var(--red-500);      /* #ef4444 */
+  --amber:        var(--amber-500);    /* #f5a623 */
+
+  /* ---- Text (ink) ramp ---- */
+  --ink:          #f4f4f5;  /* primary text */
+  --ink-muted:    #a2a2ac;  /* secondary text */
+  --ink-faint:    #6b6b76;  /* metadata */
+  --ink-disabled: #4a4a54;
+
+  /* Official short aliases (mirror of tokens.css vocabulary) */
+  --muted:        var(--ink-muted);
+  --faint:        var(--ink-faint);
+
+  /* ---- Hairlines / borders ---- */
+  --border:        rgba(244, 244, 245, 0.10); /* default 1px line */
+  --border-strong: rgba(244, 244, 245, 0.18);
+  --border-faint:  rgba(244, 244, 245, 0.06);
+  --line:          #2a2a2a;  /* solid hairline (wireframe vocabulary) */
+  --line-soft:     #222;     /* softer solid hairline */
+
+  /* ============================================================
+     Semantic aliases — reference these in product UI
+     ============================================================ */
+  --bg-app:        var(--void-black);
+  --bg-surface:    var(--surface);
+  --bg-raised:     var(--surface-raised);
+  --bg-sunken:     var(--surface-sunken);
+
+  --text-primary:  var(--ink);
+  --text-secondary:var(--ink-muted);
+  --text-meta:     var(--ink-faint);
+  --text-disabled: var(--ink-disabled);
+  --text-on-yellow:var(--yellow-ink);
+  --text-on-purple:#ffffff;
+
+  /* brand voice — links, reasoning, secondary actions */
+  --voice:         var(--purple-500);
+  --voice-hover:   var(--purple-400);
+  --voice-quiet:   rgba(139, 92, 246, 0.12);
+
+  /* the one decision */
+  --action:        var(--yellow-400);
+  --action-hover:  #ffd83a;
+  --action-ink:    var(--yellow-ink);
+  --action-glow:   0 2px 12px rgba(250, 204, 21, 0.22); /* subtle primary glow */
+
+  /* status */
+  --positive:      var(--emerald-500);
+  --positive-soft: rgba(16, 185, 129, 0.14);
+  --danger:        var(--red-500);
+  --danger-soft:   rgba(239, 68, 68, 0.14);
+  --inferred:      var(--amber-500);   /* attention flag, never a fill button */
+  --inferred-soft: rgba(245, 166, 35, 0.14);
+
+  /* Focus ring. NOTE: the authoritative handoff tokens.css defines --focus-ring
+     as the FULL box-shadow so engineer code can write `box-shadow: var(--focus-ring)`.
+     We match that exactly; the bare color lives in --focus-ring-color. */
+  --focus-ring-color: rgba(139, 92, 246, 0.55); /* purple ring color */
+  --focus-ring:       0 0 0 3px var(--focus-ring-color); /* full 3px ring (UI System) */
+}
+
+/* ============================================================
+   Light theme — secondary surface, for acquisition / marketing.
+   Opt in with [data-theme="light"] on a container or <html>.
+   ============================================================ */
+[data-theme="light"] {
+  --bg-app:        #ffffff;
+  --bg-surface:    #f7f7f9;
+  --bg-raised:     #ffffff;
+  --bg-sunken:     #eeeef2;
+
+  --text-primary:  #16161c;
+  --text-secondary:#54545f;
+  --text-meta:     #84848f;
+  --text-disabled: #b4b4bd;
+
+  --voice:         #7c4def;
+  --voice-hover:   #6a3be0;
+  --voice-quiet:   rgba(124, 77, 239, 0.10);
+
+  --border:        rgba(5, 5, 5, 0.10);
+  --border-strong: rgba(5, 5, 5, 0.16);
+  --border-faint:  rgba(5, 5, 5, 0.05);
+}

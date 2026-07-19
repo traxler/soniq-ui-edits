@@ -1,0 +1,26 @@
+<!-- @dsCard group="Brand" viewport="700x170" name="Brand gradient" subtitle="Violet → blue → cyan → green → gold. The logo & rare hero accent." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { padding: 24px; }
+  .band { height: 70px; border-radius: var(--radius-md); background: var(--brand-gradient); }
+  .stops { display: flex; gap: 8px; margin-top: 14px; }
+  .stop { flex: 1; }
+  .dot { height: 18px; border-radius: var(--radius-sm); }
+  .hex { font-family: var(--font-mono); font-size: 11px; color: var(--text-meta); margin-top: 7px; text-align: center; }
+</style>
+</head>
+<body>
+  <div class="band"></div>
+  <div class="stops">
+    <div class="stop"><div class="dot" style="background: var(--grad-1);"></div><div class="hex">#7c4dff</div></div>
+    <div class="stop"><div class="dot" style="background: var(--grad-2);"></div><div class="hex">#4f8bf0</div></div>
+    <div class="stop"><div class="dot" style="background: var(--grad-3);"></div><div class="hex">#22b8d6</div></div>
+    <div class="stop"><div class="dot" style="background: var(--grad-4);"></div><div class="hex">#36c98e</div></div>
+    <div class="stop"><div class="dot" style="background: var(--grad-5);"></div><div class="hex">#e8b53f</div></div>
+  </div>
+</body>
+</html>

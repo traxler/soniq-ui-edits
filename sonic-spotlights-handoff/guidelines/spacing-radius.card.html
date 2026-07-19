@@ -1,0 +1,32 @@
+<!-- @dsCard group="Spacing" viewport="700x200" name="Radius & elevation" subtitle="8px default · 12 cards · 16 modals · full pills. Soft shadows." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { padding: 24px; display: flex; flex-direction: column; gap: 22px; }
+  .row { display: flex; gap: 16px; align-items: flex-end; }
+  .item { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  .box { width: 72px; height: 56px; background: var(--surface-raised); border: 1px solid var(--border); }
+  .lbl { font-family: var(--font-mono); font-size: 11px; color: var(--text-meta); }
+  .shadow { width: 110px; height: 56px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="item"><div class="box" style="border-radius: var(--radius-xs)"></div><span class="lbl">xs · 4</span></div>
+    <div class="item"><div class="box" style="border-radius: var(--radius-sm)"></div><span class="lbl">sm · 8</span></div>
+    <div class="item"><div class="box" style="border-radius: var(--radius-md)"></div><span class="lbl">md · 12</span></div>
+    <div class="item"><div class="box" style="border-radius: var(--radius-lg)"></div><span class="lbl">lg · 16</span></div>
+    <div class="item"><div class="box" style="border-radius: var(--radius-xl)"></div><span class="lbl">xl · 24</span></div>
+    <div class="item"><div class="box" style="border-radius: var(--radius-pill); width:56px"></div><span class="lbl">pill</span></div>
+  </div>
+  <div class="row">
+    <div class="item"><div class="shadow" style="box-shadow: var(--shadow-sm)"></div><span class="lbl">shadow-sm</span></div>
+    <div class="item"><div class="shadow" style="box-shadow: var(--shadow-md)"></div><span class="lbl">shadow-md</span></div>
+    <div class="item"><div class="shadow" style="box-shadow: var(--shadow-lg)"></div><span class="lbl">shadow-lg</span></div>
+    <div class="item"><div class="shadow" style="box-shadow: var(--ring-focus)"></div><span class="lbl">focus ring</span></div>
+  </div>
+</body>
+</html>

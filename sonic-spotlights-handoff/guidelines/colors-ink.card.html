@@ -1,0 +1,24 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Ink ramp — text on void" subtitle="Primary, secondary, metadata, disabled." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { padding: 24px; }
+  .row { display: flex; gap: 14px; }
+  .sw { flex: 1; background: var(--surface); border-radius: var(--radius-md); border: 1px solid var(--border); padding: 16px; }
+  .big { font-family: var(--font-heading); font-weight: 700; font-size: 22px; }
+  .name { font-family: var(--font-mono); font-size: 11px; color: var(--text-meta); margin-top: 10px; }
+  .hex { font-family: var(--font-mono); font-size: 11px; color: var(--text-meta); margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw"><div class="big" style="color: var(--ink);">Aa</div><div class="name">Primary</div><div class="hex">#f4f4f5</div></div>
+    <div class="sw"><div class="big" style="color: var(--ink-muted);">Aa</div><div class="name">Muted</div><div class="hex">#a2a2ac</div></div>
+    <div class="sw"><div class="big" style="color: var(--ink-faint);">Aa</div><div class="name">Faint / meta</div><div class="hex">#6b6b76</div></div>
+    <div class="sw"><div class="big" style="color: var(--ink-disabled);">Aa</div><div class="name">Disabled</div><div class="hex">#4a4a54</div></div>
+  </div>
+</body>
+</html>

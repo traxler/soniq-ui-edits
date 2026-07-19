@@ -1,0 +1,19 @@
+/* ============================================================
+   Sonic Spotlights — Spacing tokens
+   8-point grid. Small steps bind related elements inside a
+   component; larger steps separate sections. On mobile, drop
+   one step (lg → md) to reclaim space.
+   ============================================================ */
+
+:root {
+  --sp-3xs: 2px;   /* borders · focus indicators */
+  --sp-2xs: 4px;   /* icon padding · tight gaps */
+  --sp-xs:  8px;   /* field gaps · list item padding */
+  --sp-sm:  12px;  /* button padding · icon-text gaps */
+  --sp-md:  16px;  /* component padding · text spacing */
+  --sp-lg:  24px;  /* card padding · section gaps */
+  --sp-xl:  32px;  /* layout padding · modal spacing */
+  --sp-2xl: 40px;  /* section separation · headers */
+  --sp-3xl: 48px;  /* major sections · page headers */
+  --sp-4xl: 64px;  /* hero sections · page margins */
+}

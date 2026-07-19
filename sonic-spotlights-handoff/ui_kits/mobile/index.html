@@ -1,0 +1,69 @@
+<!-- @dsCard group="Mobile" viewport="900x720" name="Soniq mobile — the first 90 seconds" subtitle="Interactive entry flow: Land → Try → Sign-in → Hand-off → mobile Workspace." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Soniq — Mobile UI Kit</title>
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  html, body { height: 100%; margin: 0; }
+  body { background: #2b2b30; }
+  #app { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; padding: 32px 0; }
+</style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="../../_ds_bundle.js"></script>
+
+  <script type="text/babel" src="PhoneFrame.jsx" data-presets="react"></script>
+  <script type="text/babel" src="Land.jsx" data-presets="react"></script>
+  <script type="text/babel" src="Try.jsx" data-presets="react"></script>
+  <script type="text/babel" src="SignIn.jsx" data-presets="react"></script>
+  <script type="text/babel" src="HandOff.jsx" data-presets="react"></script>
+  <script type="text/babel" src="MobileWorkspace.jsx" data-presets="react"></script>
+  <script type="text/babel" src="MobileContext.jsx" data-presets="react"></script>
+
+  <script type="text/babel" data-presets="react">
+    const ORDER = ["land", "try", "signin", "handoff", "workspace", "context"];
+    const LABEL = { land: "Land", try: "Try", signin: "Sign-in", handoff: "Hand-off", workspace: "Workspace", context: "Context" };
+
+    function App() {
+      const [view, setView] = React.useState("land");
+      const go = (t) => setView(t);
+      const screens = {
+        land: <window.Land onNavigate={go} />,
+        try: <window.Try onNavigate={go} />,
+        signin: <window.SignIn onNavigate={go} />,
+        handoff: <window.HandOff onNavigate={go} />,
+        workspace: <window.MobileWorkspace onNavigate={go} />,
+        context: <window.MobileContext onNavigate={go} />,
+      };
+      return (
+        <>
+          {screens[view]}
+          <div style={{ display: "flex", alignItems: "center", gap: 8, fontFamily: "var(--font-mono)", fontSize: 11 }}>
+            {ORDER.map((id) => {
+              const on = id === view;
+              return (
+                <span key={id} onClick={() => go(id)} style={{
+                  cursor: "pointer", padding: "5px 11px", borderRadius: 999,
+                  color: on ? "#0c0c0c" : "var(--muted)",
+                  background: on ? "var(--purple-400)" : "rgba(255,255,255,.06)",
+                  border: "1px solid " + (on ? "transparent" : "var(--line)"),
+                  letterSpacing: "0.04em",
+                }}>{LABEL[id]}</span>
+              );
+            })}
+          </div>
+        </>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+  </script>
+</body>
+</html>
