@@ -214,9 +214,24 @@ footer nav{display:flex;gap:22px}
   .board{grid-template-columns:1fr}
   section{padding:56px 0}
 }
+
+/* Round 2 — desktop-only soft return (H2) */
+@media(max-width:640px){.bd{display:none}}
+/* Round 2 — amber pending-decision flag (placeholder discipline) */
+.flag-amber{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--inferred);border:1px dashed rgba(245,166,35,.5);border-radius:var(--r-tag);padding:2px 7px;vertical-align:2px}
+/* Round 2 — selected row = selected-card state, not a check (R4) */
+.result-row.sel{background:rgba(139,92,246,.06)}
+/* Round 2 — Line-to-Soniq collapsed rail (Cardinal Rule 4, per Hansen reference) */
+.soniq-rail{position:fixed;top:0;right:0;bottom:0;width:46px;border-left:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:16px;background:var(--bg-app);z-index:30}
+.rail-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald)}
+.rail-btn{width:30px;height:30px;border-radius:var(--r-def);border:1px solid var(--voice);background:transparent;color:var(--voice);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.rail-btn:hover{background:var(--voice-quiet)}
+.rail-label{writing-mode:vertical-rl;font-family:var(--font-display);font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-meta)}
+body.railed .shell{margin-right:46px}
+@media(max-width:920px){.soniq-rail{display:none}body.railed .shell{margin-right:0}}
 </style>
-</head><body class="">
-<div class="mockbar"><b>SONIQ V2 · DS-ALIGNED</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="on" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
+</head><body class="railed">
+<div class="mockbar"><b>SONIQ V2 · R2</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="on" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
 <div class="shell">
   <aside class="side">
     <div class="brand"><img src="logo-horizontal-dark.png" alt="Sonic Spotlights" style="height:20px"></div>
@@ -243,7 +258,7 @@ footer nav{display:flex;gap:22px}
         <button class="btn btn-outline">Analyze fit</button>
       </div>
       <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center">
-        <span class="pill purple">Search playlists</span>
+        <span class="pill purple">Search playlists</span> <span class="flag-amber">search scope pending Q1</span>
         <span class="pill">Paste a link</span>
         <a class="small" style="margin-left:auto" href="#">+ Add a press / email contact</a>
       </div>
@@ -305,21 +320,32 @@ footer nav{display:flex;gap:22px}
   </div>
 </div>
 
+<div class="soniq-rail" title="Line to Soniq — collapsed (Activity + Ask)">
+  <span class="rail-dot"></span>
+  <button class="rail-btn" aria-label="Open Line to Soniq"><svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.3H6L3 22V11.5A8.4 8.4 0 0 1 11.5 3h1A8.4 8.4 0 0 1 21 11.5z"/></svg></button>
+  <span class="rail-label">Line to Soniq</span>
+</div>
 <div class="notes">
   <details>
     <summary>Design notes · Workspace (targets)</summary>
     <p class="nh">Design-system alignment</p>
     <ul>
-      <li>Workspace is calm: no spotlights atmosphere (Rule 8). Sidebar is exactly Workspace · Campaigns · Media (Rule 6), and Context now lives behind the artist avatar rather than as a sidebar link; the footer text is a mockup annotation of that behavior. Chrome glyphs replaced with Lucide-style inline SVG, the flagged icon substitution.</li>
+      <li>Workspace is calm: no spotlights atmosphere (Rule 6). Sidebar is exactly Workspace · Campaigns · Media (Rule 3), and Context now lives behind the artist avatar rather than as a sidebar link; the footer text is a mockup annotation of that behavior. Chrome glyphs replaced with Lucide-style inline SVG, the flagged icon substitution.</li>
       <li>One Laser Yellow: the batch bar's "Draft 2 pitches." Analyze-fit is secondary purple. Score rings are mono numerals with band-colored borders; genre and status labels are 4px Tags; body is Figtree with mono confined to scores.</li>
     </ul>
     <p class="nh">Review feedback applied</p>
     <ul>
-      <li>C1: all Verified/Unverified pills removed. Rows carry observable signals (recency, followers, genre distribution) and the filter chip changed from "Verified only" to "Updated this week." The layout keeps a clear slot next to the fit ring so a real verified state can appear there, separately, when the partner network ships (Rule 3).</li>
+      <li>C1: all Verified/Unverified pills removed. Rows carry observable signals (recency, followers, genre distribution) and the filter chip changed from "Verified only" to "Updated this week." The layout keeps a clear slot next to the fit ring so a real verified state can appear there, separately, when the partner network ships (fit ≠ verified principle).</li>
       <li>C3: "You added" survives as provenance (it's true), and nothing on the screen implies a Soniq-owned curator database.</li>
       <li>Adopted by the review as-is: release naming in the headline, the simplified search card (roadmap and negative-state chips removed), band-colored rings, batch selection bar, and skip-language in low-fit reasoning. The review noted four of these matched their alpha punch list independently.</li>
     </ul>
-  </details>
+      <p class="nh">Round 2</p>
+    <ul>
+      <li>R2 (= Hansen H16/H18): the Line-to-Soniq collapsed rail is now docked at the right edge, per the reference screenshots: status dot, Ask button, vertical label. The layout reserves its 46px so the batch bar no longer ignores that space. Hidden below 920px in the mockup pending the mobile pattern.</li>
+      <li>R3: rule citations corrected (atmosphere = Rule 6, sidebar/Context = Rule 3, fit ≠ verified = product principle).</li>
+      <li>Q1: search chip carries the pending flag, same as Step 2.</li>
+    </ul>
+</details>
 </div>
 
 </body></html>

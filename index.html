@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Soniq — Home (v2 · DS-aligned)</title>
+<title>Soniq — Home (v2 r2)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>/* ============================================================
@@ -214,9 +214,24 @@ footer nav{display:flex;gap:22px}
   .board{grid-template-columns:1fr}
   section{padding:56px 0}
 }
+
+/* Round 2 — desktop-only soft return (H2) */
+@media(max-width:640px){.bd{display:none}}
+/* Round 2 — amber pending-decision flag (placeholder discipline) */
+.flag-amber{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--inferred);border:1px dashed rgba(245,166,35,.5);border-radius:var(--r-tag);padding:2px 7px;vertical-align:2px}
+/* Round 2 — selected row = selected-card state, not a check (R4) */
+.result-row.sel{background:rgba(139,92,246,.06)}
+/* Round 2 — Line-to-Soniq collapsed rail (Cardinal Rule 4, per Hansen reference) */
+.soniq-rail{position:fixed;top:0;right:0;bottom:0;width:46px;border-left:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:16px;background:var(--bg-app);z-index:30}
+.rail-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald)}
+.rail-btn{width:30px;height:30px;border-radius:var(--r-def);border:1px solid var(--voice);background:transparent;color:var(--voice);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.rail-btn:hover{background:var(--voice-quiet)}
+.rail-label{writing-mode:vertical-rl;font-family:var(--font-display);font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-meta)}
+body.railed .shell{margin-right:46px}
+@media(max-width:920px){.soniq-rail{display:none}body.railed .shell{margin-right:0}}
 </style>
 </head><body class="glow">
-<div class="mockbar"><b>SONIQ V2 · DS-ALIGNED</b> <a class="on" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
+<div class="mockbar"><b>SONIQ V2 · R2</b> <a class="on" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
 <div class="wrap">
   <header class="topnav">
     <div class="brand"><img class="appicon" src="app-icon.png" alt="">Soniq</div>
@@ -231,8 +246,8 @@ footer nav{display:flex;gap:22px}
   <!-- HERO — carries the page's single Laser Yellow action -->
   <section style="padding-top:64px;text-align:center">
     <span class="eyebrow">For independent artists</span>
-    <h1 style="max-width:820px;margin:22px auto 0">Your next release, pitched to curators who actually listen.</h1>
-    <p class="sub" style="max-width:640px;margin:24px auto 0">Paste the playlists and press you want. Soniq scores each one for real fit, explains why, and drafts the pitch in your voice. You send it from your own inbox, so the relationship stays yours.</p>
+    <h1 style="max-width:820px;margin:22px auto 0">You Make the Music,<br>We Handle the Noise.</h1>
+    <p class="sub" style="max-width:660px;margin:24px auto 0">Meet Soniq, an AI marketing companion that learns your voice, reads your sound, and scores the curators and press you have in mind for fit. It drafts pitches you review and approve before anything goes anywhere.</p>
     <div style="margin-top:36px"><a class="btn btn-yellow" href="#try">Try with your release →</a></div>
     <p class="small" style="margin-top:18px"><span class="mono" style="color:var(--voice)">~60s</span> to your first fit score · one link + one line</p>
     <div class="checks" style="margin-top:30px">
@@ -248,7 +263,7 @@ footer nav{display:flex;gap:22px}
   <section id="proof">
     <div class="section-head">
       <span class="eyebrow">What you get</span>
-      <h2>The score shows its work. Even when it's a no.</h2>
+      <h2>The score shows its work.<br class="bd">Even when it's a no.</h2>
       <p class="sub">Every playlist gets a 0–100 fit score with the reasoning in plain language, then a pitch drafted in your voice. Here's a worked example, and it's a weak fit on purpose: telling you when to skip is the whole point.</p>
       <p style="margin-top:16px"><span class="sample-flag">Sample data · not a real playlist</span></p>
     </div>
@@ -371,43 +386,38 @@ footer nav{display:flex;gap:22px}
       <h2>Score everything free. Pay at your fourth draft.</h2>
       <p class="sub">Fit scoring is unlimited on every plan, forever. The paywall shows up after Soniq has drafted three real pitches for you.</p>
     </div>
+    <div class="placeholder" style="max-width:720px;margin:0 auto 28px">Tier contents below are placeholders pending the pricing owner (Q3). Decided so far: unlimited scoring on every plan, three free drafts, the gate at the fourth, working prices $19 / $39.</div>
     <div class="grid-3">
       <div class="card tier">
         <h3>Free</h3>
-        <p class="who">For your first release</p>
+        <p class="who">Your first campaign starts here</p>
         <div class="price">$0</div>
         <ul>
           <li>Unlimited fit scores</li>
           <li>3 pitch drafts in your voice</li>
-          <li>1 active release</li>
-          <li>Send from your own inbox</li>
+          <li>You send from your own inbox</li>
         </ul>
+        <a class="btn btn-quiet" href="#try">Start free</a>
+      </div>
+      <div class="card tier">
+        <h3>Solo <span class="flag-amber">working name · Q3</span></h3>
+        <p class="who">Tier scope pending</p>
+        <div class="price">$19<span>/mo</span></div>
+        <ul>
+          <li>Unlocks drafting the rest of your campaign</li>
+        </ul>
+        <div class="placeholder">[Feature splits pending Q3 — nothing else asserted]</div>
         <a class="btn btn-quiet" href="#try">Start free</a>
       </div>
       <div class="card tier hot">
-        <h3>Solo</h3>
-        <p class="who">For a 4–8 week release cadence</p>
-        <div class="price">$19<span>/mo</span></div>
-        <ul>
-          <li>Unlimited pitch drafts</li>
-          <li>Voice profile that learns your edits</li>
-          <li>Follow-up reminders</li>
-          <li>3 active releases</li>
-          <li>Shareable media kit links</li>
-        </ul>
-        <a class="btn btn-outline" href="#try">Start free, upgrade later</a>
-      </div>
-      <div class="card tier">
-        <h3>Momentum</h3>
-        <p class="who">For labels and managers</p>
+        <h3>Momentum <span class="flag-amber">working name · Q3</span></h3>
+        <p class="who">The 4–8-week cadence plan · conversion target per /plan</p>
         <div class="price">$39<span>/mo</span></div>
         <ul>
           <li>Everything in Solo</li>
-          <li>Up to 10 artists</li>
-          <li>Team seats</li>
-          <li>Coverage tracking</li>
         </ul>
-        <a class="btn btn-quiet" href="#try">Start free</a>
+        <div class="placeholder">[Feature splits pending Q3 — emphasis follows /plan, where Momentum is the target]</div>
+        <a class="btn btn-outline" href="#try">Start free, upgrade later</a>
       </div>
     </div>
     <p class="small" style="text-align:center;margin-top:26px">No credit card to start. Cancel anytime. You always send from your own inbox, on every plan.</p>
@@ -433,18 +443,22 @@ footer nav{display:flex;gap:22px}
         <p>No, and that's the point. Soniq drafts the pitch; you approve it and send it from your own inbox. Curators see a real email from a real artist, and the relationship stays yours.</p>
       </details>
       <details>
+        <summary>Do I still own my music?</summary>
+        <p>Yes. Ownership never transfers. You grant Soniq a purpose-limited license to analyze your track and draft your pitches, nothing more, and you can delete your data at any time. Final language ships with the Terms of Service.</p>
+      </details>
+      <details>
         <summary>Where do the curators come from?</summary>
         <p>You bring them. Paste the playlists and press you already have in mind, or search public playlists by genre or vibe. Soniq doesn't sell access to a contact database, and there's no pay-for-placement anywhere in the product.</p>
       </details>
       <details>
         <summary>What does it cost?</summary>
-        <p>Fit scoring is unlimited and free on every plan. Your first three pitch drafts are free too; the paywall appears at the fourth. Solo is $19/mo for unlimited drafts, and Momentum is $39/mo for teams. No credit card to start.</p>
+        <p>Fit scoring is unlimited and free on every plan. Your first three pitch drafts are free; the paywall appears at the fourth and unlocks drafting the rest of your campaign. Working prices are $19 and $39 a month while the final tiers are decided. No credit card to start.</p>
       </details>
     </div>
   </section>
 
   <footer>
-    <span>© 2026 Sonic Spotlights LLC</span>
+    <span>© 2026 Sonic Spotlights LLC · soniq.rocks</span>
     <nav><a href="#">Terms</a><a href="#">Privacy Policy</a></nav>
   </footer>
 </div>
@@ -470,7 +484,16 @@ footer nav{display:flex;gap:22px}
       <li>Proof stays because most landing visitors never run the demo: they're skimming from a link on a phone, researching for a bandmate, or evaluating without a release ready to paste. For them this section is the only exposure to the reasoning quality. It now leads with the honest 38 and "Soniq's read: skip this one," which is the strongest anti-scam artifact the brand has — the aspirational-sample aesthetic belongs to the scams. "Run this sample yourself" feeds the real flow, and section engagement should decide its long-term fate with data.</li>
       <li>Voice fix from C5-adjacent guidance: the block is labeled "Soniq's read," third person, not "Our take" — first-person-plural stays reserved for company policy statements.</li>
     </ul>
-  </details>
+      <p class="nh">Round 2</p>
+    <ul>
+      <li>H1: hero swapped to the prototype pair. Shipped in Title Case because the handoff carves this exact line out as the one Title Case exception; Hansen guessed sentence case, so it's a one-line change if the team rules otherwise. The sub is the "Meet Soniq" companion framing. Note the own-inbox differentiator now lives in the checks and step 03 rather than the hero sentence.</li>
+      <li>H2: soft return after "The score shows its work." on desktop, suppressed on mobile. H4/H5 left as-is per "designer's call"; happy to add the returns if anyone feels strongly.</li>
+      <li>H3: sample draft copy flagged for a rewrite pass against the #general philosophy before release; not changed here since no target language was given.</li>
+      <li>H6: added the music-ownership FAQ seeded from the Help Center plan (P0 trust item); final wording ships with the ToS.</li>
+      <li>P1–P3: pricing tier contents are now placeholder-flagged, not asserted. Invented features (team seats, artist counts, gated reminders and kit links) removed entirely; the emphasized card moved to Momentum to match /plan, where Momentum is the conversion target for the cadence persona. Free tier lists only decided facts. FAQ cost answer de-invented to match. Resolves the P3 contradictions by removing the gates, not the surfaces.</li>
+      <li>H13: footer carries soniq.rocks; the workspace-ready page now points there too (was sonicspotlights.app — confirm which domain is canonical).</li>
+    </ul>
+</details>
 </div>
 
 </body></html>

@@ -214,9 +214,24 @@ footer nav{display:flex;gap:22px}
   .board{grid-template-columns:1fr}
   section{padding:56px 0}
 }
+
+/* Round 2 — desktop-only soft return (H2) */
+@media(max-width:640px){.bd{display:none}}
+/* Round 2 — amber pending-decision flag (placeholder discipline) */
+.flag-amber{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--inferred);border:1px dashed rgba(245,166,35,.5);border-radius:var(--r-tag);padding:2px 7px;vertical-align:2px}
+/* Round 2 — selected row = selected-card state, not a check (R4) */
+.result-row.sel{background:rgba(139,92,246,.06)}
+/* Round 2 — Line-to-Soniq collapsed rail (Cardinal Rule 4, per Hansen reference) */
+.soniq-rail{position:fixed;top:0;right:0;bottom:0;width:46px;border-left:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:16px;background:var(--bg-app);z-index:30}
+.rail-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald)}
+.rail-btn{width:30px;height:30px;border-radius:var(--r-def);border:1px solid var(--voice);background:transparent;color:var(--voice);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.rail-btn:hover{background:var(--voice-quiet)}
+.rail-label{writing-mode:vertical-rl;font-family:var(--font-display);font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-meta)}
+body.railed .shell{margin-right:46px}
+@media(max-width:920px){.soniq-rail{display:none}body.railed .shell{margin-right:0}}
 </style>
-</head><body class="">
-<div class="mockbar"><b>SONIQ V2 · DS-ALIGNED</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="on" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
+</head><body class="railed">
+<div class="mockbar"><b>SONIQ V2 · R2</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="on" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
 <div class="shell">
   <aside class="side">
     <div class="brand"><img src="logo-horizontal-dark.png" alt="Sonic Spotlights" style="height:20px"></div>
@@ -293,26 +308,37 @@ footer nav{display:flex;gap:22px}
     </div>
 
     <div style="margin-top:40px">
-      <h3>Coverage</h3>
+      <h3>Coverage <span class="flag-amber">launch scope pending sign-off</span></h3>
       <div class="col-empty" style="margin-top:14px;padding:26px">No placements yet. When a curator adds the release or an outlet covers it, log it from the Replied column and it appears here with the date, link, and source.</div>
     </div>
   </div>
 </div>
 
+<div class="soniq-rail" title="Line to Soniq — collapsed (Activity + Ask)">
+  <span class="rail-dot"></span>
+  <button class="rail-btn" aria-label="Open Line to Soniq"><svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.3H6L3 22V11.5A8.4 8.4 0 0 1 11.5 3h1A8.4 8.4 0 0 1 21 11.5z"/></svg></button>
+  <span class="rail-label">Line to Soniq</span>
+</div>
 <div class="notes">
   <details>
     <summary>Design notes · Campaign detail</summary>
     <p class="nh">Design-system alignment</p>
     <ul>
       <li>One-yellow violation fixed: this screen previously carried yellow on both "Open in email" and "Log outcome." "Open in email" in the Ready column is the single most important decision on the page and keeps the yellow; "Log outcome" is now secondary purple. StatusDot-style state chips, mono for scores and elapsed-time stamps, calm workspace with no atmosphere.</li>
-      <li>Rule 4/5 hold throughout: there is no Send button, no delivery or opened state anywhere. The board's Sent state is artist-declared via mark-as-sent, and replies are artist-logged. The explainer strip states this once so the board reads honestly.</li>
+      <li>Rule 5 holds throughout: there is no Send button, no delivery or opened state anywhere. The board's Sent state is artist-declared via mark-as-sent, and replies are artist-logged. The explainer strip states this once so the board reads honestly.</li>
     </ul>
     <p class="nh">Review feedback applied</p>
     <ul>
       <li>The pipeline board, follow-up clock, snooze, reply-gist line, and the media-kit handoff from the Replied column were all adopted by the review as-is; this page is flagged as the missing core of the product and is heading for the build queue. The only requested change was the yellow fix above.</li>
       <li>Coverage tracking sits on this page but bills under Momentum per the revised tiers; the empty state copy is unchanged.</li>
     </ul>
-  </details>
+      <p class="nh">Round 2</p>
+    <ul>
+      <li>R2: Line-to-Soniq rail added; Hansen's open-panel reference (Activity feed + Ask input) is the expanded state this collapses from.</li>
+      <li>R3: artist-sends is Rule 5; citation fixed.</li>
+      <li>P5: the Coverage section now carries an explicit pending flag. It stays in the mock as proposed launch chrome, but build needs the yes/no on launch scope before this column ships, and its Momentum billing line was removed with the rest of the invented pricing gates.</li>
+    </ul>
+</details>
 </div>
 
 </body></html>

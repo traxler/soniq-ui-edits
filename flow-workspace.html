@@ -214,9 +214,24 @@ footer nav{display:flex;gap:22px}
   .board{grid-template-columns:1fr}
   section{padding:56px 0}
 }
+
+/* Round 2 — desktop-only soft return (H2) */
+@media(max-width:640px){.bd{display:none}}
+/* Round 2 — amber pending-decision flag (placeholder discipline) */
+.flag-amber{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--inferred);border:1px dashed rgba(245,166,35,.5);border-radius:var(--r-tag);padding:2px 7px;vertical-align:2px}
+/* Round 2 — selected row = selected-card state, not a check (R4) */
+.result-row.sel{background:rgba(139,92,246,.06)}
+/* Round 2 — Line-to-Soniq collapsed rail (Cardinal Rule 4, per Hansen reference) */
+.soniq-rail{position:fixed;top:0;right:0;bottom:0;width:46px;border-left:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:16px;background:var(--bg-app);z-index:30}
+.rail-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald)}
+.rail-btn{width:30px;height:30px;border-radius:var(--r-def);border:1px solid var(--voice);background:transparent;color:var(--voice);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.rail-btn:hover{background:var(--voice-quiet)}
+.rail-label{writing-mode:vertical-rl;font-family:var(--font-display);font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-meta)}
+body.railed .shell{margin-right:46px}
+@media(max-width:920px){.soniq-rail{display:none}body.railed .shell{margin-right:0}}
 </style>
 </head><body class="glow">
-<div class="mockbar"><b>SONIQ V2 · DS-ALIGNED</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="on" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
+<div class="mockbar"><b>SONIQ V2 · R2</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="on" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
 <div class="flow-wrap" style="max-width:680px;padding-top:72px">
   <span class="eyebrow">Saved to your workspace</span>
   <h1 style="font-size:clamp(30px,4vw,42px);margin-top:16px">Your workspace is ready. Let's build your list.</h1>
@@ -230,14 +245,15 @@ footer nav{display:flex;gap:22px}
     <div style="display:flex;flex-direction:column;gap:0">
       <div style="display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line);align-items:baseline"><span style="color:var(--positive)">✓</span><b>Your release · identified</b><span class="small">sound described by you</span></div>
       <div style="display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line);align-items:baseline"><span style="color:var(--positive)">✓</span><b>First pitch · drafted in your voice</b><a class="small" href="flow-result.html" style="margin-left:auto">Open preview draft →</a></div>
-      <div style="display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line);align-items:baseline"><span style="color:var(--voice)">●</span><b>Voice profile · started</b><span class="small">improves each time you edit a draft</span></div>
+      <div style="display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line);align-items:baseline"><span style="color:var(--voice)">●</span><b>Voice profile · started</b><span class="flag-amber">name pending Q5</span><span class="small">improves each time you edit a draft</span></div>
       <div style="display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line);align-items:baseline"><span style="color:var(--positive)">✓</span><b>actual emo music</b><span class="mono" style="color:var(--voice);font-size:13px">38 fit</span><span class="tag">updated 1w ago</span></div>
     </div>
   </div>
 
   <div style="margin-top:28px"><a class="btn btn-yellow" style="width:100%" href="dashboard-workspace.html">Find your curators →</a></div>
   <p class="tiny-mono" style="text-align:center;margin-top:16px">Free plan · unlimited fit scores · 3 free drafts · no card &nbsp;·&nbsp; <a href="index.html#pricing" style="font-size:12.5px">See pricing</a></p>
-  <p class="small" style="text-align:center;margin-top:18px">Prefer the big screen? Open <a href="#">sonicspotlights.app</a> on your laptop. Your workspace is already there.</p>
+  <a class="btn btn-outline" style="width:100%;margin-top:12px" href="dashboard-workspace.html">Open the full workspace →</a>
+  <p class="small" style="text-align:center;margin-top:14px">Already synced at soniq.rocks on your laptop.</p>
 </div>
 
 <div class="notes">
@@ -253,7 +269,13 @@ footer nav{display:flex;gap:22px}
       <li>C2: plan terms now state the real model, unlimited scoring with three free drafts, replacing the fit-score meter. This screen is the last stop before the workspace, so it carries the value-before-price framing verbatim.</li>
       <li>Adopted by the review as-is: naming the release at creation, the voice-profile rename tied to draft edits, and dropping "trial" language. No changes requested.</li>
     </ul>
-  </details>
+      <p class="nh">Round 2</p>
+    <ul>
+      <li>P4: "Voice profile" now carries a pending flag; round 1 routed the rename to the spec owner (Q5) and the review recommends approval, but until that lands the spec name is Context, so this surface stops asserting the rename as settled. The pricing page no longer references it at all.</li>
+      <li>H15: "Prefer the big screen" sentence upgraded to a proper secondary CTA, "Open the full workspace," under the primary. H14 flagged for the same mobile pass as Fit result.</li>
+      <li>H13: domain unified to soniq.rocks.</li>
+    </ul>
+</details>
 </div>
 
 </body></html>

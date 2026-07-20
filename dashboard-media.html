@@ -214,9 +214,24 @@ footer nav{display:flex;gap:22px}
   .board{grid-template-columns:1fr}
   section{padding:56px 0}
 }
+
+/* Round 2 — desktop-only soft return (H2) */
+@media(max-width:640px){.bd{display:none}}
+/* Round 2 — amber pending-decision flag (placeholder discipline) */
+.flag-amber{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--inferred);border:1px dashed rgba(245,166,35,.5);border-radius:var(--r-tag);padding:2px 7px;vertical-align:2px}
+/* Round 2 — selected row = selected-card state, not a check (R4) */
+.result-row.sel{background:rgba(139,92,246,.06)}
+/* Round 2 — Line-to-Soniq collapsed rail (Cardinal Rule 4, per Hansen reference) */
+.soniq-rail{position:fixed;top:0;right:0;bottom:0;width:46px;border-left:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:16px;background:var(--bg-app);z-index:30}
+.rail-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald)}
+.rail-btn{width:30px;height:30px;border-radius:var(--r-def);border:1px solid var(--voice);background:transparent;color:var(--voice);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.rail-btn:hover{background:var(--voice-quiet)}
+.rail-label{writing-mode:vertical-rl;font-family:var(--font-display);font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-meta)}
+body.railed .shell{margin-right:46px}
+@media(max-width:920px){.soniq-rail{display:none}body.railed .shell{margin-right:0}}
 </style>
-</head><body class="">
-<div class="mockbar"><b>SONIQ V2 · DS-ALIGNED</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="on" href="dashboard-media.html">Media</a></div>
+</head><body class="railed">
+<div class="mockbar"><b>SONIQ V2 · R2</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="on" href="dashboard-media.html">Media</a></div>
 <div class="shell">
   <aside class="side">
     <div class="brand"><img src="logo-horizontal-dark.png" alt="Sonic Spotlights" style="height:20px"></div>
@@ -295,20 +310,31 @@ footer nav{display:flex;gap:22px}
   </div>
 </div>
 
+<div class="soniq-rail" title="Line to Soniq — collapsed (Activity + Ask)">
+  <span class="rail-dot"></span>
+  <button class="rail-btn" aria-label="Open Line to Soniq"><svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.3H6L3 22V11.5A8.4 8.4 0 0 1 11.5 3h1A8.4 8.4 0 0 1 21 11.5z"/></svg></button>
+  <span class="rail-label">Line to Soniq</span>
+</div>
 <div class="notes">
   <details>
     <summary>Design notes · Media</summary>
     <p class="nh">Design-system alignment</p>
     <ul>
       <li>Media is a reference surface: it shows, it doesn't decide, so it carries zero yellow (Cardinal Rule 2). Upload and Copy-link are secondary/quiet purple. The completeness checks use the emerald affordance; missing items are neutral, not alarmed. Calm workspace, Lucide-style icons, 12px cards, Figtree body.</li>
-      <li>Context note reframed to match Rule 6: artist-level files (bio, photos) live in Context behind the avatar and travel with every release; this panel only explains that, it doesn't duplicate the entry point.</li>
+      <li>Context note reframed to match Rule 3: artist-level files (bio, photos) live in Context behind the avatar and travel with every release; this panel only explains that, it doesn't duplicate the entry point.</li>
     </ul>
     <p class="nh">Review feedback applied</p>
     <ul>
       <li>Adopted by the review as-is: the kit completeness meter, the evergreen shareable kit link, release naming carried through, and the single upload action replacing the type dropdown. No changes requested on this page.</li>
       <li>The kit link connects to the campaign board's Replied column ("send the WAV" → Share media kit), which the review called out as the right cross-surface handoff; kept intact.</li>
     </ul>
-  </details>
+      <p class="nh">Round 2</p>
+    <ul>
+      <li>R2: Line-to-Soniq rail added, matching Hansen's Media reference shot.</li>
+      <li>R3: sidebar/Context citation corrected to Rule 3.</li>
+      <li>P3: the shareable kit link stays visible here and is no longer gated anywhere, since pricing no longer asserts that gate; if the pricing owner later gates it, this surface needs a locked state designed, not just a paywall redirect. H17: broader Media direction stays open pending Hartman's infra.</li>
+    </ul>
+</details>
 </div>
 
 </body></html>

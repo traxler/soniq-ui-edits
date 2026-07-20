@@ -214,9 +214,24 @@ footer nav{display:flex;gap:22px}
   .board{grid-template-columns:1fr}
   section{padding:56px 0}
 }
+
+/* Round 2 — desktop-only soft return (H2) */
+@media(max-width:640px){.bd{display:none}}
+/* Round 2 — amber pending-decision flag (placeholder discipline) */
+.flag-amber{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--inferred);border:1px dashed rgba(245,166,35,.5);border-radius:var(--r-tag);padding:2px 7px;vertical-align:2px}
+/* Round 2 — selected row = selected-card state, not a check (R4) */
+.result-row.sel{background:rgba(139,92,246,.06)}
+/* Round 2 — Line-to-Soniq collapsed rail (Cardinal Rule 4, per Hansen reference) */
+.soniq-rail{position:fixed;top:0;right:0;bottom:0;width:46px;border-left:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:16px;background:var(--bg-app);z-index:30}
+.rail-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald)}
+.rail-btn{width:30px;height:30px;border-radius:var(--r-def);border:1px solid var(--voice);background:transparent;color:var(--voice);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.rail-btn:hover{background:var(--voice-quiet)}
+.rail-label{writing-mode:vertical-rl;font-family:var(--font-display);font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-meta)}
+body.railed .shell{margin-right:46px}
+@media(max-width:920px){.soniq-rail{display:none}body.railed .shell{margin-right:0}}
 </style>
 </head><body class="glow">
-<div class="mockbar"><b>SONIQ V2 · DS-ALIGNED</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="on" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
+<div class="mockbar"><b>SONIQ V2 · R2</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="on" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
 <div class="flow-wrap" style="max-width:780px">
 
   <div class="card inset" style="display:flex;gap:18px;align-items:center;margin-bottom:20px;padding:20px 24px">
@@ -279,16 +294,21 @@ footer nav{display:flex;gap:22px}
     <summary>Design notes · Fit result</summary>
     <p class="nh">Design-system alignment</p>
     <ul>
-      <li>The fit ring is the ConfidenceMeter pattern: mono numerals, band-colored border. Fit stands alone per Cardinal Rule 3; when a real verified state ships with the partner network, it renders as a separate element, never merged into the score.</li>
+      <li>The fit ring is the ConfidenceMeter pattern: mono numerals, band-colored border. Fit stands alone per the fit ≠ verified product principle; when a real verified state ships with the partner network, it renders as a separate element, never merged into the score.</li>
       <li>"Our take" restyled as a ReasoningNote: purple, reference tone. It was amber, but amber is reserved for the "I inferred this" flag and is never decorative. Draft/label eyebrows moved off mono; mono now marks only the score and the character counts.</li>
-      <li>Single Laser Yellow on this screen: "Save to your workspace." Copy, Edit, Upload, and Score-another are secondary or quiet. No Send button exists anywhere, per Rule 4: the artist sends.</li>
+      <li>Single Laser Yellow on this screen: "Save to your workspace." Copy, Edit, Upload, and Score-another are secondary or quiet. No Send button exists anywhere, per Rule 5: the artist sends.</li>
     </ul>
     <p class="nh">Review feedback applied</p>
     <ul>
       <li>C1: the Unverified badge and its explainer are gone; in their place, observable signal tags (recency, followers) and a plain statement of what the score reads. The save-line no longer promises a verification step that doesn't exist.</li>
       <li>Adopted by the review as-is: the band scale, the "Soniq’s read" skip recommendation (renamed from "Our take" per the voice rule: Soniq is third person; first-person-plural is reserved for company policy), the upload-for-sonic-read card, and "a 38 saves you a burned contact" as house copy. No structural changes requested.</li>
     </ul>
-  </details>
+      <p class="nh">Round 2</p>
+    <ul>
+      <li>R3: rule citations corrected (fit ≠ verified is a product principle, not a numbered rule; artist-sends is Rule 5).</li>
+      <li>H12: flagged for a mobile layout pass at build; the CTA row and score header already stack, but this screen is a mobile-engagement moment and deserves real device QA, not just a breakpoint check.</li>
+    </ul>
+</details>
 </div>
 
 </body></html>

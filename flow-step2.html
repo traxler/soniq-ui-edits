@@ -214,21 +214,36 @@ footer nav{display:flex;gap:22px}
   .board{grid-template-columns:1fr}
   section{padding:56px 0}
 }
+
+/* Round 2 — desktop-only soft return (H2) */
+@media(max-width:640px){.bd{display:none}}
+/* Round 2 — amber pending-decision flag (placeholder discipline) */
+.flag-amber{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--inferred);border:1px dashed rgba(245,166,35,.5);border-radius:var(--r-tag);padding:2px 7px;vertical-align:2px}
+/* Round 2 — selected row = selected-card state, not a check (R4) */
+.result-row.sel{background:rgba(139,92,246,.06)}
+/* Round 2 — Line-to-Soniq collapsed rail (Cardinal Rule 4, per Hansen reference) */
+.soniq-rail{position:fixed;top:0;right:0;bottom:0;width:46px;border-left:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:16px;background:var(--bg-app);z-index:30}
+.rail-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald)}
+.rail-btn{width:30px;height:30px;border-radius:var(--r-def);border:1px solid var(--voice);background:transparent;color:var(--voice);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.rail-btn:hover{background:var(--voice-quiet)}
+.rail-label{writing-mode:vertical-rl;font-family:var(--font-display);font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-meta)}
+body.railed .shell{margin-right:46px}
+@media(max-width:920px){.soniq-rail{display:none}body.railed .shell{margin-right:0}}
 </style>
 </head><body class="glow">
-<div class="mockbar"><b>SONIQ V2 · DS-ALIGNED</b> <a class="" href="index.html">Home</a> <a class="on" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
+<div class="mockbar"><b>SONIQ V2 · R2</b> <a class="" href="index.html">Home</a> <a class="on" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
 <div class="flow-wrap">
   <div class="flow-card">
     <div class="flow-top">
       <span class="eyebrow">Step 2 of 2 · Pick a curator</span>
-      <a href="index.html#try" style="font-size:15px">← your sound</a>
+      <a href="index.html#try" style="font-size:15px">← Edit your sound</a>
     </div>
-    <div class="captured">YOUR SOUND · CAPTURED · <a href="index.html#try" style="font-size:11px">edit</a></div>
+    <div class="captured">Your sound · saved</div>
     <h3 style="font-size:26px">Now, a curator to score.</h3>
     <p class="small" style="margin:8px 0 24px">Paste one you have in mind, or search. Still no sign-up.</p>
 
     <div class="field">
-      <label>Paste a playlist · or search</label>
+      <label>Paste a playlist · or search <span class="flag-amber">search scope pending Q1</span></label>
       <input class="input" value="emo">
     </div>
     <button class="btn btn-quiet btn-sm">Search playlists</button>
@@ -243,7 +258,7 @@ footer nav{display:flex;gap:22px}
       </div>
       <div class="result-row sel">
         <div>
-          <div class="name">actual emo music <span style="color:var(--voice)">✓</span></div>
+          <div class="name">actual emo music</div>
           <div class="meta">Aimz!! · 4,700 followers · 257 tracks · updated 1w ago</div>
         </div>
         <div class="chips"><span class="chip">emo</span><span class="chip">screamo</span><span class="chip">post-hardcore</span></div>
@@ -253,7 +268,7 @@ footer nav{display:flex;gap:22px}
     <p style="margin:22px 0 6px;border-top:1px solid var(--line);padding-top:18px"><a href="#">No curator yet? Try a sample →</a></p>
 
     <div style="margin-top:18px"><a class="btn btn-yellow" style="width:100%" href="flow-result.html">Score the fit →</a></div>
-    <p class="tiny-mono" style="margin-top:14px">This scores fit only. Verification runs when you save it to a workspace. Soniq never contacts anyone.</p>
+    <p class="tiny-mono" style="margin-top:14px">This scores fit only. Soniq never contacts anyone.</p>
     <p class="small" style="margin-top:10px">By continuing you agree to the <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a></p>
   </div>
 </div>
@@ -264,14 +279,21 @@ footer nav{display:flex;gap:22px}
     <p class="nh">Design-system alignment</p>
     <ul>
       <li>Tokens swapped to the DS values (Void Black canvas, Electric Purple, Laser Yellow); the flow card is a 16px large surface, result rows are 12px cards, genre chips are 4px Tags. Body is Figtree; the step label and captured line moved off JetBrains Mono, which is reserved for scores and timestamps. Purple focus rings on the input.</li>
-      <li>Entry surface, so the spotlights atmosphere stays (Rule 8). "Score the fit" is this screen's single Laser Yellow action; "Search playlists" is quiet, links are purple.</li>
+      <li>Entry surface, so the spotlights atmosphere stays (Rule 6). "Score the fit" is this screen's single Laser Yellow action; "Search playlists" is quiet, links are purple.</li>
     </ul>
     <p class="nh">Review feedback applied</p>
     <ul>
       <li>C1: result rows carry observable signals only (followers, track count, update recency, genre tags); no verified or unverified state exists anywhere in the flow. The pre-score note keeps the no-contact promise and drops the "verification comes later" language, since verification isn't a launch capability.</li>
       <li>Adopted from the alpha punch list per the review: richer result metadata and the enabled-on-selection button pattern were already on the internal list; no changes requested.</li>
     </ul>
-  </details>
+      <p class="nh">Round 2</p>
+    <ul>
+      <li>R1 (= Hansen H10): the stale "verification runs when you save" line is gone; the note now promises only what launch does.</li>
+      <li>R4: the selected row no longer carries a ✓. The check is the system's confirm affordance and read as a verification mark, the exact ambiguity C1 cleaned up; selection is now the purple border plus a faint wash only.</li>
+      <li>H7/H8: "Your sound · captured · edit" collapsed into one clear pattern: the status line reads "Your sound · saved" and the single edit affordance is the top-right "← Edit your sound."</li>
+      <li>Q1: the search affordance carries an amber pending flag until Hartman answers what powers search; BYOC paste is unaffected. My recommendation is to answer Q1 with a scoped "public playlist metadata search" rather than removal, since search is half the try-flow's magic, but that's an infra call.</li>
+    </ul>
+</details>
 </div>
 
 </body></html>
