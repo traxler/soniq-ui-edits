@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Soniq — Dashboard: Workspace</title>
+<title>Soniq — Workspace (overview)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>/* ============================================================
@@ -231,7 +231,12 @@ body.railed .shell{margin-right:46px}
 @media(max-width:920px){.soniq-rail{display:none}body.railed .shell{margin-right:0}}
 </style>
 </head><body class="railed">
-<div class="mockbar"><b>SONIQ V2 · R2</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="on" href="dashboard-workspace.html">Dashboard</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
+<div class="mockbar"><b>SONIQ V2 · R3</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="on" href="dashboard-workspace.html">Workspace</a> <a class="" href="dashboard-targets.html">Find curators</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
+<div class="soniq-rail" title="Line to Soniq — collapsed (Activity + Ask)">
+  <span class="rail-dot"></span>
+  <button class="rail-btn" aria-label="Open Line to Soniq"><svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.3H6L3 22V11.5A8.4 8.4 0 0 1 11.5 3h1A8.4 8.4 0 0 1 21 11.5z"/></svg></button>
+  <span class="rail-label">Line to Soniq</span>
+</div>
 <div class="shell">
   <aside class="side">
     <div class="brand"><img src="logo-horizontal-dark.png" alt="Sonic Spotlights" style="height:20px"></div>
@@ -240,112 +245,80 @@ body.railed .shell{margin-right:46px}
       <a href="dashboard-campaign.html">Campaigns</a>
       <a href="dashboard-media.html">Media</a>
     </nav>
-    <div class="foot"><span class="av" title="Context opens here">MT</span><div>Grayline<br><span class="tiny-mono" style="font-size:11px">Context lives behind your avatar</span></div></div>
+    <div class="foot"><span class="av" title="Context opens here">MR</span><div>Maya Reyes<br><span class="tiny-mono" style="font-size:11px">@thresholds · Context</span></div></div>
   </aside>
   <div class="main">
     <div class="topbar">
       <div class="searchbox"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> Search anything <span class="mono" style="margin-left:auto;font-size:12px">⌘K</span></div>
       <span class="chip" style="margin-left:auto;padding:6px 8px"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="9" cy="7" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="17" r="2"/></svg></span>
     </div>
-    <p class="crumb">WORKSPACE <b>›</b> HOLDING PATTERN EP</p>
-    <h2>Where should <em style="font-style:normal;color:var(--voice)">Holding Pattern EP</em> go?</h2>
-    <p class="sub" style="font-size:16px;margin-top:10px;max-width:70ch">Search by genre or vibe, or paste a playlist or outlet link. Soniq scores each one for fit with this release.</p>
-    <p style="margin-top:14px;font-size:14.5px"><a href="#">How fit scoring works ↗</a> &nbsp;&nbsp; <a href="#">Why some editorial playlists can't be scored ↗</a></p>
-
-    <div class="card inset" style="margin-top:24px;padding:20px">
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <input class="input" style="flex:1;min-width:280px" placeholder="Search, or paste a playlist or outlet link">
-        <button class="btn btn-outline">Analyze fit</button>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center">
-        <span class="pill purple">Search playlists</span> <span class="flag-amber">search scope pending Q1</span>
-        <span class="pill">Paste a link</span>
-        <a class="small" style="margin-left:auto" href="#">+ Add a press / email contact</a>
-      </div>
+    <p class="crumb">WORKSPACE</p>
+    <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+      <h2>Here's where things stand.</h2>
+      <span class="small" style="margin-left:auto">Everything you have active, at a glance.</span>
     </div>
 
-    <div style="display:flex;align-items:center;gap:10px;margin:30px 0 16px;flex-wrap:wrap">
-      <span class="eyebrow" style="letter-spacing:.18em">4 targets · scored by fit</span>
-      <span class="chip" style="margin-left:auto;border-color:var(--voice);color:var(--text-primary)">All</span>
-      <span class="chip">Updated this week</span>
-      <span class="chip">Strong fit (70+)</span>
-      <span class="tiny-mono">Sort: fit ⌄</span>
-    </div>
-
-    <div class="target sel">
-      <input type="checkbox" checked>
-      <div class="ring g" style="width:56px;height:56px;font-size:19px">82</div>
-      <div class="body">
-        <div class="headrow"><b style="font-size:16.5px">Midwest Emo Revival</b><a class="why" href="#">Why? ↗</a></div>
-        <p class="metaline">Dani K · 12,400 followers · updated this week &nbsp; <span class="chip">emo</span> <span class="chip">midwest</span></p>
-        <p class="reason">Curator favors slow-build, twinkly guitar work with clean production. 7 of the last 10 adds are early-00s revival bands with direct overlap to your reference points.</p>
+    <!-- SONIQ SUGGESTS hero card (the Workspace's one decision) -->
+    <div class="card" style="border:1px solid var(--voice);box-shadow:0 0 0 1px var(--voice);margin-top:22px;background:linear-gradient(180deg,rgba(139,92,246,.08),transparent)">
+      <p class="eyebrow" style="color:var(--voice)">◆ Soniq suggests</p>
+      <div style="display:flex;gap:18px;align-items:flex-start;margin-top:14px;flex-wrap:wrap">
+        <div style="width:60px;height:60px;border-radius:var(--r-card);background:linear-gradient(135deg,#2a2450,#4a3a8a);flex:none"></div>
+        <div style="flex:1;min-width:220px">
+          <p class="tiny-mono">SINGLE · OUT JUN 14</p>
+          <h3 style="font-size:22px">Dark Moon</h3>
+          <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><span class="tag">lo-fi · shoegaze</span><span class="tag mono">118 BPM</span><span class="tag mono">F# minor</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:20px;align-items:center;margin-top:20px;border-top:1px solid var(--line);padding-top:20px;flex-wrap:wrap">
+        <div style="flex:1;min-width:260px">
+          <p style="font-weight:700">Keep the momentum going.</p>
+          <p class="small">Score more playlists or press for Dark Moon, and Soniq drafts each pitch in your voice. You're 1 of 3 free drafts in.</p>
+        </div>
+        <a class="btn btn-yellow" href="dashboard-targets.html">Find curators for Dark Moon →</a>
       </div>
     </div>
 
-    <div class="target sel">
-      <input type="checkbox" checked>
-      <div class="ring a" style="width:56px;height:56px;font-size:19px">61</div>
-      <div class="body">
-        <div class="headrow"><b style="font-size:16.5px">Twinkle Daddies &amp; Friends</b><a class="why" href="#">Why? ↗</a></div>
-        <p class="metaline">Marisol V · 6,100 followers · updated 5d ago &nbsp; <span class="chip">emo</span> <span class="chip">math rock</span></p>
-        <p class="reason">Strong stylistic overlap on guitar work, but the list skews instrumental. A vocal-forward single is a possible fit, not a lock.</p>
+    <!-- Active snapshot (Jason: "a snap-shot of what they have active") -->
+    <p class="eyebrow" style="margin:34px 0 14px">Active now</p>
+    <a class="card" style="display:flex;gap:16px;align-items:center;text-decoration:none;color:var(--text-primary);margin-bottom:12px" href="dashboard-campaign.html">
+      <div style="width:44px;height:44px;border-radius:var(--r-def);background:linear-gradient(135deg,#2a2450,#4a3a8a);flex:none"></div>
+      <div style="flex:1">
+        <div style="display:flex;gap:10px;align-items:center"><b>Dark Moon campaign</b><span class="pill green">In motion</span></div>
+        <p class="metaline" style="color:var(--text-meta);font-size:13px;margin-top:3px">Playlist pitch · opened Jun 14</p>
       </div>
+      <span class="mono" style="font-size:13px;color:var(--text-meta)">5 queued · 7 sent · 2 replied</span>
+      <svg class="ic" viewBox="0 0 24 24" style="color:var(--text-meta)"><path d="M9 6l6 6-6 6"/></svg>
+    </a>
+    <div class="col-empty" style="text-align:center">Start another campaign, or add a PR pitch. <a href="dashboard-targets.html">New campaign →</a></div>
+
+    <!-- Snapshot stats -->
+    <div class="stats" style="margin-top:26px">
+      <div><b class="mono">1</b><span>of 3 free drafts used</span></div>
+      <div><b class="mono">1</b><span>curator scored</span></div>
+      <div><b class="mono">0</b><span>sent by you</span></div>
     </div>
 
-    <div class="target">
-      <input type="checkbox">
-      <div class="ring r" style="width:56px;height:56px;font-size:19px">38</div>
-      <div class="body">
-        <div class="headrow"><b style="font-size:16.5px">actual emo music</b><span class="tag">You added</span><a class="why" href="#">Why? ↗</a></div>
-        <p class="metaline">Aimz!! · 4,700 followers · pasted link · analyzed &nbsp; <span class="chip">screamo</span> <span class="chip">post-hardcore</span></p>
-        <p class="reason">Genre distribution dominated by heavier emo variants; the match is surface-level. Recommend skipping unless the angle is the playlist name itself.</p>
-      </div>
+    <!-- Ask, above the fold (Jason + H21) -->
+    <div class="card inset" style="margin-top:26px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <span style="color:var(--voice)">◆</span>
+      <input class="input" style="flex:1;min-width:240px;background:transparent;border:none;padding:6px 0" placeholder="Ask Soniq anything about your release, or what to do next…">
+      <button class="btn btn-outline btn-sm">Ask</button>
     </div>
-
-    <div class="target">
-      <input type="checkbox">
-      <div class="ring r" style="width:56px;height:56px;font-size:19px">28</div>
-      <div class="body">
-        <div class="headrow"><b style="font-size:16.5px">Emo songs</b><a class="why" href="#">Why? ↗</a></div>
-        <p class="metaline">Henry · 4,001 followers &nbsp; <span class="chip">emo</span></p>
-        <p class="reason">Naming alignment only. The word "emo" is shared; the sound is not. Skip.</p>
-      </div>
-    </div>
-
-    <div class="selectbar">
-      <b>2 selected</b>
-      <span class="small">avg fit <span class="mono">72</span> · both updated this week</span>
-      <a class="btn btn-yellow btn-sm" style="margin-left:auto" href="dashboard-campaign.html">Draft 2 pitches →</a>
-    </div>
+    <p class="small" style="margin-top:10px">New to a release and not sure what's next? Ask Soniq. It reads your Context and points you at the next move.</p>
   </div>
 </div>
 
-<div class="soniq-rail" title="Line to Soniq — collapsed (Activity + Ask)">
-  <span class="rail-dot"></span>
-  <button class="rail-btn" aria-label="Open Line to Soniq"><svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.3H6L3 22V11.5A8.4 8.4 0 0 1 11.5 3h1A8.4 8.4 0 0 1 21 11.5z"/></svg></button>
-  <span class="rail-label">Line to Soniq</span>
-</div>
 <div class="notes">
   <details>
-    <summary>Design notes · Workspace (targets)</summary>
-    <p class="nh">Design-system alignment</p>
+    <summary>Design notes · Workspace (overview)</summary>
+    <p class="nh">Round 3 — H21 (rebuilt)</p>
     <ul>
-      <li>Workspace is calm: no spotlights atmosphere (Rule 6). Sidebar is exactly Workspace · Campaigns · Media (Rule 3), and Context now lives behind the artist avatar rather than as a sidebar link; the footer text is a mockup annotation of that behavior. Chrome glyphs replaced with Lucide-style inline SVG, the flagged icon substitution.</li>
-      <li>One Laser Yellow: the batch bar's "Draft 2 pitches." Analyze-fit is secondary purple. Score rings are mono numerals with band-colored borders; genre and status labels are 4px Tags; body is Figtree with mono confined to scores.</li>
+      <li>The Workspace default face is now a suggests-driven overview, not the targets list. This adopts Jason's H16 definition and Hansen's prototype: a “Soniq suggests” hero card carrying the release meta and the screen's one yellow action, an “active now” snapshot of live campaigns (Jason: “a snap-shot of what they have active”), the honest stat row, and the Ask box above the fold. This separates Workspace (what's happening + what next) from Campaigns (the working pipeline) cleanly, and leaves room for roadmap snapshots like social content.</li>
+      <li>Clicking the active campaign opens it in the Campaigns tab, where campaign-specific stats live — Jason's explicit routing. The targets/scoring screen (“Where should Dark Moon go?”) moved to its own page reached via “Find curators”; it survives intact as the working state, just no longer the Workspace's front door.</li>
+      <li>Ask box is an entry point to Line-to-Soniq, not a second chat panel, so Cardinal Rule 4 holds (one Activity+Ask surface). The rail stays docked at the right edge. One yellow: “Find curators for Dark Moon.”</li>
+      <li>Sample identity switched to Hansen's prototype persona (Maya Reyes / Dark Moon) so this set reads against the same reference the team is using. The purpose statement itself (“what is Workspace for”) is still a team decision per Jason and Hansen — this is a concrete proposal to react to, not a settled answer.</li>
     </ul>
-    <p class="nh">Review feedback applied</p>
-    <ul>
-      <li>C1: all Verified/Unverified pills removed. Rows carry observable signals (recency, followers, genre distribution) and the filter chip changed from "Verified only" to "Updated this week." The layout keeps a clear slot next to the fit ring so a real verified state can appear there, separately, when the partner network ships (fit ≠ verified principle).</li>
-      <li>C3: "You added" survives as provenance (it's true), and nothing on the screen implies a Soniq-owned curator database.</li>
-      <li>Adopted by the review as-is: release naming in the headline, the simplified search card (roadmap and negative-state chips removed), band-colored rings, batch selection bar, and skip-language in low-fit reasoning. The review noted four of these matched their alpha punch list independently.</li>
-    </ul>
-      <p class="nh">Round 2</p>
-    <ul>
-      <li>R2 (= Hansen H16/H18): the Line-to-Soniq collapsed rail is now docked at the right edge, per the reference screenshots: status dot, Ask button, vertical label. The layout reserves its 46px so the batch bar no longer ignores that space. Hidden below 920px in the mockup pending the mobile pattern.</li>
-      <li>R3: rule citations corrected (atmosphere = Rule 6, sidebar/Context = Rule 3, fit ≠ verified = product principle).</li>
-      <li>Q1: search chip carries the pending flag, same as Step 2.</li>
-    </ul>
-</details>
+  </details>
 </div>
 
 </body></html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Soniq — Campaign</title>
+<title>Soniq — Find curators</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>/* ============================================================
@@ -231,7 +231,7 @@ body.railed .shell{margin-right:46px}
 @media(max-width:920px){.soniq-rail{display:none}body.railed .shell{margin-right:0}}
 </style>
 </head><body class="railed">
-<div class="mockbar"><b>SONIQ V2 · R3</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Workspace</a> <a class="" href="dashboard-targets.html">Find curators</a> <a class="on" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
+<div class="mockbar"><b>SONIQ V2 · R3</b> <a class="" href="index.html">Home</a> <a class="" href="flow-step2.html">Step 2</a> <a class="" href="flow-result.html">Fit result</a> <a class="" href="flow-workspace.html">Workspace ready</a> <a class="" href="dashboard-workspace.html">Workspace</a> <a class="on" href="dashboard-targets.html">Find curators</a> <a class="" href="dashboard-campaign.html">Campaign</a> <a class="" href="dashboard-media.html">Media</a></div>
 <div class="shell">
   <aside class="side">
     <div class="brand"><img src="logo-horizontal-dark.png" alt="Sonic Spotlights" style="height:20px"></div>
@@ -247,69 +247,75 @@ body.railed .shell{margin-right:46px}
       <div class="searchbox"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> Search anything <span class="mono" style="margin-left:auto;font-size:12px">⌘K</span></div>
       <span class="chip" style="margin-left:auto;padding:6px 8px"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="9" cy="7" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="17" r="2"/></svg></span>
     </div>
-    <p class="crumb">CAMPAIGNS <b>›</b> DARK MOON</p>
-    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-      <h2>Dark Moon</h2>
-      <span class="pill green">In motion</span>
-      <div style="margin-left:auto;display:flex;gap:10px">
-        <a class="btn btn-outline btn-sm" href="dashboard-targets.html">+ Add curators</a>
-        <button class="btn btn-quiet btn-sm">New release</button>
-      </div>
-    </div>
-    <p class="sub" style="font-size:16px;margin-top:8px">Plan targets, review pitches, and track earned coverage.</p>
+    <p class="crumb">CAMPAIGNS <b>›</b> DARK MOON <b>›</b> FIND CURATORS</p>
+    <h2>Where should <em style="font-style:normal;color:var(--voice)">Dark Moon</em> go?</h2>
+    <p class="sub" style="font-size:16px;margin-top:10px;max-width:70ch">Search by genre or vibe, or paste a playlist or outlet link. Soniq scores each one for fit with this release.</p>
+    <p style="margin-top:14px;font-size:14.5px"><a href="#">How fit scoring works ↗</a> &nbsp;&nbsp; <a href="#">Why some editorial playlists can't be scored ↗</a></p>
 
-    <div class="stats">
-      <div><b>4</b><span>targets</span></div>
-      <div><b>2</b><span>ready</span></div>
-      <div><b>1</b><span>sent</span></div>
-      <div><b>1</b><span>replied</span></div>
-      <div><b style="color:var(--positive)">0</b><span>placed</span></div>
-    </div>
-
-    <div class="card inset" style="padding:16px 20px;margin-bottom:28px;display:flex;gap:14px;align-items:center">
-      <svg class="ic" style="width:18px;height:18px" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-      <p class="small" style="flex:1"><b style="color:var(--text-primary)">You send every pitch from your own inbox.</b> "Open in email" prefills the message in your mail app. Mark it sent and Soniq starts the follow-up clock.</p>
-    </div>
-
-    <div class="board">
-      <div>
-        <div class="col-head"><span>Ready</span><span>2</span></div>
-        <div class="pcard">
-          <div class="nm">Midwest Emo Revival <span class="mono" style="color:var(--positive);font-size:12px">82</span></div>
-          <div class="meta">Draft approved · not yet sent</div>
-          <div class="act"><button class="btn btn-yellow btn-sm">Open in email</button><button class="btn btn-quiet btn-sm">Review draft</button></div>
-        </div>
-        <div class="pcard">
-          <div class="nm">Twinkle Daddies &amp; Friends <span class="mono" style="color:var(--amber);font-size:12px">61</span></div>
-          <div class="meta">Draft ready for review</div>
-          <div class="act"><button class="btn btn-quiet btn-sm">Review draft</button></div>
-        </div>
+    <div class="card inset" style="margin-top:24px;padding:20px">
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <input class="input" style="flex:1;min-width:280px" placeholder="Search, or paste a playlist or outlet link">
+        <button class="btn btn-outline">Analyze fit</button>
       </div>
-      <div>
-        <div class="col-head"><span>Sent · awaiting</span><span>1</span></div>
-        <div class="pcard" style="border-color:rgba(255,184,77,.45)">
-          <div class="nm">Deep Elm Adjacent <span class="mono" style="color:var(--positive);font-size:12px">74</span></div>
-          <div class="meta">Sent 6d ago · <b style="color:var(--amber)">follow-up due</b></div>
-          <div class="act"><button class="btn btn-outline btn-sm">Draft follow-up</button><button class="btn btn-quiet btn-sm">Snooze 3d</button></div>
-        </div>
-      </div>
-      <div>
-        <div class="col-head"><span>Replied</span><span>1</span></div>
-        <div class="pcard">
-          <div class="nm">Emo Night CLE Zine <span class="mono" style="color:var(--positive);font-size:12px">77</span></div>
-          <div class="meta">Replied 2d ago · "send the WAV"</div>
-          <div class="act"><button class="btn btn-outline btn-sm">Log outcome</button><a class="btn btn-quiet btn-sm" href="dashboard-media.html">Share media kit</a></div>
-        </div>
-      </div>
-      <div>
-        <div class="col-head"><span>Placed</span><span>0</span></div>
-        <div class="col-empty">Placements land here. Log a reply as placed and Soniq tracks it as coverage for this release.</div>
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;align-items:center">
+        <span class="pill purple">Search playlists</span> <span class="flag-amber">search scope pending Q1</span>
+        <span class="pill">Paste a link</span>
+        <a class="small" style="margin-left:auto" href="#">+ Add a press / email contact</a>
       </div>
     </div>
 
-    <div style="margin-top:40px">
-      <h3>Coverage <span class="flag-amber">launch scope pending sign-off</span></h3>
-      <div class="col-empty" style="margin-top:14px;padding:26px">No placements yet. When a curator adds the release or an outlet covers it, log it from the Replied column and it appears here with the date, link, and source.</div>
+    <div style="display:flex;align-items:center;gap:10px;margin:30px 0 16px;flex-wrap:wrap">
+      <span class="eyebrow" style="letter-spacing:.18em">4 targets · scored by fit</span>
+      <span class="chip" style="margin-left:auto;border-color:var(--voice);color:var(--text-primary)">All</span>
+      <span class="chip">Updated this week</span>
+      <span class="chip">Strong fit (70+)</span>
+      <span class="tiny-mono">Sort: fit ⌄</span>
+    </div>
+
+    <div class="target sel">
+      <input type="checkbox" checked>
+      <div class="ring g" style="width:56px;height:56px;font-size:19px">82</div>
+      <div class="body">
+        <div class="headrow"><b style="font-size:16.5px">Midwest Emo Revival</b><a class="why" href="#">Why? ↗</a></div>
+        <p class="metaline">Dani K · 12,400 followers · updated this week &nbsp; <span class="chip">emo</span> <span class="chip">midwest</span></p>
+        <p class="reason">Curator favors slow-build, twinkly guitar work with clean production. 7 of the last 10 adds are early-00s revival bands with direct overlap to your reference points.</p>
+      </div>
+    </div>
+
+    <div class="target sel">
+      <input type="checkbox" checked>
+      <div class="ring a" style="width:56px;height:56px;font-size:19px">61</div>
+      <div class="body">
+        <div class="headrow"><b style="font-size:16.5px">Twinkle Daddies &amp; Friends</b><a class="why" href="#">Why? ↗</a></div>
+        <p class="metaline">Marisol V · 6,100 followers · updated 5d ago &nbsp; <span class="chip">emo</span> <span class="chip">math rock</span></p>
+        <p class="reason">Strong stylistic overlap on guitar work, but the list skews instrumental. A vocal-forward single is a possible fit, not a lock.</p>
+      </div>
+    </div>
+
+    <div class="target">
+      <input type="checkbox">
+      <div class="ring r" style="width:56px;height:56px;font-size:19px">38</div>
+      <div class="body">
+        <div class="headrow"><b style="font-size:16.5px">actual emo music</b><span class="tag">You added</span><a class="why" href="#">Why? ↗</a></div>
+        <p class="metaline">Aimz!! · 4,700 followers · pasted link · analyzed &nbsp; <span class="chip">screamo</span> <span class="chip">post-hardcore</span></p>
+        <p class="reason">Genre distribution dominated by heavier emo variants; the match is surface-level. Recommend skipping unless the angle is the playlist name itself.</p>
+      </div>
+    </div>
+
+    <div class="target">
+      <input type="checkbox">
+      <div class="ring r" style="width:56px;height:56px;font-size:19px">28</div>
+      <div class="body">
+        <div class="headrow"><b style="font-size:16.5px">Emo songs</b><a class="why" href="#">Why? ↗</a></div>
+        <p class="metaline">Henry · 4,001 followers &nbsp; <span class="chip">emo</span></p>
+        <p class="reason">Naming alignment only. The word "emo" is shared; the sound is not. Skip.</p>
+      </div>
+    </div>
+
+    <div class="selectbar">
+      <b>2 selected</b>
+      <span class="small">avg fit <span class="mono">72</span> · both updated this week</span>
+      <a class="btn btn-yellow btn-sm" style="margin-left:auto" href="dashboard-campaign.html">Draft 2 pitches →</a>
     </div>
   </div>
 </div>
@@ -321,24 +327,14 @@ body.railed .shell{margin-right:46px}
 </div>
 <div class="notes">
   <details>
-    <summary>Design notes · Campaign detail</summary>
-    <p class="nh">Design-system alignment</p>
+    <summary>Design notes · Find curators (targets)</summary>
+    <p class="nh">Round 3 — H21 relocation</p>
     <ul>
-      <li>One-yellow violation fixed: this screen previously carried yellow on both "Open in email" and "Log outcome." "Open in email" in the Ready column is the single most important decision on the page and keeps the yellow; "Log outcome" is now secondary purple. StatusDot-style state chips, mono for scores and elapsed-time stamps, calm workspace with no atmosphere.</li>
-      <li>Rule 5 holds throughout: there is no Send button, no delivery or opened state anywhere. The board's Sent state is artist-declared via mark-as-sent, and replies are artist-logged. The explainer strip states this once so the board reads honestly.</li>
+      <li>This is the former Workspace default, relocated. It's reached from a campaign's “Find curators” action and sits under Campaigns in the breadcrumb, since scoring targets is campaign work. The Workspace tab now opens on the suggests-driven overview.</li>
+      <li>Unchanged from round 2 otherwise: no Verified pills (signals only), band-colored fit rings, the “Updated this week” filter, the sticky batch bar as the single yellow, the Line-to-Soniq rail docked right, and the “scope pending Q1” flag on search.</li>
+      <li>Identity is Maya Reyes / Dark Moon to match the reference prototype.</li>
     </ul>
-    <p class="nh">Review feedback applied</p>
-    <ul>
-      <li>The pipeline board, follow-up clock, snooze, reply-gist line, and the media-kit handoff from the Replied column were all adopted by the review as-is; this page is flagged as the missing core of the product and is heading for the build queue. The only requested change was the yellow fix above.</li>
-      <li>Coverage tracking sits on this page but bills under Momentum per the revised tiers; the empty state copy is unchanged.</li>
-    </ul>
-      <p class="nh">Round 2</p>
-    <ul>
-      <li>R2: Line-to-Soniq rail added; Hansen's open-panel reference (Activity feed + Ask input) is the expanded state this collapses from.</li>
-      <li>R3: artist-sends is Rule 5; citation fixed.</li>
-      <li>P5: the Coverage section now carries an explicit pending flag. It stays in the mock as proposed launch chrome, but build needs the yes/no on launch scope before this column ships, and its Momentum billing line was removed with the rest of the invented pricing gates.</li>
-    </ul>
-</details>
+  </details>
 </div>
 
 </body></html>
